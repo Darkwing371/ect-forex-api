@@ -1,0 +1,2865 @@
+//
+// Easy Cash & Tax Forex API
+// Währungsinitialisierungsdatei
+//
+// Liste der Währungen, die initial in der Datenbank geführt werden sollen
+// Hier ist wichtig vorher zu prüfen, ob die beabsichtigte API diese Währung
+// auch führt und wie eventuell das dortige Tickersymbol bzw. die genaue ID ist
+//
+// Diese Datei ist quasi die Whitelist dafür, welche Währungen abgefragt werden
+// Zukünftige Erweiterungen müssen händisch in der Datenbank angelegt werden
+// Diese Datei wird bloß EIN mal beim ersten Start der EC&T Forex API eingelesen
+//
+// Da die Ticker der Krypto-Währungen nicht in der Form standardisiert sind wie
+// bei Fiat-Währungen, wird es leider Namensdoppelungen bei den Tickern geben
+// Doppelungen wurden aufgelöst zu: ABC, ABC.2, ABC.3 etc.
+//
+// Datenquellen
+// Für Fiat-Währungen verwenden wir: 'frankfurter' (https://frankfurter.dev/)
+// Für Krypto-Währungen, Stablecoins und Token: 'LiveCoinWatch' (https://www.livecoinwatch.com/)
+//
+// Technische Hinweise
+// Diese Datei MUSS in UTF-8 sein!
+// Kommentare mit '//' möglich
+// CSV-Format: Tickersymbol{string[16]};Währungsname{string[64]};Typ{string[fiat,crypto]};LiveCoinWatch-ID{string[64]}\r\n
+//
+//
+//
+// Fiat-Währungen
+//
+AUD;Australischer Dollar;fiat;
+BGN;Bulgarischer Lev;fiat;
+BRL;Brasilianischer Real;fiat;
+CAD;Kanadischer Dollar;fiat;
+CHF;Schweizer Franken;fiat;
+CNY;Chinesicher Renminbi Yuan;fiat;
+CZK;Tschechische Krone;fiat;
+DKK;Dänische Krone;fiat;
+GBP;Britisches Pfund;fiat;
+HKD;Hong-Kong-Dollar;fiat;
+HUF;Ungarischer Forint;fiat;
+IDR;Indonesische Rupiah;fiat;
+ILS;Israelischer Schekel;fiat;
+INR;Indische Rupie;fiat;
+ISK;Isländische Krone;fiat;
+JPY;Japaischer Yen;fiat;
+KRW;Südkoreanischer Won;fiat;
+MXN;Mexikanischer Peso;fiat;
+MYR;Malaysischer Ringgit;fiat;
+NOK;Norwegische Krone;fiat;
+NZD;Neuseeländischer Dollar;fiat;
+PHP;Philippinischer Peso;fiat;
+PLN;Polnischer Złoty;fiat;
+RON;Rumänischer Leu;fiat;
+SEK;Schwedische Krone;fiat;
+SGD;Singapur-Dollar;fiat;
+THB;Thailändischer Baht;fiat;
+TRY;Türkische Lira;fiat;
+ZAR;Südafrikanischer Rand;fiat;
+USD;US-Dollar;fiat;
+//
+// Krypto-Währungen: must-have
+//
+BTC;Bitcoin;crypto;BTC
+XMR;Monero;crypto;XMR
+//
+// Krypto-Währungen: nice-to-have
+//
+LTC;Litecoin;crypto;LTC
+DOGE;Dogecoin;crypto;DOGE
+NMC;Namecoin;crypto;NMC
+FIL;Filecoin;crypto;FIL
+ZEC;Zcash;crypto;ZEC
+DERO;Dero;crypto;DERO
+DASH;Dash;crypto;DASH
+ARRR;PirateChain;crypto;ARRR
+TRX;TRON;crypto;TRX
+BNB;BNB;crypto;BNB
+SOL;Solana;crypto;SOL
+XLM;Stellar;crypto;XLM
+DAI;Dai;crypto;DAI
+RVN;Ravencoin;crypto;RVN
+DGB;DigiByte;crypto;DGB
+ADA;Cardano;crypto;ADA
+XRP;XRP;crypto;XRP
+XCH;Chia;crypto;XCH
+LBC;LBRY Credits;crypto;LBC
+BCH;Bitcoin Cash;crypto;BCH
+ETH;Ethereum;crypto;ETH
+ENS;Ethereum Name Service;crypto;ENS
+//
+// Krypto-Währungen: vielleicht maximal noch die nächsten 50 interessant,
+// darunter ein paar USD-Stablecoins; ansonsten hauptsächlich sinnlose Token, Memecoins und Spielerei
+//
+USDT;Tether;crypto;USDT
+USDC;USDC;crypto;USDC
+AVAX;Avalanche;crypto;AVAX
+SUI;Sui;crypto;_SUI
+LINK;Chainlink;crypto;LINK
+TONCOIN;Toncoin;crypto;TONCOIN
+SHIB;Shiba Inu;crypto;SHIB
+WBTC;Wrapped Bitcoin;crypto;WBTC
+HBAR;Hedera Hashgraph;crypto;HBAR
+DOT;Polkadot;crypto;DOT
+PEPE;Pepe;crypto;____PEPE
+UNI;Uniswap;crypto;UNI
+OKB;OKB;crypto;OKB
+NEAR;NEAR Protocol;crypto;NEAR
+HYPE;Hyperliquid;crypto;______HYPE
+POL;Polygon Ecosystem Token;crypto;POL
+ARB;Arbitrum;crypto;ARB
+ICP;Internet Computer;crypto;ICP
+APT;Aptos;crypto;APT
+AAVE;Aave;crypto;AAVE
+WBT;WhiteBIT Coin;crypto;WBT
+MNT;Mantle;crypto;______MNT
+TAO;bittensor;crypto;____TAO
+ETC;Ethereum Classic;crypto;ETC
+RENDER;Render Token;crypto;RENDER
+VET;VeChain;crypto;VET
+CRO;Cronos;crypto;CRO
+FET;Artificial Superintelligence Alliance;crypto;FET
+ALGO;Algorand;crypto;ALGO
+OM;MANTRA DAO;crypto;OM
+ONDO;Ondo;crypto;ONDO
+KAS;Kaspa;crypto;KAS
+ATOM;Cosmos;crypto;ATOM
+VIRTUAL;Virtual Protocol;crypto;VIRTUAL
+IMX;Immutable X;crypto;_IMX
+OP;Optimism;crypto;OP
+TIA;Celestia;crypto;_TIA
+STX;Stacks;crypto;_STX
+THETA;Theta Network;crypto;THETA
+FTM;Fantom;crypto;FTM
+INJ;Injective Protocol;crypto;INJ
+GT;Gatechain Token;crypto;GT
+GRT;The Graph;crypto;GRT
+WIF;dogwifhat;crypto;WIF
+BONK;Bonk;crypto;__BONK
+FDUSD;First Digital USD;crypto;FDUSD
+WLD;Worldcoin;crypto;__WLD
+JASMY;JasmyCoin;crypto;JASMY
+ETHFI;ether.fi governance token;crypto;_ETHFI
+FLOKI;Floki Inu;crypto;_FLOKI
+EOS;EOS;crypto;EOS
+LDO;Lido DAO;crypto;LDO
+RSR;Reserve Rights;crypto;RSR
+RAY;Raydium;crypto;RAY
+SAND;The Sandbox;crypto;SAND
+NEO;NEO;crypto;NEO
+GALA;Gala;crypto;GALA
+BEAM;Beam;crypto;__BEAM
+MKR;Maker;crypto;MKR
+BRETT;Brett;crypto;__BRETT
+QNT;Quant;crypto;QNT
+MATIC;Polygon;crypto;MATIC
+RUNE;THORChain;crypto;RUNE
+XTZ;Tezos;crypto;XTZ
+CRV;Curve DAO Token;crypto;CRV
+KLAY;Klaytn;crypto;_KLAY
+PENDLE;Pendle;crypto;PENDLE
+JUP;Jupiter;crypto;_JUP
+FLR;Flare;crypto;FLR
+SPX;SPX6900;crypto;____SPX
+XDC;XDC Network;crypto;XDC
+AXS;Axie Infinity;crypto;AXS
+MANA;Decentraland;crypto;MANA
+AERO;Aerodrome;crypto;___AERO
+BSV;Bitcoin SV;crypto;BSV
+BTT;BitTorrent;crypto;BTT
+CORE;Core DAO;crypto;___CORE
+EGLD;MultiversX;crypto;EGLD
+SEI;Sei Network;crypto;SEI
+APE;ApeCoin;crypto;APE
+AIOZ;AIOZ Network;crypto;AIOZ
+MIOTA;IOTA;crypto;MIOTA
+HNT;Helium;crypto;HNT
+DEXE;DeXe;crypto;DEXE
+MOG;Mog Coin;crypto;__MOG
+PRIME;Echelon Prime;crypto;___PRIME
+JTO;Jito;crypto;JTO
+POPCAT;Popcat;crypto;_POPCAT
+AKT;Akash Network;crypto;AKT
+AR;Arweave;crypto;AR
+CAKE;PancakeSwap;crypto;CAKE
+KCS;KuCoin Shares;crypto;KCS
+FLOW;Flow;crypto;FLOW
+CHZ;Chiliz;crypto;CHZ
+AMP;Amp;crypto;AMP
+MINA;Mina Protocol;crypto;MINA
+NEXO;Nexo;crypto;NEXO
+SUPER;SuperVerse;crypto;_SUPER
+USDD;Decentralized USD;crypto;USDD
+COMP;Compound;crypto;COMP
+DOG;DOG•GO•TO•THE•MOON 🐕;crypto;_______________DOG
+AI;Sleepless AI Token;crypto;___________________AI
+GNO;Gnosis;crypto;GNO
+SNX;Synthetix;crypto;SNX
+XEC;eCash;crypto;XEC
+BABYDOGE;Baby Doge Coin;crypto;BABYDOGE
+NOT;Notcoin;crypto;NOT
+TURBO;Turbo;crypto;__TURBO
+AXL;Axelar;crypto;__AXL
+LUNC;Luna Classic;crypto;LUNC
+MEW;cat in a dogs world;crypto;__MEW
+ORDI;Ordinals;crypto;ORDI
+CBETH;Coinbase Wrapped Staked ETH;crypto;CBETH
+1INCH;1inch;crypto;1INCH
+KAVA;Kava;crypto;KAVA
+PYTH;Pyth Network;crypto;PYTH
+BLUR;Blur;crypto;BLUR
+KSM;Kusama;crypto;KSM
+W;Wormhole;crypto;W
+NFT;APENFT;crypto;_NFT
+CVX;Convex Finance;crypto;CVX
+PAXG;PAX Gold;crypto;PAXG
+SNEK;Snek;crypto;_SNEK
+CHEX;CHEX Token;crypto;CHEX
+FRAX;Frax;crypto;FRAX
+ROSE;Oasis Network;crypto;ROSE
+USUAL;USUAL;crypto;USUAL
+TUSD;TrueUSD;crypto;TUSD
+SUSHI;Sushi;crypto;SUSHI
+DEGEN;Degen;crypto;___________DEGEN
+CTC;Creditcoin;crypto;_CTC
+BOME;BOOK OF MEME;crypto;BOME
+CHEEL;CHEELEE;crypto;CHEEL
+WOO;Wootrade Network;crypto;WOO
+TRAC;OriginTrail;crypto;TRAC
+TFUEL;Theta Fuel;crypto;TFUEL
+HOT;Holo Token;crypto;_HOT
+ZRX;0x;crypto;ZRX
+ZEN;Horizen;crypto;ZEN
+NEIRO;Neiro;crypto;___NEIRO
+CKB;Nervos Network;crypto;CKB
+ONE;Harmony;crypto;ONE
+TWT;Trust Wallet Token;crypto;TWT
+ME;Magic Eden;crypto;ME
+ENJ;Enjin Coin;crypto;ENJ
+JST;JUST;crypto;JST
+RON;Ronin;crypto;___RON
+QUBIC;QUBIC;crypto;QUBIC
+IOTX;IoTeX;crypto;IOTX
+LPT;Livepeer;crypto;LPT
+OHM;Olympus;crypto;OHM
+ETHW;ETHPoW;crypto;ETHW
+UMA;UMA;crypto;UMA
+VRSC;Veruscoin;crypto;VRSC
+BAT;Basic Attention Token;crypto;BAT
+MANTA;Manta Network;crypto;MANTA
+CFX;Conflux Token;crypto;CFX
+ILV;Illuvium;crypto;ILV
+ASTR;ASTAR;crypto;ASTR
+QTUM;Qtum;crypto;QTUM
+MX;MX Token;crypto;MX
+PAAL;PAAL AI v2;crypto;_PAAL
+TRIBE;Tribe;crypto;TRIBE
+AEVO;Aevo;crypto;AEVO
+WEMIX;Wemix Token;crypto;WEMIX
+FXS;Frax Share;crypto;FXS
+PYUSD;PayPal USD;crypto;PYUSD
+POLYX;Polymesh;crypto;POLYX
+SC;Siacoin;crypto;SC
+BICO;Biconomy;crypto;BICO
+GLM;Golem;crypto;GLM
+KDA;Kadena;crypto;KDA
+OSMO;Osmosis;crypto;OSMO
+XYO;XYO Network;crypto;XYO
+SKL;SKALE;crypto;SKL
+METIS;Metis Token;crypto;METIS
+LRC;Loopring;crypto;LRC
+YFI;yearn.finance;crypto;YFI
+GMX;GMX;crypto;__GMX
+TEL;Telcoin;crypto;TEL
+0X0;0x0.ai: AI Smart Contract Auditor;crypto;0X0
+RBTC;RSK Smart Bitcoin;crypto;RBTC
+HONEY;Hivemapper;crypto;________HONEY
+DCR;Decred;crypto;DCR
+DYDX;dYdX;crypto;DYDX
+CORGIAI;CorgiAI;crypto;CORGIAI
+ZIL;Zilliqa;crypto;ZIL
+CET;CoinEx Token;crypto;CET
+FLUX;Flux;crypto;_FLUX
+GLMR;Moonbeam;crypto;GLMR
+XVG;Verge;crypto;XVG
+LCX;LCX;crypto;LCX
+XRD;Radix Native Token;crypto;XRD
+MASK;Mask Network;crypto;_MASK
+RPL;Rocket Pool;crypto;RPL
+ACH;Alchemy Pay;crypto;ACH
+APU;Apu Apustaja;crypto;__APU
+ONT;Ontology;crypto;ONT
+ELON;Dogelon Mars;crypto;ELON
+BTG;Bitcoin Gold;crypto;BTG
+BLAST;Blast;crypto;________BLAST
+ANDY;Andy;crypto;___ANDY
+DYM;Dymension;crypto;DYM
+ORCA;Orca;crypto;ORCA
+POND;Marlin;crypto;POND
+AMPL;Ampleforth;crypto;AMPL
+BITCOIN;HarryPotterObamaSonic10Inu (Ethereum);crypto;_BITCOIN
+CELO;Celo;crypto;CELO
+ZANO;Zano;crypto;ZANO
+TNSR;Tensor;crypto;TNSR
+SXP;SXP;crypto;SXP
+BIGTIME;Big Time;crypto;BIGTIME
+AGIX;SingularityNET;crypto;AGIX
+AGLD;Adventure Gold;crypto;AGLD
+AUDIO;Audius;crypto;AUDIO
+XNO;Nano;crypto;XNO
+STORJ;Storj;crypto;STORJ
+CSPR;Casper Network;crypto;CSPR
+AGI;Delysium;crypto;_AGI
+AVAIL;Avail;crypto;AVAIL
+SOLO;Sologenic;crypto;SOLO
+XSUSHI;SushiBar;crypto;XSUSHI
+VVS;VVS Finance;crypto;VVS
+WAVES;Waves;crypto;WAVES
+NOS;Nosana;crypto;_NOS
+SNT;Status;crypto;SNT
+CVC;Civic;crypto;CVC
+LQTY;Liquity;crypto;LQTY
+OGN;Origin Protocol;crypto;OGN
+ICX;ICON;crypto;ICX
+TRB;Tellor;crypto;TRB
+RLC;iExec RLC;crypto;RLC
+CFG;Centrifuge;crypto;CFG
+BIT;BITDAO;crypto;__BIT
+MAGIC;Treasure DAO;crypto;_MAGIC
+YGG;Yield Guild Games;crypto;YGG
+SCRT;Secret;crypto;SCRT
+WOLF;Landwolf;crypto;___________________WOLF
+BAL;Balancer;crypto;BAL
+SLP;Smooth Love Potion;crypto;_SLP
+XVS;Venus;crypto;XVS
+LUNA;Luna;crypto;LUNA
+IOST;Internet of Services Token;crypto;IOST
+DAG;Constellation;crypto;DAG
+CELR;Celer Network;crypto;CELR
+MPL;Maple;crypto;MPL
+COTI;COTI;crypto;COTI
+TVK;Terra Virtua Kolect;crypto;TVK
+CORE.2;COREUM;crypto;_CORE
+POWR;Power Ledger;crypto;POWR
+ORAI;Oraichain;crypto;ORAI
+BANANA;Banana Gun v2;crypto;_________BANANA
+CTSI;Cartesi;crypto;CTSI
+DENT;Dent;crypto;DENT
+JOE;JOE;crypto;_JOE
+WAXP;WAX;crypto;WAXP
+GFI;Goldfinch Protocol;crypto;___GFI
+ABT;Arcblock;crypto;ABT
+IQ;IQ;crypto;IQ
+TAI;TARS AI;crypto;______TAI
+APW;APWine;crypto;_APW
+PORTAL;PORTAL;crypto;__PORTAL
+MOKIT;Mocking Kitten Coin;crypto;MOKIT
+MIMATIC;MAI;crypto;MIMATIC
+GAS;Gas;crypto;GAS
+SAGA;Saga;crypto;__SAGA
+ZEUS;Zeus Network;crypto;_______ZEUS
+XEM;NEM;crypto;XEM
+OCEAN;Ocean Protocol;crypto;OCEAN
+ORN;Orion Protocol;crypto;ORN
+SGB;Songbird;crypto;SGB
+NU;NuCypher;crypto;NU
+REQ;Request Network;crypto;REQ
+MOVR;Moonriver;crypto;MOVR
+OMI;ECOMI;crypto;OMI
+NMR;Numeraire;crypto;NMR
+ERG;Ergo;crypto;ERG
+AUCTION;Bounce;crypto;AUCTION
+KEEP;Keep Network;crypto;KEEP
+AZERO;Aleph Zero;crypto;AZERO
+STPT;STPT;crypto;STPT
+OMNI;Omni Network;crypto;______OMNI
+PUNDIX;Pundi X;crypto;PUNDIX
+OXT;Orchid;crypto;OXT
+TRU;TrueFi;crypto;TRU
+ALPH;Alephium;crypto;ALPH
+LSK;Lisk;crypto;LSK
+CTK;Shentu;crypto;CTK
+VCNT;ViciCoin;crypto;VCNT
+API3;API3;crypto;API3
+DUSK;Dusk Network;crypto;DUSK
+PROM;Prometeus;crypto;PROM
+DESO;Decentralized Social;crypto;DESO
+DODO;DODO;crypto;DODO
+USTC;TerraClassicUSD;crypto;USTC
+SPELL;Spell Token;crypto;SPELL
+CHR;Chromia;crypto;CHR
+RIF;RSK Infrastructure Framework;crypto;RIF
+KNC;Kyber Network Crystal;crypto;KNC
+LON;Tokenlon;crypto;LON
+BONE;Bone ShibaSwap;crypto;___BONE
+TON;Tokamak;crypto;__TON
+XYM;Symbol;crypto;XYM
+PRO;Propy;crypto;PRO
+NAKA;Nakamoto Games;crypto;NAKA
+FX;Function X;crypto;FX
+MLK;MiL.k;crypto;MLK
+CULT;Milady Cult Coin;crypto;________CULT
+WIN;WINkLink;crypto;WIN
+PERP;Perpetual Protocol;crypto;PERP
+ARK;Ark;crypto;ARK
+OLAS;Autonolas;crypto;OLAS
+MBL;MovieBloc;crypto;MBL
+STG;Stargate Finance;crypto;_STG
+STEEM;Steem;crypto;STEEM
+SHDW;GenesysGo Shadow;crypto;SHDW
+ALI;Alethea Artificial Liquid Intelligence Token;crypto;__ALI
+WMT;World Mobile Token;crypto;WMT
+GMT;STEPN;crypto;____GMT
+RARE;SuperRare;crypto;___RARE
+ARDR;Ardor;crypto;ARDR
+SYS;Syscoin;crypto;SYS
+SKEY;SmartKey;crypto;SKEY
+USDP;Pax Dollar;crypto;USDP
+SLERF;SLERF;crypto;SLERF
+SNAI;SwarmNode.ai;crypto;SNAI
+ACS;Access Protocol;crypto;__ACS
+QI;BENQi;crypto;___QI
+DF;dForce;crypto;DF
+BADGER;Badger DAO;crypto;BADGER
+SFUND;Seedify.fund;crypto;SFUND
+HT;HTX Token;crypto;HT
+BOBA;Boba Network;crypto;BOBA
+DAO;DAO Maker;crypto;DAO
+DEAI;Zero1 Token;crypto;_DEAI
+BNT;Bancor;crypto;BNT
+WNXM;Wrapped NXM;crypto;WNXM
+SHIRO;Shiro Neko;crypto;_SHIRO
+EWT;Energy Web Token;crypto;EWT
+HIFI;Hifi Finance;crypto;_HIFI
+MICHI;michi;crypto;_MICHI
+NCT;PolySwarm;crypto;NCT
+XCN;Onyxcoin;crypto;XCN
+SURE;inSure;crypto;_SURE
+MTL;Metal;crypto;MTL
+WEN;Wen;crypto;_____WEN
+TRUMP;MAGA;crypto;______TRUMP
+ALU;Altura;crypto;ALU
+ALPHA;Stella;crypto;ALPHA
+SFP;SafePal;crypto;SFP
+BLOK;Bloktopia;crypto;BLOK
+BAKE;BakeryToken;crypto;BAKE
+MGC;Meta Games Coin v2;crypto;_____MGC
+ERN;Ethernity Chain;crypto;_ERN
+KUJI;Kujira;crypto;KUJI
+VTHO;VeThor Token;crypto;VTHO
+PNG;Pangolin;crypto;PNG
+MATICX;Stader Liquid Staking Matic;crypto;MATICX
+FORTH;Ampleforth Governance Token;crypto;FORTH
+XAI;Xai;crypto;____________XAI
+MYRO;Myro;crypto;_MYRO
+QKC;QuarkChain;crypto;QKC
+CBK;Cobak Token;crypto;CBK
+FOXY;Foxy;crypto;__FOXY
+PRQ;PARSIQ;crypto;PRQ
+BUSD;Binance USD;crypto;BUSD
+HUNT;HUNT;crypto;HUNT
+CTXC;Cortex;crypto;CTXC
+CLV;Clover Finance;crypto;_CLV
+DEGO;Dego Finance;crypto;DEGO
+DOG.2;The Doge NFT;crypto;___DOG
+NKN;New Kind of Network;crypto;NKN
+SD;Stader;crypto;_SD
+FORT;Forta;crypto;_FORT
+MBX;Marblex;crypto;_MBX
+BAND;Band Protocol;crypto;BAND
+BOBO;BOBO;crypto;___BOBO
+HIVE;Hive;crypto;HIVE
+LOOKS;LooksRare;crypto;_LOOKS
+LTO;LTO Network;crypto;LTO
+BFC;Bifrost;crypto;_BFC
+LAT;PlatON;crypto;LAT
+RAD;Radworks;crypto;RAD
+BEL;Bella Protocol;crypto;BEL
+IDEX;IDEX;crypto;IDEX
+SWEAT;Sweat Economy;crypto;SWEAT
+RARI;Rarible;crypto;RARI
+COOK;Cook;crypto;COOK
+PROS;Prosper;crypto;PROS
+HEGIC;Hegic;crypto;HEGIC
+STMX;StormX;crypto;STMX
+AIDOGE;AIDOGE;crypto;AIDOGE
+ETN;Electroneum;crypto;ETN
+AST;AirSwap;crypto;AST
+MED;Medibloc;crypto;MED
+AERGO;Aergo;crypto;AERGO
+QRL;Quantum Resistant Ledger;crypto;QRL
+POKT;Pocket Network;crypto;POKT
+FUN;FUNToken;crypto;FUN
+FRONT;Frontier;crypto;FRONT
+MODE;Mode;crypto;MODE
+MLN;Enzyme;crypto;MLN
+TKO;Tokocrypto;crypto;TKO
+DEXT;DEXTools;crypto;DEXT
+FLM;Flamingo Finance;crypto;FLM
+BGSC;BugsCoin;crypto;BGSC
+DEP;DEAPCOIN;crypto;DEP
+MNDE;Marinade Token;crypto;MNDE
+PORT3;Port3 Network;crypto;PORT3
+BCN;Bytecoin;crypto;BCN
+TORN;Tornado Cash;crypto;TORN
+OMG;OMG Foundation;crypto;OMG
+GHX;GamerCoin;crypto;GHX
+XPR;XPR Network;crypto;XPR
+ALCX;Alchemix;crypto;ALCX
+MATH;MATH;crypto;MATH
+QUICK;QuickSwap (OLD);crypto;QUICK
+BSW;Biswap;crypto;BSW
+BRISE;Bitgert;crypto;BRISE
+WAN;Wancoin;crypto;WAN
+NULS;Nuls;crypto;NULS
+BLD;Agoric;crypto;BLD
+TLOS;Telos;crypto;TLOS
+CLORE;CLORE Blockchain;crypto;CLORE
+HOPR;HOPR;crypto;HOPR
+KMD;Komodo;crypto;KMD
+SRX;StorX;crypto;SRX
+ICE;Ice;crypto;__________ICE
+WCFG;Wrapped Centrifuge;crypto;WCFG
+ELA;Elastos;crypto;ELA
+POLY;Polymath Network;crypto;POLY
+LOKA;League of Kingdoms Arena;crypto;LOKA
+MANEKI;MANEKI;crypto;_MANEKI
+GST;Green Satoshi Token;crypto;____GST
+PRCL;Parcl;crypto;PRCL
+WAGMI;Wagmi;crypto;_______WAGMI
+BMX;BitMart Token;crypto;BMX
+TT;ThunderCore;crypto;TT
+ALEPH;Aleph.im;crypto;ALEPH
+LOOM;Loom Network;crypto;LOOM
+COS;Contentos;crypto;COS
+CXO;CargoX;crypto;CXO
+POLS;Polkastarter;crypto;POLS
+STEP;Step Finance;crypto;STEP
+FCT;FirmaChain;crypto;_FCT
+GROK;GROK;crypto;_GROK
+SAMO;Samoyedcoin;crypto;SAMO
+EURT;Euro Tether;crypto;_EURT
+FIS;Stafi;crypto;FIS
+DNT;district0x;crypto;DNT
+LINA;Linear;crypto;LINA
+OMNOM;Doge Eat Doge;crypto;OMNOM
+CYBER;CyberConnect;crypto;___CYBER
+EVER;Everscale;crypto;EVER
+GRS;Groestlcoin;crypto;GRS
+VEE;BLOCKv;crypto;VEE
+REN;Republic Protocol;crypto;REN
+MDT;Measurable Data Token;crypto;MDT
+CREAM;Cream;crypto;CREAM
+STOS;Stratos;crypto;STOS
+QUACK;RichQuack;crypto;_QUACK
+NEUR;neur.sh;crypto;_NEUR
+BOSON;Boson Protocol;crypto;BOSON
+MAGA;MAGA;crypto;________MAGA
+KATA;Katana Inu;crypto;KATA
+CUSD;Celo Dollar;crypto;CUSD
+FIO;FIO Protocol;crypto;FIO
+UFT;UniLend Finance;crypto;UFT
+FARM;Harvest Finance;crypto;FARM
+SDT;Stake DAO;crypto;SDT
+C98;Coin98;crypto;C98
+AURORA;AURORA;crypto;_AURORA
+AQT;Alpha Quark Token;crypto;AQT
+AMB;AirDAO;crypto;AMB
+LAI;LayerAI Token;crypto;_LAI
+ADX;AdEx;crypto;ADX
+SNSY;Sensay;crypto;SNSY
+TOKE;Tokemak;crypto;TOKE
+CELL;Cellframe;crypto;CELL
+VINU;Vita Inu;crypto;VINU
+OPUL;Opulous;crypto;OPUL
+PIVX;PIVX;crypto;PIVX
+ZYN;ZynCoin;crypto;_ZYN
+PSTAKE;pSTAKE Finance;crypto;PSTAKE
+NFTX;NFTX;crypto;NFTX
+VAI;Vaiot;crypto;VAI
+WING;Wing Finance;crypto;WING
+ADS;Adshares;crypto;ADS
+INV;Inverse Finance;crypto;_INV
+EXRD;E-Radix;crypto;EXRD
+KIN;Kin;crypto;KIN
+BTU;BTU Protocol;crypto;BTU
+ASM;Assemble Protocol;crypto;ASM
+ALPACA;Alpaca Finance;crypto;ALPACA
+REEF;Reef Finance;crypto;REEF
+BNX;BinaryX v1;crypto;_BNX
+XPRT;Persistence;crypto;XPRT
+TRUST;$TRUST ME BROs by Virtuals;crypto;______TRUST
+SUKU;SUKU;crypto;SUKU
+SDAO;Singularity DAO;crypto;_SDAO
+VLX;Velas;crypto;VLX
+DFI;DeFiChain;crypto;DFI
+LIT;Litentry;crypto;_LIT
+FIRO;Firo;crypto;FIRO
+BLOCK;Blockasset;crypto;_BLOCK
+TPT;Token Pocket;crypto;TPT
+SOLIDX;Solid X;crypto;SOLIDX
+BLZ;Bluzelle;crypto;_BLZ
+UOS;Ultra;crypto;UOS
+INDEX;Index Cooperative;crypto;INDEX
+MNGO;Mango;crypto;MNGO
+SPC;SpaceChain;crypto;SPC
+MONA;MonaCoin;crypto;MONA
+SFM;SafeMoon V2;crypto;SFM
+GLQ;GraphLinq Chain;crypto;GLQ
+AVT;Aventus;crypto;AVT
+DIA;DIA;crypto;DIA
+KOKO;KOALA AI;crypto;___KOKO
+ARTY;Artyfact;crypto;ARTY
+HARD;Kava Lend;crypto;HARD
+FOX;FOX Token;crypto;FOX
+CROWN;CROWN Token;crypto;____CROWN
+GRAIL;Camelot Token;crypto;_GRAIL
+SUSD;sUSD;crypto;SUSD
+DNX;Dynex;crypto;DNX
+DRGN;Dragonchain;crypto;DRGN
+MAX;Matr1x;crypto;___________MAX
+TRIAS;Trias Token;crypto;TRIAS
+OVR;Ovr;crypto;OVR
+MFER;mfercoin;crypto;_MFER
+VIB;Viberate;crypto;VIB
+BURGER;BurgerCities;crypto;BURGER
+NIM;Nimiq;crypto;NIM
+CTX;Cryptex Finance;crypto;_CTX
+TLM;Alien Worlds Trilium;crypto;_TLM
+BOB;BOB;crypto;___BOB
+LAMB;Lambda;crypto;LAMB
+PNK;Kleros;crypto;PNK
+JUNO;Juno Network;crypto;JUNO
+TONIC;Tectonic;crypto;TONIC
+SOV;Sovryn Token;crypto;_SOV
+EPS;Ellipsis;crypto;_EPS
+PANDORA;Pandora;crypto;PANDORA
+NWC;Newscrypto Coin;crypto;NWC
+FIDA;Bonfida;crypto;FIDA
+MTRG;Meter Governance;crypto;MTRG
+VXV;Vectorspace AI;crypto;VXV
+TOWER;Tower;crypto;TOWER
+MNW;Morpheus Network;crypto;MNW
+SX;SX Network;crypto;SX
+DEXTF;Domani Protocol;crypto;DEXTF
+UFO;UFO GAMING;crypto;____UFO
+YFII;DFI.money;crypto;YFII
+NEXA;NEXA;crypto;NEXA
+VITE;VITE;crypto;VITE
+DVPN;Sentinel;crypto;DVPN
+CRU;Crust Network;crypto;CRU
+GMEE;GAMEE;crypto;GMEE
+RBN;Ribbon Finance;crypto;RBN
+TFT;ThreeFold Token;crypto;_TFT
+KWENTA;Kwenta;crypto;KWENTA
+XCAD;XCAD Network;crypto;XCAD
+BPX;Black Phoenix v2;crypto;__BPX
+CANTO;CANTO;crypto;CANTO
+AE;Aeternity;crypto;AE
+KP3R;Keep3rV1;crypto;KP3R
+PLU;Pluton;crypto;PLU
+BFG;BetFury Token;crypto;BFG
+VGX;Voyager Token;crypto;VGX
+XDB;XDB CHAIN;crypto;XDB
+REALIS;Realis Worlds;crypto;REALIS
+XNA;Neurai;crypto;XNA
+SAITO;Saito;crypto;SAITO
+ARIA20;Arianee;crypto;ARIA20
+BAD;BAD IDEA AI;crypto;_BAD
+GET;GET Protocol;crypto;GET
+MXC;MXC;crypto;MXC
+DERI;Deri Protocol;crypto;DERI
+G3;GAM3S.GG;crypto;G3
+SCLP;SCALLOP;crypto;SCLP
+TKP;TOKPIE;crypto;TKP
+TRAC.2;TRAC;crypto;_TRAC
+NODL;Nodle;crypto;NODL
+KRL;Kryll;crypto;KRL
+HI;hi Dollar;crypto;HI
+GNS;Gains Network;crypto;GNS
+WOW;Wownero;crypto;WOW
+PPC;Peercoin;crypto;PPC
+WELSH;Welshcorgicoin;crypto;WELSH
+CATE;CateCoin;crypto;_CATE
+MUSE;Muse;crypto;MUSE
+SWAP;Trustswap;crypto;SWAP
+BNC;Bifrost;crypto;_BNC
+CSC;CasinoCoin;crypto;CSC
+PEPE20;Pepe 2.0;crypto;_PEPE20
+EVMOS;Evmos;crypto;EVMOS
+JESUS;Jesus Coin;crypto;__JESUS
+NEST;NEST Protocol;crypto;NEST
+SDN;Shiden Network;crypto;SDN
+PUSH;Ethereum Push Notification Service;crypto;PUSH
+MCB;MCDex;crypto;MCB
+POLYDOGE;PolyDoge;crypto;POLYDOGE
+KAI;KardiaChain;crypto;KAI
+KLIMA;Klima DAO;crypto;KLIMA
+XAUT;Tether Gold;crypto;XAUT
+CEEK;CEEK;crypto;CEEK
+SIS;Symbiosis;crypto;SIS
+STARL;STARL;crypto;STARL
+MAN;Matrix AI Network;crypto;MAN
+ZEPH;Zephyr;crypto;ZEPH
+UNCX;UniCrypt;crypto;UNCX
+HXRO;Hxro;crypto;HXRO
+EURS;STASIS EURS;crypto;EURS
+GUSD;Gemini Dollar;crypto;GUSD
+WRX;WazirX;crypto;WRX
+DVI;Dvision Network;crypto;DVI
+RXD;Radiant;crypto;RXD
+CAPS;Ternoa;crypto;CAPS
+NLS;Nolus;crypto;NLS
+CHAIN;Chain Games;crypto;CHAIN
+CUBE;Somnium Space Cubes;crypto;CUBE
+GAFI;GameFi;crypto;GAFI
+XEP;Electra Protocol;crypto;XEP
+DORA;DORA AI by Virtuals;crypto;___DORA
+DBC;DeepBrain Chain;crypto;DBC
+SHR;ShareRing;crypto;SHR
+RLY;Rally;crypto;RLY
+FUSE;Fuse Network Token;crypto;FUSE
+RVF;RocketX exchange;crypto;RVF
+ISP;Ispolink;crypto;ISP
+BCCOIN;BlackCardCoin;crypto;BCCOIN
+BEAM.2;BEAM;crypto;BEAM
+RENBTC;renBTC;crypto;RENBTC
+BTR;Bitrue Coin;crypto;_BTR
+MYST;Mysterium;crypto;MYST
+TROY;Troy;crypto;TROY
+SC.2;Shark Cat;crypto;______SC
+SYLO;Sylo;crypto;SYLO
+ASTRAFER;Astrafer;crypto;ASTRAFER
+KAN;BitKan;crypto;KAN
+ATLAS;Star Atlas;crypto;ATLAS
+PNDC;Pond0x;crypto;PNDC
+AKRO;Akropolis;crypto;AKRO
+SIX;SIX;crypto;SIX
+MARSH;Unmarshal;crypto;MARSH
+CVP;PowerPool Concentrated Voting Power;crypto;CVP
+AVA;Travala;crypto;AVA
+XTP;Tap;crypto;XTP
+WHALES;Whales Market;crypto;___WHALES
+MCONTENT;Mcontent;crypto;MCONTENT
+WHALE;WHALE;crypto;WHALE
+SNIFT;StarryNift;crypto;SNIFT
+HNS;Handshake;crypto;HNS
+ADP;Adappter Token;crypto;ADP
+POOL;PoolTogether;crypto;POOL
+VERSE;Verse;crypto;___VERSE
+ZF;zkSwap Finance;crypto;ZF
+DYP;Dypius;crypto;DYP
+MONG;MongCoin;crypto;MONG
+CEL;Celsius Network;crypto;CEL
+RWA;Xend Real World Asset;crypto;__RWA
+HEEHEE;HeeeHeee;crypto;HEEHEE
+HAMMY;SAD HAMSTER;crypto;HAMMY
+SOLVE;SOLVE;crypto;SOLVE
+EFI;Efinity;crypto;EFI
+UNIBOT;Unibot v2;crypto;_UNIBOT
+KEY;Selfkey;crypto;KEY
+HUAHUA;CHIHUAHUA;crypto;HUAHUA
+BDP;Big Data Protocol;crypto;_BDP
+BEER;BEER;crypto;____BEER
+REVV;REVV;crypto;REVV
+SOFI;RAI Finance;crypto;_SOFI
+BAN;Banano;crypto;BAN
+SMH;Spacemesh;crypto;_SMH
+KEX;KIRA Network;crypto;KEX
+LMR;Lumerin;crypto;LMR
+VELAR;Velar;crypto;VELAR
+ATS;Alltoscan;crypto;_ATS
+SQUID;Squid Game;crypto;SQUID
+NINJA;dogwifnunchucks;crypto;______NINJA
+IDLE;IDLE;crypto;IDLE
+GRIN;Grin;crypto;GRIN
+BEPRO;BEPRO Network;crypto;BEPRO
+HERO;Metahero;crypto;___HERO
+BAX;BABB;crypto;BAX
+CHAD;Based Chad;crypto;___________CHAD
+UBT;Unibright;crypto;UBT
+NEOX;Neoxa;crypto;_NEOX
+BOND;BarnBridge;crypto;BOND
+MASQ;MASQ;crypto;MASQ
+GBYTE;OByte;crypto;GBYTE
+PRE;Presearch;crypto;PRE
+RISE;EverRise;crypto;___RISE
+BTS;BitShares;crypto;BTS
+REPV2;Augur v2;crypto;REPV2
+SNC;SunContract;crypto;SNC
+SPACE;MicroVisionChain;crypto;___________SPACE
+UMB;Umbrella Network;crypto;UMB
+ORC;Orbit Chain;crypto;ORC
+XRUNE;Thorstarter;crypto;_XRUNE
+CQT;Covalent Query Token;crypto;CQT
+OOE;OpenOcean;crypto;OOE
+HOTCROSS;Hot Cross;crypto;HOTCROSS
+FEI;Fei Protocol;crypto;FEI
+IRIS;IRISnet;crypto;IRIS
+UBXS;UBXS;crypto;UBXS
+SWTH;Carbon Protocol;crypto;SWTH
+NXS;Nexus;crypto;NXS
+CARD;Cardstack;crypto;CARD
+WOLF.2;Landwolf;crypto;_____________WOLF
+POLIS;Star Atlas DAO;crypto;_POLIS
+OBOT;Obortech;crypto;OBOT
+VTC;Vertcoin;crypto;VTC
+ACE;Acent;crypto;_ACE
+WKC;WIKI CAT;crypto;WKC
+MIR;Mirror Protocol;crypto;MIR
+BVM;Bitcoin Virtual Machine;crypto;_BVM
+GUMMY;GUMMY;crypto;_GUMMY
+CTI;ClinTex CTi;crypto;CTI
+FREE;FreeRossDAO;crypto;__FREE
+BITCI;Bitcicoin;crypto;BITCI
+NAV;NAV Coin;crypto;NAV
+BOOT;Bostrom;crypto;_BOOT
+DOBO;DogeBonk;crypto;DOBO
+PKF;PolkaFoundry;crypto;PKF
+HAM;Hamster;crypto;HAM
+FOLD;MANIFOLD FINANCE;crypto;FOLD
+HEZ;Hermez Network Token;crypto;HEZ
+WGC;Wild Goat Coin v2;crypto;__WGC
+GAL;Galxe;crypto;____GAL
+XPX;Sirius Chain;crypto;XPX
+STAN;Stanley Cup Coin;crypto;__STAN
+OCC;OccamFi;crypto;_OCC
+RAI;Rai Reflex Index;crypto;RAI
+CREO;CreoEngine;crypto;CREO
+XRT;Robonomics Network;crypto;XRT
+EPX;Ellipsis;crypto;_EPX
+MTV;MultiVAC;crypto;MTV
+YOURAI;YOUR AI;crypto;YOURAI
+XWBTC;Instabridge Wrapped Bitcoin;crypto;XWBTC
+SIGNA;Signum;crypto;SIGNA
+MBS;MonkeyLeague;crypto;__MBS
+HACD;Hacash Diamond;crypto;HACD
+CAS;Cashaa;crypto;CAS
+RAINI;Rainicorn;crypto;RAINI
+SAFEMARS;Safemars;crypto;SAFEMARS
+MINTME;MintMe.com Coin;crypto;MINTME
+SPHERE;Sphere Finance;crypto;_SPHERE
+LSS;Lossless;crypto;LSS
+UMEE;Umee;crypto;UMEE
+FIGHT;Fight To MAGA;crypto;_FIGHT
+EQ;Equilibrium;crypto;EQ
+CHI;XAYA;crypto;CHI
+MAHA;MahaDAO;crypto;MAHA
+XUSDC;Instabridge Wrapped USDC;crypto;XUSDC
+COVAL;Circuits of Value;crypto;COVAL
+LOKI;Oxen;crypto;LOKI
+PART;Particl;crypto;PART
+SBR;Saber;crypto;SBR
+FSN;Fusion;crypto;FSN
+OBSR;Observer;crypto;OBSR
+GEL;Gelato;crypto;_GEL
+ASR;AS Roma Fan Token;crypto;ASR
+VSP;Vesper Finance;crypto;VSP
+KOM;Kommunitas;crypto;KOM
+DWB;dickwifbutt;crypto;DWB
+BURN;Buy and Burn Token;crypto;_____________BURN
+BRIDGE;Octus Bridge;crypto;__BRIDGE
+SFI;Saffron Finance;crypto;_SFI
+TRADE;Polytrade;crypto;__TRADE
+DPR;Deeper Network;crypto;DPR
+ICE.2;Popsicle Finance;crypto;ICE
+GIV;Giveth;crypto;GIV
+TOOKER;Tooker Kurlson;crypto;TOOKER
+RDD;ReddCoin;crypto;RDD
+DSLA;DSLA Protocol;crypto;DSLA
+VSYS;V Systems;crypto;VSYS
+POLK;Polkamarkets;crypto;POLK
+HAC;Hacash;crypto;_HAC
+SHA;Safe Haven;crypto;_SHA
+PGX;Pegaxy Stone;crypto;PGX
+MCHC;My Crypto Heroes;crypto;MCHC
+AUTISM;autism;crypto;_AUTISM
+BODEN;jeo boden;crypto;BODEN
+TOMB;Tomb Finance;crypto;TOMB
+PICKLE;Pickle Finance;crypto;PICKLE
+MAPS;MAPS;crypto;MAPS
+ASIA;Asia Coin;crypto;ASIA
+WOZX;Efforce;crypto;WOZX
+CWS;Crowns;crypto;CWS
+NFTB;NFTb;crypto;NFTB
+DFX;DFX Finance;crypto;__DFX
+MANIA;ScapesMania;crypto;_MANIA
+P3D;3DPass Coin;crypto;P3D
+MNTL;Assetmantle;crypto;MNTL
+ZPAY;ZoidPay;crypto;_ZPAY
+ARV;ARIVA;crypto;ARV
+MOOV;dotmoovs;crypto;MOOV
+KINT;Kintsugi;crypto;KINT
+LANA;LanaCoin;crypto;LANA
+HYVE;Hyve;crypto;HYVE
+YPRED;yPredict;crypto;YPRED
+ABYSS;ABYSS;crypto;ABYSS
+JULD;JulSwap;crypto;JULD
+AIPG;AI Power Grid;crypto;AIPG
+UNB;Unbound Finance;crypto;_UNB
+RBLS;Rebel Bots;crypto;RBLS
+NRG;Energi;crypto;NRG
+UNFI;Unifi Protocol DAO;crypto;UNFI
+FOR;ForTube;crypto;__FOR
+UNO;Unobtanium;crypto;UNO
+LAUNCH;PulseLaunch;crypto;_LAUNCH
+LA;LATOKEN;crypto;LA
+VPS;VPS AI;crypto;_VPS
+RAVEN;Raven Protocol;crypto;RAVEN
+PIRATE;PirateCash;crypto;PIRATE
+VAL;SORA Validator Token;crypto;VAL
+DC;Dogechain Token;crypto;_____DC
+RAZOR;Razor Network;crypto;RAZOR
+BRIUN;Briun Armstrung;crypto;BRIUN
+LIBRA;0L Network;crypto;__LIBRA
+CHESS;Tranchess;crypto;_CHESS
+COST;Costco Hot Dog;crypto;COST
+RTM;Raptoreum;crypto;RTM
+AIRI;aiRight;crypto;AIRI
+KLS;Karlsen;crypto;_KLS
+STRONG;StrongBlock;crypto;STRONG
+NGM;e-Money;crypto;NGM
+ZEE;ZeroSwap;crypto;ZEE
+K21;K21;crypto;K21
+BIFI;Beefy.Finance;crypto;BIFI
+POLC;Polka City;crypto;POLC
+CROS;Cros Token;crypto;CROS
+MIST;MIST 霞;crypto;____MIST
+EMT;EtherMail;crypto;___EMT
+TABOO;Taboo;crypto;TABOO
+HORD;Hord;crypto;HORD
+BELT;Belt;crypto;BELT
+STRAX;Stratis;crypto;STRAX
+TRONPAD;TRONPAD;crypto;TRONPAD
+HARD.2;DaiHard;crypto;_HARD
+CGG;ChainGuardians Governance Token;crypto;CGG
+LRT;LandRocker;crypto;LRT
+NSDX;NASDEX Token;crypto;NSDX
+ABOND;ApeBond;crypto;ABOND
+VEMP;vEmpire DDAO;crypto;VEMP
+SOS;OpenDAO;crypto;___SOS
+KIT;DexKit;crypto;KIT
+BUNNY;Pancake Bunny;crypto;__BUNNY
+SPARTA;Spartan Protocol;crypto;SPARTA
+POT;PotCoin;crypto;_POT
+QUANT;Gen Z Quant;crypto;___QUANT
+NSFW;Pleasure Coin;crypto;NSFW
+RING;Darwinia Network Native Token;crypto;RING
+BIFI.2;Bifrost Finance;crypto;__BIFI
+HYDRA;Hydrachain;crypto;HYDRA
+MM;Million;crypto;_MM
+EQX;EQIFI Token;crypto;EQX
+LPOOL;Launchpool;crypto;LPOOL
+AUTO;Auto;crypto;AUTO
+SATOX;Satoxcoin;crypto;SATOX
+FRM;Ferrum Network;crypto;FRM
+WAS;Wasder;crypto;WAS
+SPS;Splintershards;crypto;SPS
+XOR;Sora;crypto;XOR
+ZCL;ZClassic;crypto;ZCL
+NIZA;Niza;crypto;NIZA
+FISH;Polycat Finance;crypto;_FISH
+KINE;Kine Protocol;crypto;KINE
+TIP;Tip;crypto;___TIP
+TIDAL;Tidal Finance;crypto;TIDAL
+FWC;QATAR 2022 TOKEN;crypto;FWC
+PSP;ParaSwap;crypto;PSP
+XCCX;BlockChainCoinX;crypto;XCCX
+BANANA.2;ApeSwap;crypto;_BANANA
+OXY;Oxygen;crypto;_OXY
+TX20;trex20;crypto;TX20
+RGAME;R-Games;crypto;RGAME
+WSPP;WolfSafePoorPeople (Polygon);crypto;WSPP
+KLV;Klever;crypto;KLV
+VRA;Verasity;crypto;VRA
+BTCZ;BitcoinZ;crypto;BTCZ
+GOATS;GOATS;crypto;_GOATS
+BIO;Bio Protocol;crypto;__BIO
+PENGU;Pudgy Penguins;crypto;_____PENGU
+MOVE;Movement;crypto;_____MOVE
+ENA;Ethena Labs;crypto;ENA
+PHA;Phala Network;crypto;PHA
+PNUT;Peanut the Squirrel;crypto;_PNUT
+MOCA;Moca;crypto;_MOCA
+UXLINK;UXLINK;crypto;UXLINK
+BGB;Bitget Token;crypto;BGB
+AI16Z;ai16z;crypto;AI16Z
+VELO;Velo;crypto;VELO
+BUZZ;Hive AI;crypto;______BUZZ
+CHILLGUY;Just a chill guy;crypto;CHILLGUY
+EIGEN;Eigen;crypto;EIGEN
+GOAT;Goatseus Maximus;crypto;________________GOAT
+URO;Urolithin A;crypto;URO
+AVA.2;Ava AI;crypto;___AVA
+VANA;Vana;crypto;__VANA
+FLOCK;FLock.io;crypto;_FLOCK
+GRASS;Grass;crypto;_GRASS
+IO;io.net;crypto;_IO
+ZRO;LayerZero;crypto;ZRO
+SWARMS;swarms;crypto;SWARMS
+MEMEFI;MEMEFI;crypto;_MEMEFI
+BLUE;Bluefin;crypto;__________BLUE
+ZEREBRO;zerebro;crypto;ZEREBRO
+FWOG;FWOG;crypto;FWOG
+COW;CoW Protocol;crypto;____COW
+MORPHO;Morpho;crypto;_MORPHO
+ARKM;Arkham;crypto;ARKM
+DAR;Mines of Dalarnia;crypto;_DAR
+AIXBT;aixbt by Virtuals;crypto;AIXBT
+DEEP;DeepBook Token;crypto;____DEEP
+MOODENG;Moo Deng;crypto;MOODENG
+FTT;FTX Token;crypto;FTT
+FARTCOIN;Fartcoin;crypto;FARTCOIN
+SUNDOG;Sundog;crypto;SUNDOG
+OL;OPENLOOT;crypto;OL
+STRK;Starknet Token;crypto;_STRK
+ACX;Across Protocol Token;crypto;_ACX
+KEKIUS;Kekius Maximus;crypto;KEKIUS
+RIF.2;Rifampicin;crypto;_RIF
+BAN.2;Comedian;crypto;__BAN
+USDE;USDe;crypto;__USDE
+ATA;Automata;crypto;ATA
+THE;THENA;crypto;_THE
+L3;Layer3;crypto;_L3
+1000SATS;1000*SATS (Ordinals);crypto;1000SATS
+ACT;Achain;crypto;ACT
+ZK;zkSync;crypto;ZK
+COOKIE;Cookie;crypto;_COOKIE
+BTF;Bitfinity;crypto;BTF
+SCR;Scroll;crypto;____SCR
+WSTETH;Wrapped stETH;crypto;WSTETH
+ZRC;Zircuit;crypto;_ZRC
+USDCE;USDC.e (Bridged USDC);crypto;USDCE
+PEOPLE;ConstitutionDAO;crypto;PEOPLE
+VELO.2;Velodrome Finance;crypto;_VELO
+DOGE.2;Department Of Government Efficiency;crypto;___________________DOGE
+GRIFFAIN;test griffain.com;crypto;GRIFFAIN
+PUFFER;PUFFER;crypto;PUFFER
+BTCB;Binance-Peg BTCB Token;crypto;BTCB
+JLP;Jupiter Perps LP;crypto;JLP
+CETUS;Cetus Token;crypto;_CETUS
+DRIFT;Drift Protocol;crypto;_DRIFT
+XION;XION;crypto;XION
+MAJOR;Major;crypto;__MAJOR
+APEX;ApeX Token;crypto;____APEX
+SUN;Sun;crypto;_SUN
+HTX;HTX;crypto;_HTX
+MEME;Memecoin;crypto;____________MEME
+DOGS;Dogs;crypto;_____DOGS
+PBU;Polar beaR;crypto;PBU
+ARC;AI Rig Complex;crypto;_______________ARC
+CBBTC;Coinbase Wrapped BTC;crypto;CBBTC
+BTCB.2;Bitcoin Avalanche Bridged;crypto;__BTCB
+ATH;Aethir;crypto;____________ATH
+FITFI;Step App;crypto;FITFI
+UFD;Unicorn Fart Dust;crypto;UFD
+KAIA;Kaia;crypto;KAIA
+ANON;Super Anon;crypto;___________ANON
+HMSTR;Hamster Kombat;crypto;HMSTR
+CGPT;ChainGPT;crypto;CGPT
+PEAQ;peaq;crypto;PEAQ
+ORDER;Orderly Network;crypto;ORDER
+JITOSOL;Jito Staked SOL;crypto;JITOSOL
+FUEL;Fuel Network;crypto;____FUEL
+XETA;XANA;crypto;_XETA
+TAIKO;Taiko Token;crypto;TAIKO
+GIGA;Gigachad;crypto;___GIGA
+RATS;Rats;crypto;_RATS
+SUPRA;Supra;crypto;_SUPRA
+RAI.2;Reploy;crypto;_____RAI
+HIPPO;sudeng;crypto;______HIPPO
+SSV;SSV Network;crypto;SSV
+STREAM;Streamflow;crypto;_____STREAM
+CARV;CARV;crypto;CARV
+LUMIA;Lumia;crypto;LUMIA
+ELIZA;Eliza;crypto;_ELIZA
+YNE;yesnoerror;crypto;YNE
+SWELL;Swell Governance Token;crypto;SWELL
+KIP;KIP Protocol;crypto;KIP
+STT;Statter Network;crypto;____STT
+HAPPY;Happy Cat;crypto;_______HAPPY
+TTC;TonTycoon;crypto;_______TTC
+ANKR;Ankr Network;crypto;ANKR
+NEIRO.2;Neiro;crypto;__NEIRO
+CATI;Catizen;crypto;__CATI
+XT;XT Token;crypto;XT
+SKI;SKI MASK DOG;crypto;_SKI
+DAPPX;dAppstore;crypto;DAPPX
+ALCH;Alchemist AI;crypto;___ALCH
+MAVIA;Heroes of Mavia;crypto;MAVIA
+VANRY;VANRY;crypto;VANRY
+BULLY;Dolos The Bully;crypto;_______BULLY
+CHEEMS;Cheems v2;crypto;__CHEEMS
+MASA;Masa;crypto;MASA
+MBOX;MOBOX;crypto;MBOX
+1000CAT;1000CAT;crypto;1000CAT
+VR;Victoria VR;crypto;VR
+ACA;Acala;crypto;__ACA
+LUCE;Official Mascot of the Holy Year;crypto;LUCE
+HIGH;Highstreet;crypto;HIGH
+BARSIK;Hasbulla's Cat;crypto;_BARSIK
+UTK;xMoney;crypto;UTK
+X;X Empire;crypto;___________________________X
+WBETH;Wrapped Binance Beacon ETH;crypto;WBETH
+REX;REVOX;crypto;_______REX
+BUTTHOLE;Butthole Coin;crypto;_BUTTHOLE
+ALT;AltLayer Token;crypto;__________ALT
+PLS;PulseChain;crypto;__PLS
+WSDM;Wisdomise;crypto;WSDM
+DBR;deBridge;crypto;_DBR
+NS;SuiNS Token;crypto;__NS
+LRDS;BLOCKLORDS;crypto;LRDS
+SYN;Synapse;crypto;_SYN
+VISTA;Ethervista;crypto;VISTA
+VVAIFU;Dasha;crypto;VVAIFU
+BB;BounceBit;crypto;_________BB
+LOFI;Lofi;crypto;__LOFI
+WHY;why;crypto;_WHY
+KOMA;Koma Inu;crypto;KOMA
+VOXEL;Voxies;crypto;VOXEL
+RETH;Rocket Pool ETH;crypto;__RETH
+LEVER;LeverFi;crypto;LEVER
+TOMI;tomi Token;crypto;_TOMI
+SCIHUB;sci-hub;crypto;SCIHUB
+ALEO;Aleo;crypto;ALEO
+T;Threshold Network Token;crypto;T
+DRUGS;Big Pharmai;crypto;DRUGS
+HOOK;Hook Protocol;crypto;HOOK
+SPORE;SPORE;crypto;___SPORE
+PIXEL;PIXEL;crypto;___PIXEL
+USDBC;USD Base Coin;crypto;USDBC
+CLANKER;tokenbot;crypto;CLANKER
+ZKL;zkLink;crypto;ZKL
+ID;Space ID;crypto;__ID
+ELF;aelf;crypto;ELF
+HOTKEY;HotKeySwap;crypto;HOTKEY
+PHB;Phoenix Global;crypto;PHB
+DMAIL;Dmail Network;crypto;DMAIL
+TEVA;Tevaera;crypto;TEVA
+REZ;Renzo;crypto;REZ
+STETH;Lido Staked Ether;crypto;_STETH
+MSOL;Marinade.Finance mSOL;crypto;MSOL
+TREMP;doland tremp;crypto;TREMP
+MERL;Merlin Chain;crypto;_MERL
+COQ;COQINU;crypto;COQ
+ALICE;My Neighbor Alice;crypto;ALICE
+LISTA;Lista DAO;crypto;LISTA
+ARTFI;ARTFI;crypto;ARTFI
+LWFI;Liberty world financial;crypto;LWFI
+RDNT;Radiant Capital;crypto;RDNT
+ACT.2;Act I : The AI Prophecy;crypto;___ACT
+E4C;$E4C;crypto;E4C
+ISLAND;ISLAND;crypto;_ISLAND
+FIL.2;Filecoin [Futures];crypto;_FIL
+PEPE.2;MOG PEPE;crypto;________________________________________________PEPE
+MAAL;Maal Chain;crypto;MAAL
+LEXICON;Lexicon;crypto;LEXICON
+SEN;Sentio Protocol;crypto;_____SEN
+CLOUD;Cloud;crypto;_____CLOUD
+DSYNC;Destra Network;crypto;_DSYNC
+IGT;Infinitar Governance Token;crypto;__IGT
+SAROS;Saros;crypto;SAROS
+NEIRO.3;Neiro;crypto;_NEIRO
+ZBCN;Zebec Network;crypto;ZBCN
+MVC;MileVerse;crypto;___MVC
+ZENT;Zentry;crypto;ZENT
+TAOCAT;TAOCat by Virtuals;crypto;TAOCAT
+CAT;Simons Cat;crypto;_________________________CAT
+BETA;BETA FINANCE;crypto;__BETA
+MIGGLES;Mister Miggles;crypto;MIGGLES
+EUROC;EURC;crypto;EUROC
+PURR;PURR;crypto;____PURR
+DESCI;SUI Desci Agents;crypto;_DESCI
+MOSS;MOSS;crypto;MOSS
+FRED;First Convicted RACCON;crypto;_____FRED
+APEPE;Ape and Pepe;crypto;_APEPE
+AIFUN;AI Agent Layer;crypto;AIFUN
+VIDT;V-ID;crypto;VIDT
+PHIL;Phil;crypto;_PHIL
+DOP;Data Ownership Protocol;crypto;____DOP
+MANA.2;Meme Anarchic Numismatic Asset;crypto;__MANA
+OIIAOIIA;spinning cat;crypto;OIIAOIIA
+LUNA.2;Luna by Virtuals;crypto;_____LUNA
+MPLX;Metaplex Token;crypto;MPLX
+NFP;NFPrompt Token;crypto;_NFP
+TRISIG;TRI SIGMA;crypto;TRISIG
+F;SynFutures;crypto;_F
+SATS;SATS;crypto;__SATS
+LUIGI;Luigi Mangione;crypto;__LUIGI
+BETH;Beacon ETH;crypto;BETH
+HFUN;Hypurr Fun;crypto;HFUN
+MAGIC.2;MAGIC;crypto;_____MAGIC
+SLEX;SLEX Token;crypto;SLEX
+OG;OG Fan Token;crypto;OG
+SANTOS;Santos FC Fan Token;crypto;SANTOS
+EGP;Eigenpie;crypto;__EGP
+IGU;IGU Token;crypto;IGU
+PIPPIN;Pippin;crypto;PIPPIN
+WELL;Moonwell;crypto;_WELL
+UNIT0;Unit Zero Mainnet Token;crypto;UNIT0
+LOU;lou;crypto;LOU
+ULTI;Ultiverse;crypto;__ULTI
+PONKE;PONKE;crypto;PONKE
+EDU;EDU Coin;crypto;__EDU
+RSS3;RSS3;crypto;RSS3
+MEMESAI;Memes AI;crypto;MEMESAI
+PIXFI;Pixelverse;crypto;PIXFI
+ACE.2;Fusionist;crypto;______ACE
+AIXCB;aixCB by Virtuals;crypto;AIXCB
+AGENT;AgentLayer;crypto;_AGENT
+MIRA;Mira;crypto;___MIRA
+KM;Kekius Maximus;crypto;KM
+WAT;WATCoin;crypto;__WAT
+MONKY;Wise Monkey;crypto;_MONKY
+COOK.2;mETH Protocol;crypto;______COOK
+TOKEN;TokenFi;crypto;____TOKEN
+ULTIMA;Ultima;crypto;ULTIMA
+SLINKY;Slinky;crypto;_SLINKY
+LOGX;LogX Network;crypto;LOGX
+INSN;IndustrySonic;crypto;_INSN
+REKT;Rekt;crypto;_____REKT
+GAME;GameBuild;crypto;________GAME
+HFT;Hashflow;crypto;__HFT
+SLF;Self Chain;crypto;_SLF
+SDAI;Savings Dai;crypto;SDAI
+TSOTCHKE;tsotchke;crypto;TSOTCHKE
+GNON;numogram;crypto;GNON
+USDS;USDS Stablecoin;crypto;____USDS
+METH;Mantle Staked Ether;crypto;____METH
+GAME.2;GAME by Virtuals;crypto;__________GAME
+SKY;SKY Governance Token;crypto;__________SKY
+AIC;AI Companions;crypto;__AIC
+BNSOL;Binance Staked SOL;crypto;BNSOL
+EYWA;EYWA;crypto;EYWA
+CRVUSD;crvUSD;crypto;CRVUSD
+MOTHER;MOTHER IGGY;crypto;__MOTHER
+UNI.2;Uni;crypto;_____UNI
+BNX.2;BinaryX v2;crypto;__BNX
+FOMO;Fomo;crypto;____________________FOMO
+AICELL;AICell;crypto;AICELL
+MAV;Maverick Protocol;crypto;_MAV
+SAVAX;BENQI Liquid Staked AVAX;crypto;SAVAX
+XTM;Torum;crypto;_XTM
+PIZZA;pizza;crypto;___________PIZZA
+PSG;Paris Saint-Germain Fan Token;crypto;PSG
+SHRUB;Shrub;crypto;SHRUB
+DEGENAI;Degen Spartan AI;crypto;DEGENAI
+JAIL;JailbreakMe;crypto;JAIL
+ARPA;ARPA Chain;crypto;ARPA
+PRAWN;Pepe The King Prawn;crypto;PRAWN
+FRXETH;Frax Ether;crypto;FRXETH
+SCHIZO;Schizo Terminal;crypto;SCHIZO
+SEND;Suilend;crypto;______SEND
+BUCK;GME MASCOT;crypto;______BUCK
+PYR;Vulcan Forged;crypto;PYR
+CPOOL;Clearpool;crypto;CPOOL
+GTC;Gitcoin;crypto;__GTC
+RACA;Radio Caca;crypto;RACA
+TRUST.2;Trust The Process;crypto;_____TRUST
+SCOUT;Scoutly AI;crypto;_SCOUT
+IQ.2;IQ6900;crypto;___IQ
+SHIBTC;Shibabitcoin;crypto;SHIBTC
+REI;REI Network;crypto;_REI
+REI.2;Unit 00 - Rei;crypto;__REI
+SUIAI;SUI Agents;crypto;SUIAI
+MCADE;Metacade;crypto;MCADE
+SYNT;Synternet Token;crypto;SYNT
+OPLN;Omega Zloty PLN°;crypto;OPLN
+DATA;Streamr DATAcoin;crypto;DATA
+HAT;TOP HAT;crypto;______HAT
+LAZIO;Lazio Fan Token;crypto;LAZIO
+AURA;Aura Network;crypto;____AURA
+CHEYENNE;Cheyenne;crypto;CHEYENNE
+EXVG;EXVERSE;crypto;EXVG
+KMNO;Kamino;crypto;KMNO
+POLY.2;Polytrader by Virtuals;crypto;____POLY
+EVAN;Evan;crypto;EVAN
+GHST;Aavegotchi;crypto;GHST
+MAD;MAD;crypto;________MAD
+AAAHHM;Plankton in Pain;crypto;AAAHHM
+WORM;Deep Worm;crypto;__WORM
+BIT.2;Biconomy Exchange Token;crypto;___BIT
+FXN;FXN;crypto;__FXN
+BULL;Tron Bull;crypto;____________________________BULL
+GME;GameStop;crypto;_____GME
+WOJAK;Wojak Coin;crypto;_WOJAK
+SEKOIA;sekoia by Virtuals;crypto;SEKOIA
+CXT;Covalent X Token;crypto;_CXT
+NOTAI;NOTAI;crypto;_NOTAI
+FAR;FARCANA;crypto;__FAR
+AITECH;Solidus Ai Tech;crypto;AITECH
+SITCOM;degenerative SITCOM;crypto;SITCOM
+SOLENG;SOLENG;crypto;SOLENG
+TURBOS;Turbos;crypto;TURBOS
+XR;Xraders;crypto;_XR
+UBC;Universal Basic Compute;crypto;_UBC
+FIRE;Matr1x Fire;crypto;______________FIRE
+DMTR;Dimitra;crypto;DMTR
+MEOW;MeowCat;crypto;____________________MEOW
+ELIZA.2;ai16zeliza;crypto;__ELIZA
+GENOME;GenomesDAO;crypto;GENOME
+MSN;MesonNetwork;crypto;_MSN
+GRIFT;ORBIT;crypto;_GRIFT
+AUTOS;CryptoAutos;crypto;AUTOS
+DOGS.2;TRUMP DOGS;crypto;_______DOGS
+HSK;HashKey Platform Token;crypto;HSK
+OPAIUM;opaium;crypto;OPAIUM
+MMXN;Moneta Digital;crypto;MMXN
+OPUS;Claude Opus;crypto;_OPUS
+TEMA;Tema;crypto;TEMA
+HEU;Heurist;crypto;HEU
+ZETA;ZetaChain;crypto;_ZETA
+ISLM;Islamic Coin;crypto;ISLM
+AXLUSDC;Axelar Wrapped USDC;crypto;AXLUSDC
+TETSUO;Tetsuo Coin;crypto;TETSUO
+CENTS;Centience;crypto;_CENTS
+PEPU;Pepe Unchained;crypto;_PEPU
+BOME.2;Book of Meme 3.0;crypto;_BOME
+KISHU;Kishu Inu;crypto;KISHU
+GTAI;GT Protocol;crypto;GTAI
+OPAI;Optopia AI;crypto;OPAI
+ONG;Ontology Gas;crypto;ONG
+VADER;VaderAI by Virtuals;crypto;__VADER
+DOSE;Dose;crypto;DOSE
+INST;Fluid;crypto;INST
+AMO;AMO Coin;crypto;AMO
+SAI;Sharpe AI;crypto;________SAI
+RETARDIO;RETARDIO;crypto;RETARDIO
+G;Gravity;crypto;_____G
+GINNAN;Ginnan the Cat;crypto;_GINNAN
+NAVX;Navi Protocol;crypto;NAVX
+DARAM;DARAM AI;crypto;_DARAM
+ODOS;Odos Token;crypto;ODOS
+MOEW;donotfomoew;crypto;MOEW
+SBR.2;STRATEGIC BITCOIN RESERVE;crypto;__SBR
+RSETH;Kelp DAO Restaked ETH;crypto;RSETH
+TERMINUS;First City in Mars;crypto;TERMINUS
+OAS;Oasys;crypto;_OAS
+FB;Fractal Bitcoin;crypto;___FB
+HEX;HEX (PulseChain);crypto;___HEX
+ROCKY;rocky;crypto;______ROCKY
+FRIC;FRIC;crypto;FRIC
+CLO;Cloudland;crypto;__CLO
+BAR;FC Barcelona Fan Token;crypto;BAR
+MUMU;Mumu the Bull;crypto;___MUMU
+LADYS;Milady;crypto;LADYS
+SWFTC;SwftCoin;crypto;SWFTC
+NTRN;Neutron;crypto;_NTRN
+NEON;Neon EVM Token;crypto;_NEON
+SERSH;SerenityShield v2;crypto;_SERSH
+HOLD;Holdstation;crypto;____HOLD
+SIGMA;SIGMA;crypto;____SIGMA
+BERT;Bertram The Pomeranian;crypto;_BERT
+NOTHING;nothing;crypto;___NOTHING
+BILLY;BILLY;crypto;_BILLY
+SILLY;Silly Dragon;crypto;_SILLY
+VOID;Nothing;crypto;_______VOID
+DOGECAST;Dogecast;crypto;_DOGECAST
+APPLE;dog with apple in mouth;crypto;_____APPLE
+PIP;PIP;crypto;_PIP
+SCA;Scallop;crypto;SCA
+BEFE;BEFE;crypto;BEFE
+SHOGGOTH;Shoggoth;crypto;SHOGGOTH
+COMBO;ComboToken;crypto;_COMBO
+MAX.2;MAX;crypto;____________MAX
+PEPECOIN;pepeCoin;crypto;PEPECOIN
+TRIO;OrdinalsBot;crypto;__TRIO
+MCOIN;m20Chain;crypto;__MCOIN
+ALPINE;Alpine F1 Team Fan Token;crypto;ALPINE
+NYAN;Nyan Heroes;crypto;_______NYAN
+ELG;Escoin Token;crypto;ELG
+DAI.2;Dai Stablecoin (PulseChain);crypto;___DAI
+VITA;VitaDAO;crypto;VITA
+HGPT;HYPERGPT;crypto;HGPT
+WAI;WAI Combinator by Virtuals;crypto;___WAI
+RLUSD;Ripple USD;crypto;RLUSD
+METAV;METAVERSE;crypto;_METAV
+SCF;Smoking Chicken Fish;crypto;SCF
+CITY;Manchester City Fan Token;crypto;_CITY
+POCHITA;Pochita;crypto;POCHITA
+VERTAI;Vertical AI;crypto;VERTAI
+M3M3;M3M3;crypto;M3M3
+NXRA;AllianceBlock Nexera;crypto;NXRA
+FMC;Fame AI;crypto;__FMC
+BCRE;BCREPE;crypto;_BCRE
+ASTO;Altered State Token;crypto;ASTO
+GOAL;TopGoal;crypto;___GOAL
+BIZA;BizAuto;crypto;BIZA
+MOODENG.2;MOO DENG;crypto;_MOODENG
+FOREST;FOREST;crypto;_FOREST
+QUICK.2;QuickSwap (NEW);crypto;_QUICK
+PORTO;FC Porto;crypto;PORTO
+SFRXETH;Staked Frax Ether;crypto;SFRXETH
+ZCX;Unizen;crypto;ZCX
+CPA;CPA by Virtuals;crypto;CPA
+SEND.2;Send;crypto;_____SEND
+AVC;AlterVerse;crypto;_AVC
+MLG;360noscope420blazeit;crypto;MLG
+TANK;AgentTank;crypto;_TANK
+BUBBLE;Imaginary Ones;crypto;_BUBBLE
+BASEDAI;basedAI;crypto;BASEDAI
+DOGE.3;Department of Gov Efficiency;crypto;____________________DOGE
+SNBNB;Synclub Staked BNB;crypto;SNBNB
+WBS;WebSea;crypto;_WBS
+PORT;it's time to full port;crypto;____PORT
+SCNSOL;Sanctum Infinity;crypto;SCNSOL
+MOBILE;Helium Mobile;crypto;MOBILE
+SWGT;SmartWorld Global Token;crypto;SWGT
+WILD;Wilder World;crypto;_WILD
+CONVO;Prefrontal Cortex Convo Agent by Virtuals;crypto;CONVO
+SWETH;Swell Staked Ether;crypto;SWETH
+XEN;XEN Crypto (Ethereum);crypto;__XEN
+LMWR;LimeWire Token;crypto;LMWR
+RENZORESTAKEDETH;ezETH;crypto;RENZORESTAKEDETH
+NMT;NetMind Token;crypto;__NMT
+SNS;Synesis One;crypto;SNS
+HOPPY;Hoppy;crypto;___HOPPY
+LINGO;Lingo;crypto;_LINGO
+SDM;Shieldeum;crypto;_SDM
+BCUT;bitsCrunch Token;crypto;BCUT
+SOON;TON Station;crypto;__SOON
+BONGO;BONGO CAT;crypto;BONGO
+FOMO.2;FOMOSolana;crypto;_____________FOMO
+RSNOOFI;reddit dog;crypto;_RSNOOFI
+PROJECT89;Project89;crypto;PROJECT89
+P2PS;P2P Solutions Foundation;crypto;P2PS
+BDX;Beldex;crypto;BDX
+GEKKO;Gekko AI by Virtuals;crypto;_GEKKO
+MARS;Mars;crypto;______________MARS
+PLSX;PulseX;crypto;PLSX
+ATM;Atletico Madrid Fan Token;crypto;_ATM
+JUV;Juventus Fan Token;crypto;JUV
+ANDY70B;ANDY70B;crypto;ANDY70B
+LEO;Bitfinex LEO Token;crypto;LEO
+JIM;Naked Jim;crypto;_JIM
+DECHAT;CHAT;crypto;DECHAT
+KWANT;kwantxbt;crypto;KWANT
+CHITAN;Chitan;crypto;CHITAN
+DZOO;Degen Zoo;crypto;_DZOO
+BLADE;Blade Games;crypto;__BLADE
+RIZZMAS;Rizzmas;crypto;RIZZMAS
+QORPO;QORPO Token;crypto;QORPO
+PLPA;PALAPA;crypto;PLPA
+BKN;Brickken;crypto;_BKN
+DIFX;Digital Financial Exchange;crypto;DIFX
+AGENCY;Larp Detective Agency;crypto;AGENCY
+FATHA;Slopfather;crypto;FATHA
+MYSTERY;Mystery;crypto;_MYSTERY
+RWA.2;RWA Inc.;crypto;______RWA
+HEART;Humans.ai;crypto;_HEART
+LBK;LBANK;crypto;_LBK
+SPA;Sperax;crypto;__SPA
+ACOLYT;Acolyte by Virtuals;crypto;ACOLYT
+A8;Ancient8;crypto;A8
+ESCC;Eos Stable Coin Chain;crypto;ESCC
+TITANX;TITAN X;crypto;TITANX
+KIKI;KIKICat;crypto;___KIKI
+PIRATE.2;Pirate Nation Token;crypto;__PIRATE
+PPT;Pop Token;crypto;_PPT
+SPARKLET;Upland;crypto;SPARKLET
+CEUR;Celo Euro;crypto;CEUR
+GOUT;GOUT;crypto;GOUT
+RSIC;Runecoin;crypto;RSIC
+ZIG;Zignaly;crypto;ZIG
+NEXD;Nexade;crypto;NEXD
+PUNDU;PUNDU;crypto;PUNDU
+LOCKIN;LOCK IN;crypto;LOCKIN
+UPC;Unipaycoin;crypto;_UPC
+USA;American Coin;crypto;__USA
+ALB;Alienbase;crypto;ALB
+EPIK;TEH EPIK DUCK;crypto;_EPIK
+SHERIF;SHERIF;crypto;SHERIF
+WOLF.3;LandWolf;crypto;_____________________WOLF
+BRWL;Blockchain Brawlers;crypto;BRWL
+WPAY;Wirex Pay;crypto;__WPAY
+KNCL;Kyber Network Crystal Legacy;crypto;KNCL
+RIO;Realio Network;crypto;RIO
+FLZ;Fellaz;crypto;FLZ
+OBOT.2;OBOT;crypto;_OBOT
+DARAM.2;Daram;crypto;DARAM
+PEPE.3;BasedPepe;crypto;__________________________________________________PEPE
+RLB;Rollbit Coin;crypto;_RLB
+HAY;Hay Stablecoin;crypto;_HAY
+MINI;mini;crypto;_MINI
+1CAT;Bitcoin Cats;crypto;1CAT
+CRYO;CryoDAO;crypto;CRYO
+KIMA;Kima Network;crypto;KIMA
+ISIKC;Isik Coin;crypto;ISIKC
+NEIRO.4;Neiro;crypto;NEIRO
+MFX;MoonFlex;crypto;_MFX
+PBUX;Playbux;crypto;PBUX
+LKI;Laika AI;crypto;LKI
+DIONE;Dione v2;crypto;_DIONE
+PATRIOT;Patriot;crypto;PATRIOT
+HUGE;HugeWin;crypto;HUGE
+RSC;ResearchCoin;crypto;__RSC
+XDAI;xDAI;crypto;XDAI
+GPU;NodeAI;crypto;_GPU
+PDA;PlayDapp;crypto;PDA
+PAI;ParallelAI;crypto;_________PAI
+DUCKAI;Duck AI;crypto;DUCKAI
+SMURFCAT;Real Smurf Cat;crypto;SMURFCAT
+LAND;Outlanders Token;crypto;_____LAND
+INC;Incentive;crypto;__INC
+PTON;Proxy TON;crypto;_PTON
+PURPE;Purple Pepe;crypto;PURPE
+MOZ;Lumoz;crypto;__MOZ
+BITCAT;Bitcat;crypto;BITCAT
+BIAO;BIAO;crypto;______BIAO
+SKYA;Sekuya;crypto;SKYA
+H4CK;H4CK Terminal by Virtuals;crypto;H4CK
+SUNCAT;SUNCAT;crypto;SUNCAT
+NPC;Non-Playable Coin;crypto;____NPC
+XTUSD;XT Stablecoin XTUSD;crypto;XTUSD
+GGP;Geegoopuzzle;crypto;___GGP
+LMEOW;lmeow;crypto;__LMEOW
+NPCS;NPC Solana;crypto;NPCS
+BASED;BASED;crypto;_______BASED
+SMART;Smart game;crypto;_____SMART
+XMD;Metal Dollar;crypto;_XMD
+IMPT;IMPT;crypto;_IMPT
+NUMBER;NUMBER;crypto;NUMBER
+GMT.2;GoMining Token;crypto;__GMT
+ZEX;Zeta;crypto;_ZEX
+ORNJ;ORNJ;crypto;ORNJ
+MUSTARD;MUSTAAAAAARD;crypto;__MUSTARD
+SIDUS;SIDUS Heroes;crypto;SIDUS
+TRACKEDBIO;TrackedBio;crypto;TRACKEDBIO
+TARA;Taraxa;crypto;TARA
+WALLET;Ambire Wallet;crypto;WALLET
+CRTS;Cratos;crypto;CRTS
+TOX;INTOVERSE TOKEN;crypto;TOX
+ZARA;ZARA AI;crypto;_ZARA
+ORBS;Orbs;crypto;ORBS
+KARRAT;KarratCoin;crypto;KARRAT
+PROPC;Propchain;crypto;PROPC
+WLKN;Walken;crypto;WLKN
+AIG;AiG;crypto;__AIG
+CWT;CoinW Token;crypto;___CWT
+LUFFY;LUFFY v3;crypto;_LUFFY
+AROK;AROK.VC;crypto;AROK
+PEIPEI;PeiPei;crypto;_____PEIPEI
+PARAM;Param;crypto;PARAM
+KACY;markkacy;crypto;_KACY
+4EVER;4EVERLAND;crypto;4EVER
+RYO;RYO Token;crypto;_RYO
+NUB;nubcat;crypto;NUB
+WEETH;Wrapped eETH;crypto;WEETH
+AI69X;ai69x;crypto;AI69X
+BSOL;BlazeStake Staked SOL;crypto;_BSOL
+BLINK;Blockmason Link;crypto;BLINK
+KOLIN;Kolin;crypto;_KOLIN
+ARG;Argentine Football Association Fan Token;crypto;_ARG
+MUSIC;MUSIC by Virtuals;crypto;___MUSIC
+LEMX;Lemon;crypto;LEMX
+FJO;Fjord Foundry;crypto;FJO
+LUM;luminous;crypto;_____LUM
+EAI;Eternal AI;crypto;_EAI
+MONAI;MONAI;crypto;MONAI
+ZODS;ZODs;crypto;ZODS
+BLUB;BLUB;crypto;_BLUB
+VOYAGE;Voyager AI;crypto;VOYAGE
+USDC.2;USD Coin from Ethereum (PulseChain);crypto;_USDC
+CWIF;catwifhat;crypto;CWIF
+ROCKET;AI ROCKET by Virtuals;crypto;_________ROCKET
+SLAYER;ThreatSlayerAI by Virtuals;crypto;SLAYER
+CAW;CAW (A Hunters Dream);crypto;CAW
+OMAX;Omax Coin;crypto;OMAX
+QANX;QANX Token v2;crypto;_QANX
+SOON.2;SoonVerse;crypto;_SOON
+RBNT;RedBelly Network;crypto;RBNT
+MARS.2;MetaMars;crypto;____________MARS
+SIMMI;Simmi Token;crypto;SIMMI
+1;just buy $1 worth of this coin;crypto;__1
+OGC;OGCommunity Token;crypto;OGC
+GARI;Gari Network;crypto;GARI
+SATORI;SATORI;crypto;SATORI
+TOSHI;Toshi;crypto;__TOSHI
+VIBE;Vibe Cat;crypto;______VIBE
+ACM;AC Milan Fan Token;crypto;_ACM
+PEW;pepe in a memes world;crypto;PEW
+WQUIL;Wrapped QUIL;crypto;WQUIL
+LMF;Lamas Finance;crypto;LMF
+APP;Moon App;crypto;___APP
+MNRY;Moonray;crypto;_MNRY
+VIC;Viction;crypto;___VIC
+GME.2;GameStop;crypto;______GME
+FREYA;Freya by Virtuals;crypto;_FREYA
+DIS;DisChain;crypto;__DIS
+GIKO;Giko Cat;crypto;_GIKO
+AVACN;AVACOIN;crypto;AVACN
+SSWP;Suiswap Token;crypto;SSWP
+3ULL;PLAYA3ULL GAMES;crypto;3ULL
+HAPI;HAPI;crypto;HAPI
+MON;MON Protocol;crypto;________MON
+WDOGE;Wrapped DogeCoin;crypto;WDOGE
+BEL.2;Bellscoin;crypto;__BEL
+CDX;CodeXChain;crypto;___CDX
+CATANA;Catana;crypto;CATANA
+XBG;XBorg;crypto;_XBG
+OMOCHI;No1 tiktok frog (Omochi);crypto;OMOCHI
+HIT;HitBTC Token;crypto;_HIT
+NUM;Numbers Protocol;crypto;NUM
+ZKF;ZKFair;crypto;ZKF
+CKP;Cakepie;crypto;_CKP
+SMOLE;smolecoin;crypto;SMOLE
+NEURAL;NeuralAI;crypto;_NEURAL
+AXOL;AXOL;crypto;AXOL
+EACC;Effective accelerationism;crypto;EACC
+RJV;Rejuve Token;crypto;_RJV
+MEOW.2;Meow Meow Meow Meow;crypto;___________________MEOW
+WSTUSDT;Wrapped Staked USDT;crypto;WSTUSDT
+PALM;PaLM AI v2;crypto;_____PALM
+HEGE;Hege;crypto;HEGE
+GUAN;Guanciale by Virtuals;crypto;GUAN
+PIN;PinLink;crypto;__PIN
+XCDOT;xcDOT;crypto;XCDOT
+CAGA;Crypto Asset Governance Alliance;crypto;CAGA
+SORA;Sora;crypto;_SORA
+BRO;Neurobro by Virtuals;crypto;_______________BRO
+ABEY;ABEYCHAIN;crypto;ABEY
+FMB;Flappy Moon Bird;crypto;__FMB
+WXT;Wirex Token;crypto;WXT
+SYRUP;Syrup Token;crypto;SYRUP
+MYRIA;Myria;crypto;_MYRIA
+BERRY;Strawberry AI;crypto;____BERRY
+PENG;Peng;crypto;__PENG
+SHAW;Shaw;crypto;SHAW
+AGENT.2;AgentAlgo;crypto;___AGENT
+EAI.2;Eagle AI;crypto;__EAI
+WBTC.2;Wrapped Bitcoin (PulseChain);crypto;__WBTC
+PUMP;Big Pump;crypto;____________PUMP
+KEYCAT;Keyboard Cat;crypto;_KEYCAT
+TITS;We Love Tits;crypto;__TITS
+AIT;AIT Protocol;crypto;____AIT
+SMILEY;Smiley;crypto;SMILEY
+BZR;BAZAARS;crypto;BZR
+SMT;Swarm Markets;crypto;_SMT
+SHRUB.2;Elon Hedgehog;crypto;_SHRUB
+DOG.3;Dog 🐕;crypto;________________DOG
+BOX;Defibox;crypto;__BOX
+NYM;Nym;crypto;NYM
+OORT;OORT;crypto;_OORT
+CHILLGIRL;Chillgirl;crypto;CHILLGIRL
+WIBE;WibeGram;crypto;WIBE
+STORM;Storm Trade;crypto;___STORM
+KENDU;Kendu Inu;crypto;KENDU
+GLUTEU;Gluteus Maximus by Virtuals;crypto;GLUTEU
+GEAR;Gearbox;crypto;_____GEAR
+CA;Coupon Assets CA-HTB;crypto;__CA
+ZCD;ZChains;crypto;ZCD
+SHRAP;Shrapnel;crypto;SHRAP
+PORK;PepeFork;crypto;____PORK
+ROCK;RockDao;crypto;____ROCK
+AUKI;Auki Token;crypto;AUKI
+LVN;Levana Protocol;crypto;_LVN
+ROGUE;Agent Rogue;crypto;_ROGUE
+ELU;Legends of Elumia;crypto;ELU
+KUB;Bitkub Coin;crypto;_KUB
+HASHAI;HashAI;crypto;HASHAI
+JOE.2;Joe Coin;crypto;__JOE
+BGG1;Blinks.gg;crypto;BGG1
+EARNM;EARN'M;crypto;EARNM
+KOTO;koto;crypto;_KOTO
+XMW;Morphware;crypto;XMW
+MET;Metformin;crypto;______MET
+H1DR4;H1DR4 by Virtuals;crypto;H1DR4
+TAOBOT;tao.bot;crypto;TAOBOT
+LAVA;Lava Network;crypto;____LAVA
+SG;SocialGood;crypto;SG
+FARTCOIN.2;Based Fartcoin;crypto;_FARTCOIN
+PIZA;PIZABRC;crypto;_PIZA
+CAT.2;NOT;crypto;___________________________CAT
+BLENDR;Blendr Network;crypto;BLENDR
+ZBU;ZEEBU;crypto;ZBU
+WDOG;wrapped dog;crypto;_WDOG
+SRM;Serum;crypto;SRM
+REAL;Realy Metaverse;crypto;___REAL
+BOB.2;Build On BNB;crypto;_______________BOB
+NAILONG;Nailong;crypto;_NAILONG
+WAT.2;Wat;crypto;_WAT
+BEBE;BEBE;crypto;____BEBE
+BEPE;Bitci PEPE;crypto;___BEPE
+AOG;AgeOfGods;crypto;_AOG
+CYBRO;CYBRO;crypto;_CYBRO
+GROW;ValleyDAO Token;crypto;___GROW
+GST.2;Gold Swap Token;crypto;________GST
+GLS;Glacier Network;crypto;_GLS
+SEILOR;SeilorToken;crypto;SEILOR
+XEL;XELIS;crypto;__XEL
+WCO;WadzCoin Token;crypto;_WCO
+FURY;Engines of Fury Token;crypto;__FURY
+ORT;Okratech;crypto;__ORT
+SELFIE;SelfieDogCoin;crypto;SELFIE
+SKBDI;Skibidi Toilet;crypto;SKBDI
+SAINT;Satoshi AI agent by Virtuals;crypto;___SAINT
+NFTXBT;nftxbt by Virtuals;crypto;NFTXBT
+SVN;StakeVault;crypto;__SVN
+QUASAR;Quasar;crypto;QUASAR
+ATH.2;AthenaDAO Token;crypto;_________ATH
+SIN;SinCity Token;crypto;__SIN
+CGO;Comtech Gold;crypto;CGO
+LEA;Lea AI;crypto;_LEA
+OZONE;Ozone Metaverse;crypto;_OZONE
+ZERC;zkRace;crypto;ZERC
+XFI;CrossFi;crypto;__XFI
+USDZ;ZEDXION;crypto;USDZ
+BALL;BitBall;crypto;_____BALL
+CARLO;Carlo;crypto;CARLO
+ACT.3;Acet Token;crypto;_ACT
+TRKX;Trakx;crypto;TRKX
+TALENT;Talent Protocol;crypto;_TALENT
+CIRUS;Cirus;crypto;CIRUS
+BBSOL;BybitSOL;crypto;BBSOL
+OGPU;OpenGPU;crypto;OGPU
+SAINT.2;Carlo Acutis;crypto;____SAINT
+STRDY;Sturdy Token;crypto;STRDY
+GAYCOIN;Zerebro Token Of Transformation;crypto;GAYCOIN
+PROPS;Propbase;crypto;_PROPS
+PRB;Paribu Net;crypto;PRB
+CERE;Cere Network;crypto;CERE
+DOLA;Dola USD Stablecoin;crypto;DOLA
+FUD;Fud the Pug;crypto;_____FUD
+ZTX;Zetrix;crypto;_ZTX
+FXD;Fathom Protocol;crypto;FXD
+LIXX;Libra Incentix;crypto;LIXX
+ROPIRITO;Ropirito;crypto;ROPIRITO
+AGC;Argocoin;crypto;_AGC
+BFIC;Bficoin;crypto;BFIC
+MUBI;MUBI;crypto;MUBI
+MSTR;MSTR2100;crypto;_____MSTR
+TBTC;tBTC;crypto;TBTC
+IVPAY;ivendPay;crypto;IVPAY
+SPLOOT;Sploots by Virtuals;crypto;SPLOOT
+DUEL;GameGPT;crypto;_DUEL
+MUSKIT;Musk It;crypto;MUSKIT
+TET;Tectum Emission Token;crypto;TET
+BRETT.2;Brett;crypto;_____BRETT
+IXS;IX Swap;crypto;IXS
+BORG;SwissBorg Token;crypto;BORG
+JORGIE;MONKEY TAKEN BY POLICE;crypto;JORGIE
+FB.2;Fenerbahçe Token;crypto;FB
+SSE;SOROOSH SMART ECOSYSTEM;crypto;SSE
+FLAVIA;Flávia Is Online;crypto;FLAVIA
+DEVVE;DevvE;crypto;DEVVE
+10SET;Tenset;crypto;10SET
+TAVA;ALTAVA;crypto;TAVA
+USDT.2;Tether USD from Ethereum (PulseChain);crypto;___USDT
+U2U;U2U;crypto;U2U
+XZK;Mystiko;crypto;XZK
+NEW;Newton Network;crypto;NEW
+HARAMBE;HARAMBE;crypto;_HARAMBE
+RAIN;Rainmaker Games;crypto;__RAIN
+ELIX;Elixir Games;crypto;_ELIX
+DCK;DexCheck;crypto;DCK
+AITOM;AITom;crypto;AITOM
+AURA.2;aura;crypto;_______AURA
+CHO;Choise;crypto;CHO
+WWY;WeWey;crypto;WWY
+JOC;Japan Open Chain;crypto;_JOC
+SHX;Stronghold Token;crypto;SHX
+NETVR;NetVRk v2;crypto;NETVR
+CATS;CATS;crypto;_________CATS
+47;President Trump;crypto;47
+KEKEC;The Balkan Dwarf;crypto;KEKEC
+DTF;Believe In Something;crypto;__DTF
+MMSS;MMSS;crypto;MMSS
+H2O;H2O Dao;crypto;___H2O
+SERAPH;Seraph by Virtuals;crypto;SERAPH
+USDT.3;USDTet (Wormhole);crypto;__USDT
+VIA;Octavia;crypto;_VIA
+APX;ApolloX;crypto;APX
+PEPE.4;Pepecoin;crypto;_______________________________________PEPE
+NGL;Entangle;crypto;_NGL
+ZEDXION;Zedxion v2;crypto;_ZEDXION
+NLK;NuLink token;crypto;NLK
+OCTO;OctonetAI;crypto;___OCTO
+AIPO;Aipocalypto;crypto;AIPO
+PRO.2;Protoken;crypto;______PRO
+KOLS;KOLscan by Virtuals;crypto;KOLS
+FROG;Frodo the virtual samurai;crypto;____________________FROG
+ALL;Sallar v2;crypto;______ALL
+HAWKTUAH;Hawk Tuah;crypto;HAWKTUAH
+SPEC;Spectral Token;crypto;__SPEC
+SKOP;Skull Of Pepe;crypto;SKOP
+TOGA;TOGA;crypto;TOGA
+LOBO;LOBO•THE•WOLF•PUP 🐺;crypto;_LOBO
+TEDDYBEAR;BEAR;crypto;TEDDYBEAR
+WIBWOB;W / I / B W \ O \ B;crypto;WIBWOB
+TALK;Talken;crypto;TALK
+FLT;Fluence;crypto;__FLT
+VES;VESTATE;crypto;VES
+BINANCEDOG;binancedog;crypto;BINANCEDOG
+TTC.2;Tongtong Coin;crypto;_____TTC
+ROOT;The Root Network;crypto;__ROOT
+ZEREPY;ZerePy;crypto;ZEREPY
+UE;UE Coin;crypto;UE
+WELL.2;WELL3;crypto;__WELL
+TURBO.2;Based Turbo;crypto;_______TURBO
+WIRE;717ai by Virtuals;crypto;_WIRE
+FLOWER;FlowerAI;crypto;_FLOWER
+PH;PondHub by Virtuals;crypto;_PH
+POOH;POOH;crypto;POOH
+DORA.2;Dora Factory;crypto;DORA
+HEX.2;HEX from Ethereum (PulseChain);crypto;__HEX
+RIZO;HahaYes;crypto;_RIZO
+TMAI;Token Metrics AI;crypto;TMAI
+AIKO;Aiko;crypto;AIKO
+NATIX;NATIX Network;crypto;NATIX
+TYBG;Base God;crypto;TYBG
+ZULU;Zulu Network;crypto;ZULU
+POOLX;Poolz Finance;crypto;POOLX
+IWT;IndoWealth Token;crypto;IWT
+DEPIN;DePIN Baby by Virtuals;crypto;_DEPIN
+LNQ;LinqAI;crypto;LNQ
+INVITE;INVITE Token;crypto;INVITE
+BENDOG;Ben the Dog;crypto;BENDOG
+CERTAI;CertaiK by Virtuals;crypto;CERTAI
+SWAG;Swag;crypto;___SWAG
+PIKA;Pika Protocol;crypto;____________PIKA
+LUSH;Lush AI;crypto;_LUSH
+IVY;Ivy Live;crypto;_IVY
+ALEX;ALEX Token;crypto;ALEX
+DSRUN;DerbyStarsRUN;crypto;DSRUN
+PUPPIES;I love puppies;crypto;PUPPIES
+DADDY;DADDY TATE;crypto;DADDY
+LAIKA;LAIKA;crypto;____LAIKA
+DOGECAST.2;Dogecast;crypto;DOGECAST
+LNDX;LandX Governance Token;crypto;LNDX
+LBR;Lybra;crypto;__LBR
+LEASH;Doge Killer;crypto;LEASH
+VRTX;Vertex;crypto;VRTX
+QF;QuantumFusion;crypto;QF
+BABYNEIRO;Baby Neiro;crypto;___BABYNEIRO
+TROLL;TROLL;crypto;__TROLL
+NEXT;Connext;crypto;__NEXT
+CUMMIES;CUMROCKET CRYPTO;crypto;CUMMIES
+SVL;Slash Vision Labs;crypto;SVL
+BTY;BitYuan;crypto;_BTY
+WIFI;WiFi Map;crypto;__WIFI
+FRENPET;Fren Pet;crypto;FRENPET
+OZFT;OUGON ZAKURA FT;crypto;OZFT
+TLC;Trillioner;crypto;_TLC
+BAKKT;BAKKT;crypto;BAKKT
+HEX.3;HEX;crypto;HEX
+CVXCRV;Convex CRV;crypto;CVXCRV
+BOOE;Book of Ethereum;crypto;BOOE
+WZRD;Bitcoin Wizards;crypto;__WZRD
+HMND;Humanode Token;crypto;HMND
+CREAL;Celo Brazilian Real;crypto;CREAL
+OFN;Openfabric;crypto;OFN
+AREA;Areon Network;crypto;_AREA
+AEROBUD;AEROBUD;crypto;AEROBUD
+RADAR;DappRadar;crypto;RADAR
+CHAT;Solchat;crypto;____CHAT
+ESE;eesee;crypto;ESE
+DOLAN;Dolan Duck;crypto;___DOLAN
+CHRONOEFFE;Chronoeffector;crypto;CHRONOEFFE
+BN;Bitcoin Names;crypto;____BN
+SPERG;Bloomsperg Terminal;crypto;SPERG
+BRICS;BRICS Chain;crypto;__BRICS
+CTA;Cross The Ages;crypto;_CTA
+FMC.2;Fimarkcoin.com;crypto;_FMC
+X28;X28;crypto;X28
+PDEX;PrivateDecentralizedExchange;crypto;_PDEX
+SECOND;MetaDOS;crypto;SECOND
+GQ;Galactic Quadrant;crypto;GQ
+CRVFRAX;Curve.fi FRAX/USDC;crypto;CRVFRAX
+CST;Coast;crypto;_______CST
+KEKIUS.2;Kekius Maximus;crypto;_KEKIUS
+OMEGA;OMEGA;crypto;__OMEGA
+TOP;TOP;crypto;_TOP
+LIKE;Only1;crypto;_LIKE
+SXCH;Solarx L1;crypto;SXCH
+KWEEN;DO KWEEN;crypto;KWEEN
+SHPING;Shping Coin;crypto;SHPING
+BBL;beoble;crypto;___BBL
+FALX;FalconX;crypto;_FALX
+LOKY;Loky by Virtuals;crypto;LOKY
+HTR;Hathor;crypto;HTR
+IDEA;Ideaology;crypto;IDEA
+FLIP;Chainflip;crypto;___FLIP
+CBPAY;CoinbarPay;crypto;CBPAY
+PAW;PawSwap;crypto;__PAW
+TUP;TenUp;crypto;TUP
+GODS;Gods Unchained;crypto;GODS
+NFE;Edu3Labs;crypto;NFE
+VAIN;Vainguard by Virtuals;crypto;_VAIN
+XCUSDT;xcUSDT;crypto;XCUSDT
+SHIBAI;Shibai Token;crypto;____SHIBAI
+USDJ;JUST Stablecoin;crypto;USDJ
+LEE;Love Earn Enjoy;crypto;_LEE
+5IRE;5ire Token;crypto;5IRE
+SMART.2;SMART BLOCKCHAIN;crypto;______SMART
+SENKU;senku ishigami by Virtuals;crypto;SENKU
+ATROPA;Atropa;crypto;ATROPA
+SUIMAN;Suiman;crypto;SUIMAN
+EUL;Euler;crypto;EUL
+DUKO;Duko;crypto;DUKO
+EZSIS;Eliza's Sister;crypto;EZSIS
+GM;GM Everyday;crypto;_________________GM
+MUNITY;Metahorse Unity Token;crypto;MUNITY
+REMILIA;Remilia;crypto;REMILIA
+ING;Infinity Universe Gem;crypto;_ING
+STKD;Stkd SCRT;crypto;STKD
+FOUR;4;crypto;___FOUR
+SPURS;Tottenham Hotspur;crypto;SPURS
+BAR.2;Gold Standard;crypto;____BAR
+MLC;My Lovely Coin;crypto;___MLC
+AIAT;AI Analysis Token;crypto;AIAT
+GROW.2;Triathon GROW;crypto;__GROW
+AGRI;AgriDex Token;crypto;__AGRI
+SYDNEY;Truth Terminal's Girlfriend;crypto;SYDNEY
+LESTER;Litecoin Mascot;crypto;LESTER
+DOME;Everdome;crypto;DOME
+DMT;Dream Machine Token (Ethereum);crypto;_________DMT
+EGX;Enegra;crypto;EGX
+PT;Phemex Token;crypto;_PT
+ATHENA;Athena by Virtuals;crypto;ATHENA
+APRS;Aperios;crypto;_APRS
+GMRX;Gaimin Token;crypto;GMRX
+SEAM;Seamless;crypto;SEAM
+FI;Fideum;crypto;FI
+SATO;Atsuko Sato;crypto;___SATO
+OKT;OKExChain;crypto;OKT
+BOB.3;Breakout Bro by Virtuals;crypto;________________BOB
+EBULL;ETHEREUM IS GOOD;crypto;EBULL
+ZKML;zKML;crypto;ZKML
+MSTAR;MerlinStarter;crypto;MSTAR
+YOUSIM;YouSim AI;crypto;YOUSIM
+ZERO;ZeroLend;crypto;_____ZERO
+INSP;Inspect;crypto;INSP
+SEND.3;Send;crypto;___SEND
+SUDO;SUDO GOVERNANCE TOKEN;crypto;SUDO
+SQGROW;SquidGrow;crypto;SQGROW
+PBR;PolkaBridge;crypto;PBR
+DPM;Diagonalization Proof Memecoin;crypto;DPM
+SAUCE;SaucerSwap;crypto;SAUCE
+DAOT;Daoversal;crypto;DAOT
+RM9000;Roastmaster9000;crypto;RM9000
+LFDOG;lifedog;crypto;LFDOG
+BANANA.3;Banana for Scale;crypto;______________BANANA
+SOLS;sols;crypto;SOLS
+OPEN;Open Platform;crypto;_OPEN
+SHFL;Shuffle;crypto;_SHFL
+NAVAL;Naval AI;crypto;NAVAL
+NRS;Nereus;crypto;NRS
+KHAI;KittenHaimer;crypto;KHAI
+SOUL;Phantasma;crypto;SOUL
+METAL;Metal Blockchain;crypto;___METAL
+RBC;Rubic;crypto;RBC
+VSC;Vyvo Coin;crypto;___VSC
+AXGT;AxonDAO Governance Token;crypto;AXGT
+DMAGA;Dark MAGA;crypto;DMAGA
+SHEKEL;Rabbi Schlomo by Virtuals;crypto;SHEKEL
+CAI;ChasmAI;crypto;_________CAI
+RITE;ritestream v2;crypto;_RITE
+BROT;BROT;crypto;BROT
+SUGAR;Sugar Boy;crypto;_____SUGAR
+FROGE;Froge;crypto;___FROGE
+ANYONE;Anyone Protocol;crypto;ANYONE
+ITHACA;Ithaca Protocol Token;crypto;ITHACA
+VEXT;Veloce;crypto;VEXT
+XD;Rawr;crypto;_______XD
+SQT;SubQueryToken;crypto;__SQT
+THL;Thala Token;crypto;THL
+BBF;Bubblefong;crypto;BBF
+FAKT;Medifakt;crypto;FAKT
+BOOM;BOOM;crypto;______BOOM
+SLIM;Solanium;crypto;SLIM
+ML;Mintlayer;crypto;_ML
+OBI;ORBOFI;crypto;OBI
+ROA;ROA CORE;crypto;ROA
+ATOMARC;Atomicals;crypto;ATOMARC
+BZZ;Swarm;crypto;BZZ
+CCD;Concordium;crypto;CCD
+DMC;Datamall Coin;crypto;_______DMC
+CENX;Centcex;crypto;_CENX
+CHRP;Chirpley;crypto;CHRP
+RAB;Rabbit;crypto;RAB
+ZIK;ZIK coin;crypto;_ZIK
+HUND;HUND;crypto;HUND
+THG;Thetan Arena;crypto;THG
+RPK;RepubliK;crypto;RPK
+HINJ;Hydro Wrapped INJ;crypto;HINJ
+MTS;META PLUS TOKEN;crypto;_____MTS
+WORK;WORK;crypto;_____WORK
+MOJO;Planet Mojo;crypto;_____MOJO
+BTW;Banana Tape Wall;crypto;__BTW
+XOXNO;XOXNO;crypto;XOXNO
+MFC;Money For Criminals;crypto;____MFC
+DOGO;DOGO;crypto;__DOGO
+DARK;Dark Frontiers;crypto;__DARK
+DIO;Decimated;crypto;_DIO
+DNA;DNA;crypto;_____DNA
+STATOM;Stride Atom;crypto;STATOM
+QBX;Qiibee v2;crypto;__QBX
+SUNWUKONG;SunWukong;crypto;SUNWUKONG
+RFL;Reflect;crypto;__RFL
+CHEQ;cheqd;crypto;CHEQ
+XPLA;XPLA;crypto;XPLA
+SOLAMA;Solama;crypto;SOLAMA
+TBANK;TaoBank;crypto;_TBANK
+BMAX;BMAX Asset Management Token;crypto;BMAX
+LLM;LLM;crypto;LLM
+SQD;Subsquid;crypto;__SQD
+NET;Nektar;crypto;_______NET
+FEAR;Fear;crypto;FEAR
+USDC.3;USD Coin (PulseChain);crypto;__USDC
+CHAT.2;VectorChat.ai;crypto;___CHAT
+VNTR;Venture Mind AI;crypto;VNTR
+GAME.3;GAME;crypto;______GAME
+AIR;AIRian;crypto;________AIR
+J3FF;J3FF by Virtuals;crypto;J3FF
+KNDX;Kondux;crypto;KNDX
+ECOTERRA;ecoterra;crypto;ECOTERRA
+DEXNET;DEXNET;crypto;DEXNET
+MEE;Medieval Empires (Polygon);crypto;__MEE
+SOCIAL;Phavercoin;crypto;_SOCIAL
+SINK;Let that sink in;crypto;SINK
+UPC.2;UPCX;crypto;___UPC
+WMC;Wrapped MistCoin;crypto;_WMC
+UPO;UpOnly Token;crypto;UPO
+OVER;OverProtocol;crypto;_OVER
+PACK;HashPack;crypto;___PACK
+VOYA;Bridged BRC20 VOYA;crypto;VOYA
+NPT;Neopin;crypto;NPT
+COBY;coby;crypto;_COBY
+EPIK.2;Epik Prime;crypto;EPIK
+KABOSU;Kabosu;crypto;________KABOSU
+KNEE;WHEN KNEE SURGERY IS TOMORROW;crypto;KNEE
+VC;VinuChain;crypto;______VC
+CHUD;Chudjak;crypto;_CHUD
+VAL.2;VALIDITY;crypto;__VAL
+WAGMIGAMES;WAGMI Game;crypto;WAGMIGAMES
+NESS;Ness LAB;crypto;_NESS
+KOLZ;KOLZ;crypto;KOLZ
+MILO;Milo Inu;crypto;_MILO
+WMM;Weird Medieval Memes;crypto;WMM
+METFI;MetFi v2;crypto;METFI
+BRUME;Brume;crypto;BRUME
+PROB;ProBit Token;crypto;PROB
+DFT;DigiFinexToken;crypto;_DFT
+NUUM;MNet Continuum;crypto;NUUM
+DOGINME;doginme;crypto;DOGINME
+OZO;Ozone Chain;crypto;OZO
+SINGULARRY;SINGULARRY;crypto;SINGULARRY
+PI;Pi Network (IOU);crypto;___PI
+HELLO;HELLO Labs;crypto;HELLO
+NASDAQ420;Nasdaq420;crypto;NASDAQ420
+MAJOR.2;Major Frog;crypto;_MAJOR
+WEBSIM;The Css God by Virtuals;crypto;WEBSIM
+SPECTRE;SPECTRE AI;crypto;_SPECTRE
+COIN;Coin on Base;crypto;________COIN
+TSUGT;TSUBASA Governance Token;crypto;TSUGT
+HELA;Science Cult Mascot;crypto;_HELA
+SUIA;Suia;crypto;SUIA
+HMT;Human Protocol;crypto;HMT
+OMIRA;Omira;crypto;OMIRA
+BTN;Bitnet BTN;crypto;____BTN
+TIME;ChronoTech Token;crypto;TIME
+GOG;Guild of Guardians;crypto;GOG
+DIMO;Dimo;crypto;DIMO
+ORE;Ore v2;crypto;_______ORE
+GHUB;GemHUB;crypto;GHUB
+LYX;LUKSO;crypto;LYX
+BST;BlocksquareToken;crypto;_______BST
+WPCI;Wrapped Paycoin;crypto;WPCI
+LUSD;Liquity USD;crypto;LUSD
+DXAI;DXAI.app by Virtuals;crypto;DXAI
+SATOSHINAKAM;SATOSHI•NAKAMOTO 丰;crypto;SATOSHINAKAMOTO
+DORKY;Dork Lord;crypto;DORKY
+WNCG;Wrapped NCG;crypto;WNCG
+SOLCEX;SolCex;crypto;SOLCEX
+GBEX;Globiance Exchange;crypto;GBEX
+PLANET;PLANET;crypto;PLANET
+FTRB;Faith Tribe;crypto;FTRB
+GNUS;Genius;crypto;GNUS
+MICE;mice;crypto;MICE
+LITH;Lithium Finance;crypto;_LITH
+XWC;WhiteCoin;crypto;XWC
+AKITA;Akita Inu;crypto;AKITA
+AGENT.3;Agents AI;crypto;__AGENT
+ETHS;Ethscriptions;crypto;__ETHS
+ATA.2;ATA by Virtuals;crypto;___ATA
+NKYC;NONKYC;crypto;NKYC
+ARC.2;ARC;crypto;_____ARC
+STONE;StakeStone Ether;crypto;___STONE
+XAVA;Avalaunch;crypto;XAVA
+PUFETH;pufETH;crypto;PUFETH
+GENE;Genopets;crypto;___GENE
+SUIP;SuiPad;crypto;SUIP
+KARATE;Karate Combat;crypto;KARATE
+LIME;iMe Lab;crypto;LIME
+NIBI;Nibiru;crypto;NIBI
+BABY;Baby;crypto;________BABY
+MAAI;Mars AI;crypto;MAAI
+BIN;Binemon;crypto;_BIN
+NEURAL.2;Artificial Neural Network;crypto;__NEURAL
+RADIO;FOMO RADIO AI;crypto;__RADIO
+SMOL;Smolcoin;crypto;___SMOL
+MRST;Mars Token;crypto;MRST
+GURU;GURU Token;crypto;__GURU
+MELOS;Melos Studio;crypto;MELOS
+PEANUT;#1 TikTok Squirrel;crypto;_PEANUT
+DOAI;DOJO Protocol;crypto;_DOAI
+ICBX;ICB Network;crypto;ICBX
+VIRTU;Virtu by Virtuals;crypto;_VIRTU
+CROWN.2;CROWN;crypto;___CROWN
+CHOMP;ChompCoin;crypto;_CHOMP
+PEAS;Peapods;crypto;PEAS
+KIBSHI;KiboShib;crypto;KIBSHI
+PRD;Parad;crypto;_PRD
+RATI;raticoin;crypto;RATI
+ENQAI;enqAI;crypto;ENQAI
+WYS;WYScale;crypto;_WYS
+GOU;Gou;crypto;_GOU
+CATA;CATAMOTO;crypto;CATA
+FEENIX;Feenix;crypto;FEENIX
+VARA;Vara Network;crypto;VARA
+TUBEUSD;tubeUSD;crypto;TUBEUSD
+FANC;fanC;crypto;FANC
+COM;BRC20.com;crypto;____COM
+PICA;Picasso;crypto;_PICA
+MONI;Monsta Infinite;crypto;MONI
+DFYN;Dfyn Network;crypto;DFYN
+AIYP;Agent YP by Virtuals;crypto;AIYP
+BURN.2;BurnedFi;crypto;___________BURN
+USDB;USDB;crypto;__USDB
+TENSOR;Hypertensor;crypto;TENSOR
+ORFY;Ordify;crypto;ORFY
+UNO.2;UnoRe;crypto;_UNO
+SHOGUN;SHOGUN;crypto;SHOGUN
+EARL;earl;crypto;EARL
+XED;Exeedme;crypto;XED
+VIOLET;Violet;crypto;VIOLET
+ZKT;zkTube;crypto;ZKT
+NCDT;Nuco.cloud;crypto;NCDT
+CSIX;Carbon;crypto;CSIX
+ATR;Artrade Token;crypto;_ATR
+RFD;REFUND;crypto;RFD
+TYPE;TypeAI;crypto;__TYPE
+MDI;MDI;crypto;MDI
+OMNI.2;Omnis Genesis by Virtuals;crypto;_______OMNI
+VENOM;Venom;crypto;__VENOM
+MAS;Massa;crypto;__MAS
+PIT;Pitbull;crypto;PIT
+PLT;Palette;crypto;_____PLT
+BABYNEIRO.2;Baby Neiro;crypto;_BABYNEIRO
+RAKE;Rake.com;crypto;__RAKE
+XODEX;Xodex;crypto;XODEX
+BIFI.3;Beefy V2;crypto;___BIFI
+4CHAN;4CHAN;crypto;4CHAN
+SILK;Silk;crypto;_SILK
+CORN;Solanacorn;crypto;______CORN
+GROGGO;Groggo By Matt Furie;crypto;GROGGO
+SHEGEN;Aiwithdaddyissues;crypto;SHEGEN
+SWORLD;Seedworld;crypto;_SWORLD
+SISC;Shirushi Coin;crypto;SISC
+TN100X;The Next 100x Memecoin on Base;crypto;TN100X
+MOB;MobileCoin;crypto;MOB
+BABYELON;Baby Elon;crypto;__BABYELON
+SWCH;SwissCheese Token;crypto;SWCH
+PBX;Paribus;crypto;PBX
+GOBI;GOBI;crypto;GOBI
+CATDOG;CatDog;crypto;CATDOG
+POPDOG;PopDog;crypto;POPDOG
+SERO;SERO;crypto;SERO
+VON;Vameon;crypto;VON
+ALVA;Alvara;crypto;ALVA
+STOG;Stooges;crypto;STOG
+OMIKAMI;AMATERASU OMIKAMI;crypto;OMIKAMI
+HTH;HumanResearchAI by Virtuals;crypto;_HTH
+MISATO;Misato by Virtuals;crypto;MISATO
+AEG;AETHER GAMES;crypto;_AEG
+CT;Crypto Twitter;crypto;__________CT
+DEFI;De.Fi;crypto;____DEFI
+PUPS;PUPS v2;crypto;__PUPS
+KILT;KILT Protocol;crypto;KILT
+RAT;RAT Escape;crypto;_________RAT
+DEXA;DEXA COIN;crypto;DEXA
+WTAO;Wrapped TAO;crypto;WTAO
+NRK;NORDEK;crypto;_NRK
+OX;OX Coin;crypto;__OX
+GGAVAX;GoGoPool: GoGoPool Liquid Staking Token;crypto;GGAVAX
+PIXIE;Pixie Pistol by Virtuals;crypto;_PIXIE
+SOLO.2;Solo;crypto;___SOLO
+BX;Blynex;crypto;__BX
+USBT;UniversalBlockchain;crypto;USBT
+TBC;Ten Best Coins;crypto;___TBC
+FLC;Flooring Lab Credit;crypto;__FLC
+LOOT;LootBot;crypto;___LOOT
+IAG;IAGON;crypto;IAG
+TINY;TINY;crypto;___TINY
+ULX;Ultron;crypto;ULX
+MSQ;MSQUARE GLOBAL;crypto;_MSQ
+AGLA;Angola;crypto;AGLA
+IZI;iZUMi Finance;crypto;_IZI
+WIZARD;Finance Wizard;crypto;___WIZARD
+INTERN;Internosaur;crypto;____INTERN
+ORDS;Ordiswap;crypto;ORDS
+AEUR;Anchored Coins EUR;crypto;AEUR
+KLAUS;Klaus;crypto;_KLAUS
+IRON;Ironfish;crypto;_IRON
+UNITY;UNITY;crypto;___UNITY
+UWU;Unicorn;crypto;________UWU
+00;00 Token;crypto;00
+ZK.2;Polyhedra Network;crypto;_ZK
+NORMIE;Normie v2;crypto;____NORMIE
+OVERSEER;The Overseer;crypto;OVERSEER
+JAK;Jak;crypto;JAK
+R;ResearchSynth by Virtuals;crypto;__R
+SML;Smell Token;crypto;___SML
+PLI;PLUGIN;crypto;PLI
+MDX;Mdex;crypto;_MDX
+CONSENT;Consent to view this coin;crypto;_CONSENT
+EXIT;DESIGNER TOKEN;crypto;_EXIT
+AVDO;AvocadoCoin;crypto;AVDO
+MONA.2;Mona Arcane;crypto;_____MONA
+ITEM;ITEMVERSE;crypto;ITEM
+VOB;VISION OF BLOCKCHAIN;crypto;VOB
+NAVI;Atlas Navi;crypto;__NAVI
+LAKE;Data Lake Token;crypto;LAKE
+ZELIX;ZELIX;crypto;ZELIX
+PLN;PLEARN;crypto;__PLN
+LAB;LineaBank;crypto;_LAB
+VAULT;Vault Terminal;crypto;__________VAULT
+AIPAD;AIPAD.tech;crypto;AIPAD
+FIGHT.2;FIGHT;crypto;__FIGHT
+ADS.2;Alkimi;crypto;_ADS
+KINIC;Kinic;crypto;KINIC
+ICPX;ICRYPEX Token;crypto;ICPX
+VU;Velvet Unicorn by Virtuals;crypto;VU
+CONX;Connex;crypto;_CONX
+DREAMS;Dreams Quest;crypto;DREAMS
+SAFE;SAFE(AnWang);crypto;_____SAFE
+CHAMP;Super Champs;crypto;__CHAMP
+LOOPIN;LooPIN;crypto;LOOPIN
+BAG;catwifbag;crypto;_________BAG
+OCTA;Octa.Space;crypto;___OCTA
+BOOJI;BOOJI;crypto;BOOJI
+WWDOGE;Multichain: WWDOGE Token;crypto;WWDOGE
+STINJ;Stride Staked Injective;crypto;STINJ
+CHONKY;CHONKY;crypto;_CHONKY
+ALETHEIA;Aletheia;crypto;ALETHEIA
+NOMNOM;nomnom;crypto;__NOMNOM
+BIRDDOG;Bird Dog;crypto;__BIRDDOG
+SLOP;slop;crypto;SLOP
+POR;Portugal National Team Fan Token;crypto;POR
+WETH;WETH;crypto;WETH
+EAVE;EaveAI;crypto;EAVE
+FLAME;Flame Token;crypto;___FLAME
+STAMP;STAMP;crypto;_STAMP
+KCAL;KCAL;crypto;_KCAL
+NYAN.2;NYANMARU COIN;crypto;________NYAN
+CATGF;cat girl;crypto;CATGF
+RFRM;Reform DAO;crypto;RFRM
+BULL.2;Bullieverse;crypto;__________BULL
+MCTP;MUMUBIT TOKEN;crypto;MCTP
+TYLER;Tyler;crypto;TYLER
+GOVAI;Pigeon Tech;crypto;GOVAI
+IUSD;iUSD;crypto;_IUSD
+LILX;LIL X;crypto;__LILX
+MARS.3;Mars;crypto;MARS
+LOE;Legends of Elysium;crypto;LOE
+SHD;Shade Protocol;crypto;___SHD
+DGENAI;DegenAI by Virtuals;crypto;DGENAI
+ETNT;Etntpow;crypto;ETNT
+KWAN2;KWAN 2.0;crypto;KWAN2
+KASTA;Kasta;crypto;KASTA
+OX.2;Open Exchange Token;crypto;_OX
+XG;GameX;crypto;XG
+OBICOIN;OBI Real Estate;crypto;OBICOIN
+CATBOY;Catboy;crypto;_CATBOY
+WYNN;Anita Max Wynn;crypto;WYNN
+STFX;STFX;crypto;STFX
+GMM;Gamium;crypto;_GMM
+SDEX;SmarDex;crypto;SDEX
+LOCUS;Locus Chain;crypto;LOCUS
+BITROCK;Bitrock (Ethereum);crypto;BITROCK
+TREEINCAT;Tree stuck in cat;crypto;TREEINCAT
+PEPE.5;PEPE (SOL);crypto;_____________________________________________PEPE
+SOURCE;Source;crypto;__SOURCE
+GOZ;Goztepe S.K. Fan Token;crypto;GOZ
+CHMB;Chumbi Valley;crypto;CHMB
+NEER;Metaverse.Network Pioneer;crypto;NEER
+PICK;PICK;crypto;PICK
+VERUM;Verum Coin;crypto;VERUM
+VOLT;VOLT.WIN;crypto;______VOLT
+LGX;Legion Network;crypto;LGX
+XAR;Arcana Network;crypto;XAR
+DAF;Diamonds Are Forever;crypto;_DAF
+KEROSENE;Kerosene;crypto;KEROSENE
+IVFUN;Invest Zone;crypto;IVFUN
+TAONU;TAO Inu;crypto;TAONU
+WXM;WeatherXM;crypto;WXM
+CCASH;C-Cash;crypto;_CCASH
+CRP;Crypton;crypto;__CRP
+VOLT.2;Volt Inu v3;crypto;_VOLT
+PEPEBRC;PEPEBRC;crypto;PEPEBRC
+CREDI;Credefi;crypto;CREDI
+MORUD;morud;crypto;MORUD
+CORA;Cora by Virtuals;crypto;_CORA
+RURI;Truth Terminal's Crush;crypto;_RURI
+NACHO;Nacho the 𐤊at;crypto;_NACHO
+EVE;EVE;crypto;____EVE
+DOE;Dogs Of Elon v2;crypto;_DOE
+LFGO;Lets Fuckin Go;crypto;_LFGO
+BIDP;BIDP;crypto;BIDP
+TRAXX;Traxx;crypto;TRAXX
+BROCK;Bitrock (Mainnet);crypto;BROCK
+SKAI;SkaiToken;crypto;SKAI
+DSFR;Digital Swiss Franc;crypto;DSFR
+IAMAI;IAMAI by Virtuals;crypto;IAMAI
+SIZE;SIZE;crypto;SIZE
+UNA;Unagi Token;crypto;_UNA
+USDY;Ondo U.S. Dollar Yield;crypto;USDY
+MS2;Station This;crypto;MS2
+DJED;Djed;crypto;DJED
+ORBT;Orbitt Token;crypto;___ORBT
+ORBR;Orbler;crypto;ORBR
+SAFE.2;Safe Token;crypto;_______SAFE
+OPSEC;OpSec v2;crypto;_OPSEC
+RUG;RUG RADIO;crypto;__RUG
+SATX;$SATX;crypto;SATX
+FT;FractonX;crypto;_FT
+NAI;Nuklai Token;crypto;_NAI
+BABYXRP;Baby Ripple;crypto;__BABYXRP
+M87;Messier v2;crypto;_M87
+VISION;VisionGame;crypto;_VISION
+MARIE;Marie Rose AI;crypto;_MARIE
+WLTH;Common Wealth Token;crypto;WLTH
+BSCS;BSC Station;crypto;BSCS
+FLAME.2;FireStarter;crypto;FLAME
+AFR;Afreum;crypto;AFR
+STARS;Crypto All-Stars;crypto;____STARS
+BTCB.3;Bitcoin on Base;crypto;______BTCB
+TOKO;Tokoin;crypto;TOKO
+DCB;Decubate Token;crypto;DCB
+CTP;Ctomorrow Platform;crypto;__CTP
+MGP;Magpie Token;crypto;__MGP
+POGAI;poor guy;crypto;POGAI
+TADA;Ta-da;crypto;_TADA
+SCOOP;Tradescoop by Virtuals;crypto;SCOOP
+VCF;Valencia CF Fan Token;crypto;VCF
+OLM;OpenLM RevShare Token;crypto;OLM
+YCT;Youclout;crypto;YCT
+GFAL;Games for a Living;crypto;GFAL
+PATEX;Patex Token;crypto;PATEX
+UNMD;UtilityNexusMind;crypto;UNMD
+AGEUR;agEUR;crypto;AGEUR
+LIVETHE;liveThe;crypto;LIVETHE
+SYL;XSL Labs;crypto;SYL
+ELDA;Eldarune;crypto;ELDA
+APTR;Aperture;crypto;APTR
+FOMO3DFUN;https://fomo3d.fun;crypto;FOMO3DFUN
+SHIMMY;Trump Official Dance Move;crypto;SHIMMY
+GAU;Gamer Arena;crypto;GAU
+SPT;SeaPad;crypto;_____SPT
+ANALOS;ANALOS;crypto;ANALOS
+PEPE.6;Pepe King Prawn;crypto;___________________PEPE
+PESTO;Pesto the Baby King Penguin;crypto;PESTO
+NEWS;Publish v2;crypto;____NEWS
+AUR;Aurix;crypto;_AUR
+CSWAP;ChainSwap;crypto;____CSWAP
+BTX;Bitcore;crypto;BTX
+UNICE;UNICE;crypto;UNICE
+PIXL;PIXL;crypto;_PIXL
+AGRS;Agoras: Currency of Tau;crypto;AGRS
+SENATE;SENATE DAO;crypto;SENATE
+MOON;r/CryptoCurrency Moons;crypto;______________MOON
+SMX;Snapmuse.io;crypto;__SMX
+AVENT;Aventa;crypto;AVENT
+APED;Aped;crypto;__APED
+CAH;Moon Tropica;crypto;CAH
+FOG;FOGnet;crypto;_FOG
+WELT;Fabwelt;crypto;WELT
+BZC;Buyzone;crypto;BZC
+CRETA;CRETA TOKEN;crypto;CRETA
+RAIL;Railgun;crypto;RAIL
+SALMAN;Mohameme Bit Salman;crypto;SALMAN
+CAPO;LaunchTokenBot;crypto;__CAPO
+TRVL;DTravel;crypto;TRVL
+ACQ;Acquire.Fi;crypto;ACQ
+BENJI;Basenji;crypto;__BENJI
+MDEL;Machine Delusions;crypto;MDEL
+BDC;BILLION•DOLLAR•CAT 🐱;crypto;_BDC
+AVAV;AVAV;crypto;AVAV
+NAO;Nettensor;crypto;_NAO
+ATO;Atocha Protocol;crypto;ATO
+KRU;Kingaru;crypto;KRU
+TSUKA;Dejitaru Tsuka;crypto;TSUKA
+DBIT;Dogebits;crypto;DBIT
+BLASTUP;BlastUP Token;crypto;BLASTUP
+TOON;Pontoon;crypto;TOON
+TAMA;Tamadoge;crypto;__TAMA
+FROGE.2;Froge;crypto;________FROGE
+CHAMP.2;NFT Champions;crypto;CHAMP
+SCPT;SCPT - Script Network;crypto;SCPT
+RBT;Rubix;crypto;__RBT
+SHIDO;Shido v4 (Ethereum);crypto;_____SHIDO
+MOVEZ;MOVEZ;crypto;MOVEZ
+DIVER;Divergence Protocol;crypto;DIVER
+AVA.3;AVA;crypto;__AVA
+CAW.2;crow with knife;crypto;_CAW
+LOAFCAT;LOAF CAT v2;crypto;LOAFCAT
+GPTPLUS;GPTPlus;crypto;GPTPLUS
+TEER;Integritee;crypto;TEER
+HAI;HackenAI;crypto;HAI
+FACT;FACT0RN;crypto;_FACT
+MEDIA;Media Network;crypto;MEDIA
+BTRST;Braintrust;crypto;BTRST
+UNP;Unipoly Coin;crypto;_UNP
+TORA;TORA NEKO;crypto;__TORA
+SKIBIDI;Skibidi Dop Dop;crypto;_SKIBIDI
+TDS;Trump Derangement Syndrome;crypto;_TDS
+COPI;Cornucopias;crypto;COPI
+OLE;OpenLeverage;crypto;__OLE
+GM.2;GoodMorning;crypto;________________GM
+MUDO;MuskDonald’s;crypto;MUDO
+JPGD;JPEG’d v2;crypto;JPGD
+SWASH;Swash Token;crypto;SWASH
+BRUH;BRUH;crypto;BRUH
+HOSKY;Hosky Token;crypto;HOSKY
+OSAK;Osaka Protocol;crypto;OSAK
+SENSO;SENSO;crypto;SENSO
+GRAI;Gravita Debt Token;crypto;GRAI
+WALLY;Emotional Support Alligator;crypto;_WALLY
+VISION.2;VISION ai by Virtuals;crypto;___VISION
+USDTE;USDT.e;crypto;USDTE
+JUSD;JUSD Stable Token;crypto;JUSD
+MELD;MetaElfLand;crypto;__MELD
+TLOOP;Time Loop;crypto;TLOOP
+OTK;Octokn;crypto;OTK
+X.2;RUNES•X•BITCOIN ✖;crypto;_________________________X
+BYTES;BYTES;crypto;BYTES
+GTGOLD;GTGOLD COIN;crypto;GTGOLD
+OOKI;Ooki Protocol;crypto;OOKI
+U;Unidef;crypto;U
+MMX;M2 Global Wealth Limited;crypto;_MMX
+NGL.2;Gold Fever Native Gold;crypto;NGL
+SFG;SolForge Fusion;crypto;___SFG
+OMNI.3;OmniCat;crypto;____OMNI
+A4M;Alien Form;crypto;A4M
+BOO;SpookyToken;crypto;_BOO
+NOOB;NOOB;crypto;__NOOB
+SHOOT;SHOOT;crypto;SHOOT
+TOPIA;TOPIA;crypto;__TOPIA
+AARK;Aark Digital;crypto;AARK
+SOURCE.2;I MADE IT UP;crypto;___SOURCE
+HAIR;HairDAO Token;crypto;HAIR
+LL;LightLink;crypto;LL
+LB;Love Bit;crypto;LB
+VIX;VIX777;crypto;___VIX
+ADAM;ADAM;crypto;____ADAM
+PAID;PAID Network;crypto;PAID
+ALPHA.2;reject modernity;crypto;_________________ALPHA
+BARON;Baron Von Whiskers by Virtuals;crypto;_BARON
+BOTTO;Botto;crypto;BOTTO
+BISO;BISOSwap;crypto;BISO
+INCOGNITO;INCOGNITO;crypto;INCOGNITO
+NALS;nals;crypto;NALS
+FEFE;Fefe;crypto;_FEFE
+FPS;Web3War;crypto;_FPS
+AMC;AI Meta Coin;crypto;___AMC
+CLNX;Coloniume;crypto;CLNX
+BCAT;BananaCat;crypto;____BCAT
+TRUF;Truflation;crypto;TRUF
+DREAM;Morpheus;crypto;_________DREAM
+CADINU;Canadian Inuit Dog;crypto;CADINU
+TWENCH;TWENCH;crypto;TWENCH
+DOGE.4;@DOGE;crypto;_____________________DOGE
+BUM;Vanilla;crypto;_BUM
+GNX;Global Network Exchange;crypto;__GNX
+ANDY.2;Andy;crypto;____ANDY
+SHIBDOGE;ShibaDoge;crypto;SHIBDOGE
+GINOA;Ginoa;crypto;GINOA
+WAFFLES;WAFFLES;crypto;WAFFLES
+BUY;Buying.com;crypto;_BUY
+EDGE;Edge;crypto;_EDGE
+XONE;XONE;crypto;XONE
+SOULS;The Unfettered Souls;crypto;SOULS
+VXT;Voxto Token;crypto;VXT
+TENET;TENET;crypto;TENET
+ASF;Asymmetry Finance Token;crypto;ASF
+DAGS;DAGCOIN;crypto;DAGS
+SHIB20;Shib2.0;crypto;__SHIB20
+GEKKO.2;Gekko;crypto;GEKKO
+LSD;little sleepy demons;crypto;_______LSD
+TRU.2;Truebit Protocol;crypto;_TRU
+BETH.2;Beth;crypto;__BETH
+MOXIE;Moxie;crypto;MOXIE
+MCG;MetalCore;crypto;__MCG
+EL;ELYSIA;crypto;__EL
+SUPERCYCLE;supercycle (real);crypto;SUPERCYCLE
+BLN;Bullions;crypto;___BLN
+CAD;Caduceus Protocol;crypto;___CAD
+BUCK.2;BUCK INU;crypto;_______BUCK
+ERTHA;ERTHA;crypto;ERTHA
+ROOBEE;Roobee;crypto;ROOBEE
+RWAX;Rwax Token;crypto;RWAX
+HLN;Helion;crypto;HLN
+SIRIUS;first reply;crypto;_SIRIUS
+KZEN;Kaizen;crypto;KZEN
+AQUA;AQUA Token;crypto;___AQUA
+MIM;Magic Internet Money;crypto;MIM
+SABAI;Sabai Ecoverse Token;crypto;SABAI
+PILL;Trinity;crypto;PILL
+CHAT.3;OpenChat;crypto;__CHAT
+CNG;CoinNavigator;crypto;_CNG
+CGV;Cogito Governance Token;crypto;CGV
+AI.2;Any Inu;crypto;_________________AI
+MAZZE;MAZZE;crypto;MAZZE
+MANE;MANE;crypto;MANE
+PSY;Gangnam Style;crypto;_____PSY
+ETHX;ETHx;crypto;ETHX
+QUNT;Injective Quants;crypto;QUNT
+UQC;Uquid Coin;crypto;UQC
+ZTX.2;ZTX;crypto;ZTX
+SOIL;Soil;crypto;_SOIL
+MD;Market Dominance;crypto;___MD
+JFIN;JFIN Coin;crypto;JFIN
+2024;2024 PUMP;crypto;2024
+TAP;Tap Protocol;crypto;___TAP
+BOZO;bozo;crypto;__BOZO
+FTR;Fautor;crypto;___FTR
+MANIFEST;Manifest;crypto;MANIFEST
+TURT;TURT;crypto;_TURT
+FDT;Frutti Dino;crypto;FDT
+HYPER;Hyper;crypto;__HYPER
+DESCI.2;DeSci;crypto;DESCI
+FRED.2;Fred Trader Bot by Virtuals;crypto;______FRED
+PUMLX;PUMLx;crypto;PUMLX
+PAYU;Platform of meme coins;crypto;PAYU
+POD;Podflow AI by Virtuals;crypto;____POD
+ROCO;Roco Finance;crypto;_ROCO
+NIKITA;NIKITA by Virtuals;crypto;NIKITA
+ECOX;ECOX;crypto;ECOX
+LOCK;Houdini Swap;crypto;____LOCK
+BLAZE;StoryFire;crypto;______BLAZE
+KASUMI;Kasumi 152 - AI;crypto;KASUMI
+USDH;USDH;crypto;USDH
+EDAT;EnviDa;crypto;EDAT
+IXT;IX Token;crypto;_IXT
+FRA;Findora;crypto;FRA
+MCRT;MagicCraft;crypto;MCRT
+OAX;OAX;crypto;OAX
+WSI;WeSendit;crypto;_WSI
+AABL;Abble;crypto;AABL
+BORA;BORA;crypto;BORA
+FCON;SpaceFalcon;crypto;FCON
+CDT;CheckDot;crypto;_CDT
+CAT.3;Catcoin;crypto;___________________CAT
+KAMA;Kamala Horris;crypto;KAMA
+SPELLFIRE;Spellfire;crypto;SPELLFIRE
+SHIBC;Shiba Classic;crypto;____SHIBC
+MOCHI;Mochi v3;crypto;_____MOCHI
+MIX;MixMarvel;crypto;_MIX
+KNS;Kenshi;crypto;KNS
+DOGK;DOGK;crypto;DOGK
+KAR;Karura;crypto;KAR
+KUBE;KubeCoin;crypto;KUBE
+FYN;Affyn;crypto;FYN
+XETH;Instabridge Wrapped ETH;crypto;_____XETH
+AME;AME Chain;crypto;AME
+RNT;RNT;crypto;__RNT
+BTM;Bytom;crypto;_BTM
+OCT;Octopus Network;crypto;__OCT
+ORBK;Ordibank;crypto;ORBK
+KIMBO;Kimbo;crypto;KIMBO
+STRM;StreamCoin;crypto;_STRM
+LBTC;Lightning Bitcoin;crypto;LBTC
+BEFI;BeFi Labs;crypto;BEFI
+AMO.2;Amino;crypto;_AMO
+DMT.2;Dream Machine Token;crypto;________DMT
+ANC;Anchor Protocol;crypto;_ANC
+MOOX;MOOxMOO;crypto;__MOOX
+UPX;uPX;crypto;_UPX
+WRLD;WRLD Token;crypto;WRLD
+GAIA;GAIA Everworld;crypto;__GAIA
+XEROAI;Xero AI;crypto;XEROAI
+WOOP;Woonkly Power;crypto;WOOP
+JGN;Juggernaut DeFi;crypto;JGN
+SVPN;Shadow Node;crypto;SVPN
+JEWEL;DeFi Kingdoms Jewels;crypto;JEWEL
+TITAN;IRON Titanium Token;crypto;_TITAN
+XDAG;Dagger;crypto;XDAG
+VDA;Verida;crypto;VDA
+VAI.2;Vai;crypto;_VAI
+CAU;Canxium;crypto;CAU
+CLS;Coldstack;crypto;CLS
+JETT;JETT CRYPTO;crypto;JETT
+MATICPO;MATIC (Wormhole);crypto;MATICPO
+PAR;Parallel;crypto;_PAR
+TD;Big Red;crypto;_TD
+EURE;Monerium EUR emoney;crypto;EURE
+COOK.3;Let Him Cook;crypto;_____COOK
+NYA;Nya;crypto;_NYA
+TOBY;toby;crypto;TOBY
+DOMI;Domi;crypto;DOMI
+WATER;WATER;crypto;__________WATER
+WYAC;WOMAN YELLING AT CAT;crypto;WYAC
+EDC;Edcoin;crypto;EDC
+LTX;Lattice Token;crypto;LTX
+BCDT;Blockchain Certified Data Token;crypto;BCDT
+SMARTCREDIT;SmartCredit Token;crypto;SMARTCREDIT
+STMATIC;Lido Staked MATIC;crypto;STMATIC
+NTX;Nunet;crypto;NTX
+GEEQ;GEEQ;crypto;GEEQ
+PRIMAL;PRIMAL;crypto;PRIMAL
+LAVA.2;Lava;crypto;___LAVA
+DPI;DeFiPulse Index;crypto;DPI
+METAL.2;BadMad Robots;crypto;__METAL
+FLOKICEO;FLOKI CEO;crypto;FLOKICEO
+GAMMA;Gamma Strategies;crypto;__GAMMA
+BLOCK.2;BlockGames;crypto;_________BLOCK
+HLG;Holograph Utility Token;crypto;HLG
+PXP;PointPay Token;crypto;PXP
+BRICK;Bricks;crypto;___BRICK
+MULTI;Multichain;crypto;MULTI
+NOCHILL;AVAX HAS NO CHILL;crypto;NOCHILL
+STARS.2;Stargaze;crypto;___STARS
+ALUSD;Alchemix USD;crypto;ALUSD
+BONDLY;Bondly;crypto;BONDLY
+KIBA;Kiba Inu V2;crypto;__KIBA
+GEC;Gecko Inu;crypto;_____GEC
+LIT.2;Liquidity Incentive Token;crypto;_____LIT
+FRAX.2;Multichain: FRAX Token;crypto;_FRAX
+COR;Cortensor;crypto;___COR
+ANDY.3;Andy;crypto;__ANDY
+DAPP;Pencils Protocol;crypto;__DAPP
+MEOW.3;Zeek Coin;crypto;___________MEOW
+SLND;Solend;crypto;SLND
+SMT.2;SmartMesh;crypto;SMT
+JPYC;JPYC;crypto;JPYC
+ETH2XFLI;ETH 2x Flexible Leverage Index;crypto;ETH2XFLI
+FAYA;FAYA;crypto;FAYA
+URUS;Aurox Token;crypto;URUS
+NGC;NAGA;crypto;NGC
+WOLF.4;Landwolf;crypto;__________________WOLF
+OPN;OPEN Ticketing Ecosystem;crypto;__OPN
+XCV;XCarnival;crypto;XCV
+DROP;DROP;crypto;____DROP
+NOPE;Nope;crypto;__NOPE
+SCP;ScPrime;crypto;SCP
+XX;XX Network;crypto;XX
+BMC;BountyMarketCap;crypto;_BMC
+UP;uP;crypto;______UP
+FREE.2;FREE Coin;crypto;FREE
+ANKRBNB;Ankr Staked BNB;crypto;ANKRBNB
+PEPE.7;Pepe;crypto;____________________________________PEPE
+BASED.2;Based Coin;crypto;________BASED
+BCD;Bitcoin Diamond;crypto;BCD
+NEROX;NEROX AI;crypto;NEROX
+JEUR;Jarvis Synthetic Euro;crypto;JEUR
+WHALE.2;White Whale;crypto;__WHALE
+VELA;VelaToken;crypto;VELA
+LLD;Liberland Dollar;crypto;LLD
+CROB;CROB MOB;crypto;_CROB
+BOSS;Boss;crypto;BOSS
+BOA;BOSAGORA;crypto;BOA
+ROOST;Roost Coin v2;crypto;_ROOST
+ANGLE;ANGLE;crypto;ANGLE
+TOMO;TomoChain;crypto;TOMO
+DINGO;DINGOCOIN;crypto;__DINGO
+THT;ThoughtAI;crypto;THT
+BLAST.2;Blastar;crypto;______BLAST
+LABS;LABS Group;crypto;LABS
+SBD;Steem Dollars;crypto;_SBD
+FERC;FairERC20;crypto;FERC
+NOIA;Syntropy;crypto;NOIA
+USDL;USDL Stablecoin;crypto;USDL
+BTCBR;Bitcoin BR v1;crypto;BTCBR
+BORING;BoringDAO;crypto;BORING
+SPA.2;Spartacus;crypto;_SPA
+SAI.2;Sai;crypto;SAI
+GBTC;Green Bitcoin;crypto;___GBTC
+SADANT;SADANT;crypto;SADANT
+TAKI;Taki;crypto;TAKI
+WIK;WickedBet;crypto;WIK
+BTCP;Bitcoin Pro;crypto;_BTCP
+KYCC;KYCCOIN;crypto;KYCC
+GOHM;Governance OHM;crypto;GOHM
+DOCK;Dock;crypto;DOCK
+LOAN;LiquidLoans;crypto;_LOAN
+XPC;eXPerience Chain;crypto;XPC
+ICSA;Icosa (Ethereum);crypto;ICSA
+PANDA;Panda Swap v2;crypto;_____________PANDA
+SEIYAN;SEIYAN;crypto;SEIYAN
+WASD;WASD Studios;crypto;WASD
+ICHI;ICHI;crypto;ICHI
+CFB;FinBet;crypto;CFB
+NFD;Feisty Doge NFT;crypto;_NFD
+AVAC;AvaCoach;crypto;AVAC
+LYXE;LUKSO Token;crypto;LYXE
+MWC;MimbleWimbleCoin;crypto;MWC
+HUSKY;Husky AVAX;crypto;_HUSKY
+AIPEPE;AI Pepe King;crypto;__AIPEPE
+PIKA.2;PIKA to PIKO ピカとピコ;crypto;__________PIKA
+GYEN;GYEN;crypto;GYEN
+HOA;Hex Orange Address;crypto;HOA
+ROUTE;Router Protocol v1;crypto;ROUTE
+GMCOIN;GMCoin;crypto;GMCOIN
+KUNCI;Kunci Coin;crypto;KUNCI
+DERC;DeRace;crypto;DERC
+GUARD;Guardian;crypto;GUARD
+SETH;sETH;crypto;_SETH
+XCP;Counterparty;crypto;XCP
+VERI;Veritaseum;crypto;VERI
+ELAND;Etherland;crypto;ELAND
+CHUCK;Chuck;crypto;_CHUCK
+INTR;Interlay;crypto;INTR
+EPIC;Epic Cash;crypto;_EPIC
+HDX;HydraDX;crypto;HDX
+REP;Augur;crypto;REP
+SCOTTY;Scotty AI;crypto;_SCOTTY
+ELK;Elk Finance;crypto;ELK
+RMRK;RMRK.app;crypto;RMRK
+ZED;ZED RUN;crypto;ZED
+CUDOS;Cudos;crypto;CUDOS
+PI.2;Plian;crypto;PI
+MATTER;AntiMatter;crypto;MATTER
+OTSEA;OTSea v2;crypto;_OTSEA
+PUFF;Puff;crypto;_PUFF
+CHSB;SwissBorg;crypto;CHSB
+MOG.2;Mog Coin Pulse;crypto;______MOG
+ASTRO;Astroport;crypto;____________ASTRO
+WOLF.5;Landwolf;crypto;_________________WOLF
+HDN;Hydranet;crypto;HDN
+CPH;Cypherium;crypto;CPH
+DECI;Maximus Decimus;crypto;DECI
+DPET;My DeFi Pet;crypto;DPET
+SPIRIT;SpiritSwap;crypto;SPIRIT
+THC;Transhuman Coin;crypto;_THC
+XPM;XPM;crypto;_XPM
+MCO2;Moss Carbon Credit;crypto;MCO2
+LEND;Aave;crypto;LEND
+ANT;Aragon;crypto;ANT
+NOT.2;Nothing;crypto;_NOT
+MTA;Meta;crypto;MTA
+IST;Inter Protocol;crypto;_IST
+RADIO.2;RadioShack Token;crypto;RADIO
+MIST.2;Alchemist;crypto;MIST
+KUMA;Kuma Inu;crypto;KUMA
+WOKE;End Wokeness;crypto;___WOKE
+GENI;Genius;crypto;__GENI
+RGT;Rari Governance Token;crypto;RGT
+WOMBAT;Wombat;crypto;WOMBAT
+JM;JustMoney;crypto;JM
+ZENIQ;ZENIQ;crypto;ZENIQ
+RET;Renewable Energy Token;crypto;__RET
+DEFIT;Defit;crypto;DEFIT
+BTSG;BitSong;crypto;BTSG
+USDV;USDV;crypto;__USDV
+INSUR;InsurAce;crypto;_INSUR
+PAY;TenX;crypto;PAY
+BCMC;Blockchain Monster Hunt;crypto;BCMC
+OLAND;OceanLand;crypto;OLAND
+ROCK.2;Rock;crypto;____________ROCK
+DCY;Dinastycoin;crypto;DCY
+WAIT;Wait v2;crypto;__WAIT
+RAMP;RAMP;crypto;RAMP
+ELITE;Elite 1337;crypto;ELITE
+42;42-coin;crypto;42
+KOIN;Fishkoin;crypto;__KOIN
+BLERF;BLERF;crypto;BLERF
+DX;DxChain Token;crypto;DX
+OPIUM;Opium;crypto;OPIUM
+HC;HCash;crypto;_HC
+EDEN;EDEN;crypto;EDEN
+AION;Aion;crypto;AION
+GXC;GXChain;crypto;GXC
+ASD;AscendEx Token;crypto;ASD
+MET.2;Metronome;crypto;MET
+GO;GoChain;crypto;GO
+LOVELY;Lovely Inu;crypto;LOVELY
+TRDM;TRADE MASTER;crypto;TRDM
+EXFI;Experimental Finance Token;crypto;EXFI
+0XL;0x Leverage;crypto;0XL
+ZCN;Züs;crypto;ZCN
+SILO;Silo Finance;crypto;SILO
+ANY;Anyswap;crypto;ANY
+QOM;Shiba Predator;crypto;QOM
+BALL.2;Game 5 BALL;crypto;___BALL
+VIDYA;Vidya;crypto;VIDYA
+XKI;Ki;crypto;XKI
+SHI;Shina Inu;crypto;___SHI
+CORE.3;cVault.finance;crypto;CORE
+VPND;VaporNodes;crypto;VPND
+ION;Ion;crypto;_ION
+UPP;Sentinel Protocol;crypto;UPP
+JOK;Jok;crypto;_JOK
+MANC;Mancium;crypto;MANC
+MOBI;Mobius;crypto;MOBI
+FWB;Friends With Benefits;crypto;FWB
+NFTE;NFTEarth v2;crypto;_NFTE
+DEC;Decentr;crypto;_DEC
+BABYSHIBAINU;Baby Shiba Inu;crypto;BABYSHIBAINU
+KAT;Kambria;crypto;KAT
+DCN;Dentacoin;crypto;DCN
+KNIGHT;Forest Knight;crypto;KNIGHT
+CRPT;Crypterium;crypto;CRPT
+ROOM;OptionRoom;crypto;ROOM
+BHC;BillionHappiness;crypto;BHC
+LEND.2;Lendle Protocol Token;crypto;_LEND
+RPR;Thereapercoin;crypto;RPR
+LTD;Living the Dream;crypto;_LTD
+THOREUM;Thoreum V2;crypto;_THOREUM
+DPX;Dopex;crypto;DPX
+DIP;Etherisc DIP Token;crypto;DIP
+XIDO;Xido Finance;crypto;XIDO
+MFT;Hifi Finance;crypto;MFT
+CPAY;Cryptopay;crypto;CPAY
+AXIS;Axis DeFi;crypto;AXIS
+QRDO;Qredo Token;crypto;QRDO
+WOM;WOM Token;crypto;WOM
+SWISSTECH;HelvetX Labs;crypto;SWISSTECH
+RYO.2;Ryo;crypto;RYO
+DG;Decentral Games;crypto;DG
+DHT;dHedge DAO;crypto;DHT
+BFT;BnkToTheFuture;crypto;BFT
+CDAI;Compound Dai;crypto;CDAI
+LIKE.2;LikeCoin;crypto;LIKE
+PXC;Phoenixcoin;crypto;PXC
+DUSD;DeFiChain Decentralized USD;crypto;____DUSD
+ETHIX;EthicHub;crypto;ETHIX
+TEN;Tokenomy;crypto;TEN
+PREMIA;Premia;crypto;PREMIA
+CHESS.2;ChessCoin 0.32%;crypto;CHESS
+PINKM;PinkMoon;crypto;PINKM
+JRT;Jarvis Reward Token;crypto;JRT
+LOC;LockTrip;crypto;LOC
+AEON;Aeon;crypto;AEON
+ZBC;Zebec Protocol;crypto;ZBC
+EUT;Euterpe Token;crypto;_EUT
+SCORE;Scorecoin;crypto;SCORE
+NPXS;Pundi X;crypto;NPXS
+BLURT;Blurt;crypto;BLURT
+MITX;Morpheus Labs;crypto;MITX
+GOVI;Govi;crypto;GOVI
+MAXI;Maximus;crypto;__MAXI
+PPT.2;Populous;crypto;PPT
+BTCV;BITCOIN VAULT;crypto;_BTCV
+EAC;EarthCoin;crypto;EAC
+CETH;cETH;crypto;CETH
+FTN;Fasttoken;crypto;_FTN
+USV;Universal Store of Value;crypto;USV
+ALI.2;Alita;crypto;_ALI
+COREDAO;coreDAO;crypto;COREDAO
+PHX;PHOENIX;crypto;PHX
+AGVE;Agave Token;crypto;AGVE
+BLK;BlackCoin;crypto;BLK
+LCC;Litecoin Cash;crypto;LCC
+AVINOC;AVINOC;crypto;AVINOC
+REVO;Revomon;crypto;REVO
+CUSDC;cUSDC;crypto;CUSDC
+BOR;BoringDAO;crypto;BOR
+CMD;Comodo Coin;crypto;CMD
+FUND;Unification;crypto;FUND
+DIVI;Divi;crypto;DIVI
+ELITE.2;Elite;crypto;___ELITE
+KAREN;KarenCoin;crypto;KAREN
+OMNI.4;Omni;crypto;OMNI
+FUEL.2;Jetfuel Finance;crypto;_FUEL
+MISTERY;Mistery;crypto;MISTERY
+RING.2;OneRing;crypto;__RING
