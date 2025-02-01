@@ -237,7 +237,7 @@ TWT;Trust Wallet Token;crypto;TWT
 ME;Magic Eden;crypto;ME
 ENJ;Enjin Coin;crypto;ENJ
 JST;JUST;crypto;JST
-RON;Ronin;crypto;___RON
+RON.2;Ronin;crypto;___RON
 QUBIC;QUBIC;crypto;QUBIC
 IOTX;IoTeX;crypto;IOTX
 LPT;Livepeer;crypto;LPT
@@ -2221,7 +2221,7 @@ VOB;VISION OF BLOCKCHAIN;crypto;VOB
 NAVI;Atlas Navi;crypto;__NAVI
 LAKE;Data Lake Token;crypto;LAKE
 ZELIX;ZELIX;crypto;ZELIX
-PLN;PLEARN;crypto;__PLN
+PLN.2;PLEARN;crypto;__PLN
 LAB;LineaBank;crypto;_LAB
 VAULT;Vault Terminal;crypto;__________VAULT
 AIPAD;AIPAD.tech;crypto;AIPAD
@@ -2493,7 +2493,7 @@ MCG;MetalCore;crypto;__MCG
 EL;ELYSIA;crypto;__EL
 SUPERCYCLE;supercycle (real);crypto;SUPERCYCLE
 BLN;Bullions;crypto;___BLN
-CAD;Caduceus Protocol;crypto;___CAD
+CAD.2;Caduceus Protocol;crypto;___CAD
 BUCK.2;BUCK INU;crypto;_______BUCK
 ERTHA;ERTHA;crypto;ERTHA
 ROOBEE;Roobee;crypto;ROOBEE

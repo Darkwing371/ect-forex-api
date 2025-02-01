@@ -558,38 +558,103 @@ return $currencies;
 
 
 
-
-// Holt die letzten Kurse von allen Währungen mit Datum ab
-// Wir benötigen dies, um eine Gesamtübersicht der Werte zu erstellen,
-// welche die EC&T Forex API liefern kann
-function list_all_currencies_latest() {
+function dump_forexdb_currencies() {
 global $db, $db_forex;
 
-    // Ergebnisvariable initialisieren
-    $filter = array();
-
-    // Die riesige Forex-DB nach Währungskürzel gruppieren,
-    // dabei aber das Datum des neusten Eintrages benutzen
-    // Kudos: https://www.codelabs365.com/sql-cookbook/mysql/select-latest-record-for-each-group/
-    $sql = "SELECT Filter.currency, Filter.price, MAX(Filter.timestamp) AS latest
-            FROM $db_forex AS Filter
-            GROUP BY Filter.currency
-            ORDER BY Filter.currency ASC";
-
-    // Datenbankabfrage starten
+    // Direkt die riesige Forex-DB nach Währungskürzel gruppieren
+    // Wir lassen hier die Power von MySQL für uns arbeiten
+    $sql = "SELECT currency FROM $db_forex GROUP BY currency";
     $res = $db->query($sql);
-
-    // Wenn Ergebnisse vorhanden
     if (mysqli_num_rows($res) > 0) {
-      // Gehe durch die Zeilen
-      while ($row = $res->fetch_assoc()) {
-          $filter[] = $row;
+        while ($row = $res->fetch_assoc()) {
+          $forex_currencies[] = $row["currency"];
           }
       }
 
-return $filter;
+return $forex_currencies;
 }
 
+
+// Holt die letzten Kurse von allen Währungen mit Datum ab
+// Diese Funktion ist relativ aufwändig und sollte nur verwendet werden,
+// um die Gesamtübersicht für die Front-End-Response der API zu erstellen
+function list_all_currencies_data_latest() {
+global $db, $db_forex;
+
+    // Alle jemals eingetragenen Währungskürzel aus der Forex-DB holen
+    // Somit erwischen wir wirklich jeden Eintrag, auch eventuell verwaiste
+    $forex_currencies = dump_forexdb_currencies();
+
+    // Währungen aus der LUT abholen
+    $lut = get_lut_0("all+inactive");
+    $lut_currencies = array_column( $lut, "currency" );
+    // Währungen, die sich nicht in der LUT befinden, aber einen Forex-Eintrag haben
+    $leftover_currencies = array_diff( $forex_currencies, $lut_currencies );
+    // Währungen, geordnet nach LUT-Reiehenfolge und mit 'leftovers' hinten dran
+    $ordered_currencies = array_merge( $lut_currencies, $leftover_currencies );
+    unset($res, $leftover_currencies);
+
+
+    // Alle Währungen mit Daten anreichern
+    // 'currency', 'name', 'price', 'latest', 'type', 'source', 'link'
+    $currencies = array();
+    foreach ( $ordered_currencies as $c ) {
+
+      $currency = $lut[" ".$c]["currency"];
+      if ( !isset($currency) ) { $currency = $c; }
+
+      $name = $lut[" ".$c]["name"];
+      $type = $lut[" ".$c]["type"];
+      $id_lcw = $lut[" ".$c]["id_livecoinwatch"];
+
+      // Letzten Kurs der Währung abholen
+      $sql = "SELECT * FROM $db_forex WHERE currency = '".$currency."' ORDER BY timestamp DESC LIMIT 1";
+      $res = $db->query($sql);
+      if (mysqli_num_rows($res) > 0) {
+            $currency_data = $res->fetch_assoc();
+          } else unset($currency_data);
+
+      $price = $currency_data["price"];
+      $latest = $currency_data["timestamp"];
+      $source = $currency_data["source"];
+
+      // Hardcoded: Abhängig vom Typ die Datenquelle in Schönschrift erzeugen
+      switch ($type) {
+        case "fiat":   $source = "EZB"; break;
+        case "crypto": $source = "LiveCoinWatch"; break;
+        default:       $source = "Suche";
+        }
+
+      // Hardcoded: Abhängig vom Typ eine URL zur externen Datenquelle erzeugen
+      if ( $type == "crypto" ) {
+         $link = "https://www.livecoinwatch.com/";
+         $sanitized_name = str_replace([" ", "-", "/", "\\"], "", $name);
+         if ( isset($id_lcw) ) { $link .= "price/".$sanitized_name."-".$id_lcw; }
+         }
+
+      if ( $type == "fiat" ) {
+         $link = "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html";
+         if ( isset($lut[" ".$currency]) ) {
+           $link = "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/eurofxref-graph-".mb_strtolower($currency).".en.html";
+          }
+         }
+
+      if ( !isset($type) ) { $link = rtrim("https://www.startpage.com/do/search?q=currency+".$currency."+".$name, "+"); }
+
+
+      $currencies[] = array( "currency" => $currency,
+                             "name " => $name,
+                             "price" => $price,
+                             "latest" => $latest,
+                             "type" => $type,
+                             "source" => $source,
+                             "link" => $link
+                            );
+
+      } // Ende: Cycle durch 'ordered_currencies'
+
+return $currencies;
+}
 
 
 

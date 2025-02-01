@@ -115,6 +115,120 @@ function asciiExtended($string) {
   return preg_replace('/[^a-zA-Z0-9\x{00E4}\x{00F6}\x{00FC}\x{00DF}\x{00C4}\x{00D6}\x{00DC}\x{1E9E}\x{0142}\ \-\+\.\,\:\@\(\)\[\]\{\}\/]/u', '_', $string);
 }
 
+// Hilfsfunktion, zur Bereinigung von API-Request-Inputs
+// Lässt nur bestimmte, erlaubte Zeichen zu
+function apiAllowed($string) {
+    // Zugelassen sind ausschließlich:
+    // a-z A-Z 0-9
+    // .,:-*
+  return preg_replace('/[^a-zA-Z0-9\.\,\:\-\*]/', '', $string);
+}
+
+
+
+
+// Hilfsfunktion, um zu prüfen, ob eine Uhrzeit wirklich im richtigen Format ist
+function validateFormat_time( $t = "18:00" ) {
+
+  // Versuche am erwarteten Trennzeichen zu splitten
+  $part = explode(":", $t);
+
+  // Sollten wir einen Wert der Form 'XX:YY' erhalten haben
+  if ( count($part) == 2 ) {
+
+          // Stunde strikt auf Ziffern prüfen
+          // Diese Prüfung vergibt es, falls die Stunde einstellig, ohne führende Null ist
+          if ( preg_match("/^[0-9]{1,2}$/", $part[0]) ) {
+              // In Integer umwandeln
+              $hour = (int) $part[0];
+              // Auf Plausibilität prüfen
+              if ( ($hour >= 0) && ($hour <= 24) ) { true; } else { return false; }
+              } else { return false; }
+
+          // Sollten wir ein verunfalltes Fragment der Form 'XX:' erhalten haben,
+          // dann lassen wir es als Stunde trotzdem gelten
+          if ( $part[1] == "" ) { $part[1] = "00"; }
+
+          // Minute strikt auf Ziffern prüfen
+          // Diese Prüfung vergibt es, falls die Minute einstellig, ohne führende Null ist
+          if ( preg_match("/^[0-9]{1,2}$/", $part[1]) ) {
+              // In Integer umwandeln
+              $min = (int) $part[1];
+              // Auf Plausibilität prüfen
+              if ( ($min >= 0) && ($min <= 59) ) { true; } else { return false; }
+              } else { return false; }
+
+          // Die maximal zulässige Uhrzeit prüfen
+          if ( ($hour >= 24) && ($min > 0) ) { return false; } else { return true; }
+
+      } // Ende: part == 2
+
+
+  // Wenn wir möglicherweise nur eine volle Stunde der Form 'XX' erhalten haben
+  if ( count($part) == 1 ) {
+
+          // Stunde strikt auf Ziffern prüfen
+          // Diese Prüfung vergibt es, falls die Stunde einstellig, ohne führende Null ist
+          if ( preg_match("/^[0-9]{1,2}$/", $part[0]) ) {
+              // In integer umwandeln
+              $hour = (int) $part[0];
+              // Auf Plausibilität prüfen
+              if ( ($hour >= 0) && ($hour <= 24) ) { return true; } else { return false; }
+              } else { return false; }
+
+       } // Ende: part == 1
+
+// Wenn keine der beiden Bedingungen bis hier her gegriffen hat
+// dann war es auch keine valide Uhrzeit
+return false;
+}
+
+
+
+
+// Hilfsfunktion, um zu prüfen, ob ein Datum wirklich im richtigen Format ist
+function validateFormat_date( $d = "2025-01-21" ) {
+
+    // Versuche am erwarteten Trennzeichen zu splitten
+    $part = explode("-", $d);
+
+    // Sollten wir einen Wert der Form 'XXXX-YY-ZZ' erhalten haben
+    if ( count($part) == 3 ) {
+
+          // Jahr strikt auf Ziffern prüfen
+          // Es muss vierstellig sein
+          if ( preg_match("/^[0-9]{4}$/", $part[0]) ) {
+              // In Integer umwandeln
+              $year = (int) $part[0];
+              // Etwas auf Plausibilität prüfen; bei Jahr theoretisch nicht notwendig
+              if ( ($year >= 2000) && ($year <= 3000) ) { true; } else { return false; }
+              } else { return false; }
+
+          // Monat strikt auf Ziffern prüfen
+          // Diese Prüfung vergibt es, falls der Monat einstellig, ohne führende Null ist
+          if ( preg_match("/^[0-9]{1,2}$/", $part[1]) ) {
+              // In Integer umwandeln
+              $month = (int) $part[1];
+              // Auf Plausibilität prüfen
+              if ( ($month >= 1) && ($month <= 12) ) { true; } else { return false; }
+              } else { return false; }
+
+          // Tag strikt auf Ziffern prüfen
+          // Diese Prüfung vergibt es, falls der Monat einstellig, ohne führende Null ist
+          if ( preg_match("/^[0-9]{1,2}$/", $part[2]) ) {
+              // In Integer umwandeln
+              $day = (int) $part[2];
+              // Auf Plausibilität prüfen
+              if ( ($day >= 1) && ($day <= 31) ) { return true; } else { return false; }
+              } else { return false; }
+
+      } // Ende: part == 3
+
+// Wenn obige Bedinung nicht angesprungen ist,
+// dann war es kein ordentliches Datum
+return false;
+}
+
 
 
 
@@ -134,7 +248,7 @@ function v( $variable ){
       // print to browser
       echo '<pre>';
       echo trim($var) .": ";
-      echo "(".count($variable).")";
+      echo "(".@count($variable).")";
       print_r($variable);
       echo "</pre>";
 }

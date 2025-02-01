@@ -27,6 +27,7 @@ allow_cron_only();
 
 
 
+
 // Hole die aktuelle Zeit in Europa ab, egal wo der Server steht und das Skript gerade läuft
 // Wir nutzen 'Europe/Berlin' als Proxy für Deutschland und Österreich
 // Merke: Jeder Zeitstempel in der Datenbank ist normalisiert auf 'Europe/Berlin'
@@ -133,7 +134,7 @@ foreach ( $fetchingTime as &$hour ) {
   unset($hour);
 
 
-// überprüfen, ob generell die Zeit für einen Fetch gekommen ist
+// Überprüfen, ob generell die Zeit für einen Fetch gekommen ist
 //
 // Erinnerung: Dieses Cron-Skript sollte stündlich ausgeführt werden,
 // bzw. 1 Minute nach der vollen Stunde, um sicherzustellen, dass wenigstens
@@ -224,8 +225,8 @@ if ( in_array( intval($currentTime_hour), $fetchingTime) ) {
         error_log("EC&T Forex API: Fetch konnte {".$count."} Werte nicht liefern: {".$list."}");
         // Ausgabe als Meldung in die Log-DB; wichtig, darauf nimmt 'scrape_lost_3M()' Bezug
         to_log("fetched but missing: ".$count." {".$list."}", "info", "event");
-        // Gegebenenfalls Ausgabe in den Browser
-        echo "<pre>"; var_dump($missing); echo "</pre>";
+        // Optional: Ausgabe in den Browser
+        // echo "<pre>"; v($missing); echo "</pre>";
       }
 
 
