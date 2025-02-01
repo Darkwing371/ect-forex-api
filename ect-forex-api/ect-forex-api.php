@@ -231,6 +231,9 @@ if ( empty($_GET) && empty($_POST) ) { frontend_response(); } else {
         // Für diesen Durchgang ist dies nun unser Ergebnis für diese Währung
         $result[] = $values;
 
+        // Nach einer erfolgreichen Abfrage, den Request-Counter der Währung erhöhen
+        increase_request_counter($c);
+
         // Sonderfall: Wenn 'oneshot' angefragt ist, dann einfach nur
         // schnell den ersten Kurs ausgeben und sofort die Schleife beenden
         if ( $oneshot ) { $result = $row["price"]; break; }

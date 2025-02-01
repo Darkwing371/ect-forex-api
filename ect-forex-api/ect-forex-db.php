@@ -66,10 +66,10 @@ function does_table_exist($db, $db_name, $db_table) {
       $row = $res->fetch_assoc();
       $res->free();
       return $row['count'] > 0;
-  } else {
+    } else {
       // Falls die Abfrage fehlschlägt, einen Fehler ausgeben
       throw new Exception("EC&T Forex API: does_table_exist(): Abfrage fehlgeschlagen: " . $db->error);
-  }
+    }
 }
 
 // Wrapper: Prüft ob im Speziellen die Tabelle in der Variable '$db_forex' (='forex') existiert
@@ -479,12 +479,12 @@ global $db, $db_log, $db_forex;
   // In Log-DB passende Einträge über einen ausgeführten Fetch finden
   $sql = "SELECT * FROM $db_log WHERE DATE(timestamp) = '$date' AND HOUR(timestamp) = $hour AND topic = 'event' AND message LIKE '%fetching time%'";
   $res = $db->query($sql);
-  if (mysqli_num_rows($res) > 0) { $log_fetch = true; }
+  if ( mysqli_num_rows($res) > 0 ) { $log_fetch = true; }
 
   // In Forex-DB passende Einträge zu vorhandenen Kursdaten finden
   $sql = "SELECT * FROM $db_forex WHERE DATE(timestamp) = '$date' AND HOUR(timestamp) = $hour";
   $res = $db->query($sql);
-  if (mysqli_num_rows($res) > 0) { $forex_fetch = true; }
+  if ( mysqli_num_rows($res) > 0 ) { $forex_fetch = true; }
 
   // Die Resultate bewerten
   // Wenn beide Abfragen unterschiedlich ausfallen, dann ist irgend etwas komisch
@@ -524,9 +524,9 @@ global $db, $db_log, $db_lut;
   // Datenbankabfrage starten
   $res = $db->query($sql);
   // Bei Ergebnis ...
-  if (mysqli_num_rows($res) > 0) {
+  if ( mysqli_num_rows($res) > 0 ) {
     // ... das Resultate-Array beschreiben
-    while ($row = $res->fetch_assoc()) {
+    while ( $row = $res->fetch_assoc() ) {
         // [ BTC] => id, 'BTC', 'Bitcoin', type, requests, inactive, id_livecoinwatch
         // Leerzeichen wird im Key vorangestellt
         $lut[" ".$row["currency"]] = $row;
@@ -558,6 +558,7 @@ return $currencies;
 
 
 
+
 function dump_forexdb_currencies() {
 global $db, $db_forex;
 
@@ -565,14 +566,16 @@ global $db, $db_forex;
     // Wir lassen hier die Power von MySQL für uns arbeiten
     $sql = "SELECT currency FROM $db_forex GROUP BY currency";
     $res = $db->query($sql);
-    if (mysqli_num_rows($res) > 0) {
-        while ($row = $res->fetch_assoc()) {
+    if ( mysqli_num_rows($res) > 0 ) {
+        while ( $row = $res->fetch_assoc() ) {
           $forex_currencies[] = $row["currency"];
           }
       }
 
 return $forex_currencies;
 }
+
+
 
 
 // Holt die letzten Kurse von allen Währungen mit Datum ab
@@ -610,7 +613,7 @@ global $db, $db_forex;
       // Letzten Kurs der Währung abholen
       $sql = "SELECT * FROM $db_forex WHERE currency = '".$currency."' ORDER BY timestamp DESC LIMIT 1";
       $res = $db->query($sql);
-      if (mysqli_num_rows($res) > 0) {
+      if ( mysqli_num_rows($res) > 0 ) {
             $currency_data = $res->fetch_assoc();
           } else unset($currency_data);
 
@@ -682,9 +685,9 @@ global $db, $db_log;
   $res = $db->query($sql);
 
   // Wenn Ergebnisse vorhanden
-  if (mysqli_num_rows($res) > 0) {
+  if ( mysqli_num_rows($res) > 0 ) {
     // Gehe durch die Zeilen
-    while ($row = $res->fetch_assoc()) {
+    while ( $row = $res->fetch_assoc() ) {
         // Sammle immer nur das Feld 'message'
         $messages[] = $row;
         }
@@ -765,6 +768,26 @@ global $db, $db_lut;
     }
 
 return $i;
+}
+
+
+
+
+// Erhöht den Request-Counter für eine Währung in der LUT um 1
+// Diese Funktion wird getriggert, wenn eine Währung per API abgefragt wird
+function increase_request_counter( $c = false ) {
+global $db, $db_lut;
+
+    // SQL-Statement um Request-Feld bei einer Währung um 1 zu erhöhen
+    $sql = "UPDATE $db_lut SET requests = (requests + 1) WHERE currency = '$c'";
+
+    // Datenbank-Update starten, wenn etwas übergeben wurde
+    if ( $c !== false ) { $do = $db->query($sql); }
+
+    // Wenn genau ein Änderungen in der DB stattgefunden hat, dann erfolgreich
+    if ( $db->affected_rows == 1 ) { return true; }
+
+return false;
 }
 
 
