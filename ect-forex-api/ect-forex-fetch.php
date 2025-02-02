@@ -126,6 +126,13 @@ return $data;
 function fetchAPI_livecoinwatch() {
 global $apikey_livecoinwatch;
 
+  // Wenn API-Key fehlt, Fehlermeldung und sofort die weitere Verarbeitung abbrechen
+  if ( $apikey_livecoinwatch == "" || $apikey_livecoinwatch == NULL ) {
+      to_log("no api key: livecoinwatch", "error", "general");
+      error_log("EC&T Forex API: fetchAPI_livecoinwatch(): Es wurde kein API-Key fuer den Service von LiveCoinWatch angegeben. Bitte in der Datei 'ect-forex-fetch.php', Zeile 19, eintragen.");
+      return array();
+      }
+
   // Name der hiesigen Datenquelle
   $source = "livecoinwatch";
   // Basis-Währung für diese Abfrage

@@ -214,7 +214,7 @@ function validateFormat_date( $d = "2025-01-21" ) {
               } else { return false; }
 
           // Tag strikt auf Ziffern prüfen
-          // Diese Prüfung vergibt es, falls der Monat einstellig, ohne führende Null ist
+          // Diese Prüfung vergibt es, falls der Tag einstellig, ohne führende Null ist
           if ( preg_match("/^[0-9]{1,2}$/", $part[2]) ) {
               // In Integer umwandeln
               $day = (int) $part[2];

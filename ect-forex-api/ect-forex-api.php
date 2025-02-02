@@ -76,6 +76,12 @@ if ( empty($_GET) && empty($_POST) ) { frontend_response(); } else {
     if ( $date === "" ) { $date = $date_default; }
     // Strenge Input-Validierung: wenn Datum ungültig, dann voller Stopp
     if ( !validateFormat_date($date) ) { api_error("invalid date requested"); }
+    // An einstellige Monate und Tage explizit führende Nullen ansetzen
+    list($y, $m, $d) = explode("-", $date);
+    if ( preg_match("/^[0-9]{1}$/", $m) ) { $m = "0".$m; }
+    if ( preg_match("/^[0-9]{1}$/", $d) ) { $d = "0".$d; }
+    $date = $y ."-". $m ."-". $d;
+    unset($y, $m, $d);
 
 
     // Variable auswerten: 'time' (HH:MM, H:M, HH, H)
@@ -83,7 +89,6 @@ if ( empty($_GET) && empty($_POST) ) { frontend_response(); } else {
     if ( $time === "" ) { $time = $time_default; }
     // Strenge Input-Validierung: wenn Zeit ungültig, dann voller Stopp
     if ( !validateFormat_time($time) ) { api_error("invalid time requested"); }
-
     // Im Falle von einzelne Stunde ('HH') oder Stunden-Fragment ('HH:') die 'time' reparieren
     $time = rtrim($time, ":");
     if ( preg_match("/^[0-9]{1,2}$/", $time) ) { $time .= ":00"; }
@@ -91,7 +96,16 @@ if ( empty($_GET) && empty($_POST) ) { frontend_response(); } else {
     list($h, $m) = explode(":", $time);
     if ( preg_match("/^[0-9]{1}$/", $h) ) { $h = "0".$h; }
     if ( preg_match("/^[0-9]{1}$/", $m) ) { $m = "0".$m; }
-    // Die doppelt und dreifach überprüfte 'time' wieder zusammensetzen
+    // Sonderfall beachten: wenn die '24. Stunde' angefragt wurde,
+    // dann bedeutet das: Stunde auf '00' und Datum +1 Tag
+    if ( $h == "24" ) {
+         $h = "00";
+         $thisday = new DateTime($date);
+         $nextday = $thisday->modify('+1 day')->format('Y-m-d');
+         $date = $nextday;
+         unset($thisday, $nextday);
+         }
+    // Die doppelt und dreifach überprüfte 'time' jetzt wieder zusammensetzen
     $time = $h.":".$m;
     // Stunden und Minute aber trotzdem zusätzlich einstellig weiterführen
     $h = ltrim($h, "0");

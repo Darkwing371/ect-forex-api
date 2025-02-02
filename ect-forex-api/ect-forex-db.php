@@ -30,6 +30,16 @@ $db_lut   = $db_forex."_lut";  // Name der zugehörigen Look-up-Tabelle
 
 
 
+// Pre-Check: ob Datenbank-Zugangsdaten angegeben wurden
+if ( $db_host == "" || $db_host == NULL ||
+     $db_name == "" || $db_name == NULL ||
+     $db_user == "" || $db_user == NULL ||
+     $db_pwd  == "" || $db_pwd  == NULL    ) {
+     // Falls eine Angabe fehlt, dann Meldung und abbrechen
+     error_log("ECT&T Forex API: Zugangsdaten fuer die Datenbankverbindung fehlen. Bitte in 'ect-forex-db.php', Zeile 19, eintragen.");
+     die();
+     }
+
 // Datenbankverbindung herstellen
 $db = new mysqli($db_host, $db_user, $db_pwd, $db_name);
 
