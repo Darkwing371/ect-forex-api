@@ -145,15 +145,12 @@ if ( empty($_GET) && empty($_POST) ) { frontend_response(); } else {
     $result = array();
 
     // Wenn Metadaten gewünscht waren, dann diese Daten schon einmal vorlegen
-    if ( $meta > 0 ) { $lut = get_lut_0("all+inactive"); }
+    // Es sei denn, es ist 'oneshot', dann aus Performancegründen weglassen
+    if ( $meta > 0 && !$oneshot) { $lut = get_lut_0("all+inactive"); }
 
-    // Auf Sonderfall 'oneshot' überprüfen
-    // Das heißt: nur der Kurs einer einzigen, und zwar der ersten, Währung aus der Liste wird direkt zurückgegeben
-    if ( $oneshot ) {
-      // Sollte 'oneshot' mit '*' kombiniert worden sein, dann ist dies undefiniert
-      // Wir defaulten in so einem Fall zu BTC
-      if  ( $currency === "*" ) { $currencies = array("BTC"); }
-      }
+    // Auf Sonderfall prüfen: 'oneshot' mit '*' kombiniert = undefiniert = Fehler
+    if ( $oneshot && $currency === "*" ) { $currencies = array(""); }
+
 
     // Durch alle gewünschten Währungen gehen und die API-Response vorbereiten
     foreach ($currencies as $c) {
@@ -163,6 +160,7 @@ if ( empty($_GET) && empty($_POST) ) { frontend_response(); } else {
             // Falls nicht, einen Error in die Metadaten schreiben
             $result[] = array( "currency" => $c, "meta" => array("error" => "not in database") );
             // Sonderfall: falls ein schneller Oneshot angefragt war, nur 'error' zurückgeben
+            // Hier würde nun auch im Falle von '*' der Error erzeugt
             if ( $oneshot ) { $result = "error"; break; }
             // Zur nächsten Währung übergeben
             continue;
