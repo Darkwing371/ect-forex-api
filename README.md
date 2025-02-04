@@ -80,9 +80,9 @@ Acht geben sollte man aber darauf, dass beispielsweise eine bestehende CMS-Insta
 **Editieren**<br>
 Es sind zwei Dateien zu editieren: `ect-forex-db.php` und `ect-forex-fetch.php`.
 
-In `ect-forex-db.php`, Zeile 19, sind die Daten für die Datenbankverbindung einzutragen: Datenbankname, Nutzername und Passwort.
+In `ect-forex-db.php`, [Zeile 19](https://github.com/Darkwing371/ect-forex-api/blob/164568da33729bede79054070f077e81f3fe71f2/ect-forex-api/ect-forex-db.php#L19), sind die Daten für die Datenbankverbindung einzutragen: Datenbankname, Nutzername und Passwort.
 
-In `ect-forex-fetch.php`, Zeile 19, ist der persönliche API-Key von LiveCoinWatch einzutragen.
+In `ect-forex-fetch.php`, [Zeile 19](https://github.com/Darkwing371/ect-forex-api/blob/164568da33729bede79054070f077e81f3fe71f2/ect-forex-api/ect-forex-fetch.php#L19), ist der persönliche API-Key von LiveCoinWatch einzutragen.
 
 <br>
 
@@ -94,7 +94,7 @@ Schrittfolge: Auf der Webseite [livecoinwatch.com/tools/api](https://www.livecoi
 <br>
 
 **CronJob anlegen**<br>
-Das eigentliche Kernstück ist das Anlegen des CronJobs für die kontinuierliche Datenabfrage (Fetching-Prozess). Es lohnt sich hierzu, die Kommentare in der Datei `ect-forex-cron.php` zu lesen, insbesondere die Zeilen 31, 111 und 137.
+Das eigentliche Kernstück ist das Anlegen des CronJobs für die kontinuierliche Datenabfrage (Fetching-Prozess). Es lohnt sich hierzu, die Kommentare in der Datei `ect-forex-cron.php` zu lesen, insbesondere die Zeilen [31](https://github.com/Darkwing371/ect-forex-api/blob/164568da33729bede79054070f077e81f3fe71f2/ect-forex-api/ect-forex-cron.php#L31), [111](https://github.com/Darkwing371/ect-forex-api/blob/164568da33729bede79054070f077e81f3fe71f2/ect-forex-api/ect-forex-cron.php#L111) und [137](https://github.com/Darkwing371/ect-forex-api/blob/164568da33729bede79054070f077e81f3fe71f2/ect-forex-api/ect-forex-cron.php#L137).
 
 Ziel ist es, den CronJob in der ersten Minute einer vollen Stunde das Skript `ect-forex-cron.php` auszuführen zu lassen. Dazu trägt man in der crontab (Befehl `crontab -e`) folgende Zeile ein:
 
@@ -143,7 +143,7 @@ Der Parameter `currency` erwartet als Wert mindestens ein Tickersymbol, um eine 
 
 Da leider die Tickersymbole im Speziellen bei Kryptowährungen und Token nicht standardisiert sind – bzw. ein und derselbe Token auch auf mehreren Chains oder Ökosystemen laufen kann – kommt es zwangsläufig in einigen Fällen zu Doppelungen oder gar mehrfacher Verwendung eines Währungstickers. Die EC&T Forex API verwendet deswegen ihr eigenes Währungsticker-Schema, um derartige Doppelungen aufzulösen: bei Mehrfachverwendung erhält ein Währungsticker einen laufenden numerischen Index ('.N') angehangen. Beispiel: 'CAD' (Kanadischer Dollar) und 'CAD.2' (Caduceus Protocol).
 
-In der Datei `ect-forex-currencies.init` befinden sich sämtliche verfügbare Währungsticker mit bereits aufgelösten Doppelungen. Man findet also für die API verwendbare Währungsticker in (a) eben dieser Datei, (b) nach der Initialisation in der Datenbanktabelle `forex_lut` (Look-up-Tabelle, LUT), oder (c) in der Liste, generiert durch das Ausführen der API ohne jeglichen Parameter – siehe [Beispiel (6)](#beispiel-6).
+In der Datei `ect-forex-currencies.init` befinden sich sämtliche verfügbare Währungsticker mit bereits aufgelösten Doppelungen. Man findet also für die API verwendbare Währungsticker in: **(a)** eben dieser Datei, **(b)** nach der Initialisation in der Datenbanktabelle `forex_lut` (Look-up-Tabelle, LUT), **(c)** im JSON-Objekt, generiert durch das Aufrufen der API mit der besonderen Parameter-Kombination `currencies=*&oneshot` (schnell) – siehe [Benutzung / oneshot](#benutzung-oneshot) –, oder **(d)** in der HTML-Tabelle, generiert durch das Aufrufen der API ohne jeglichen Parameter (langsam) – siehe [Beispiel (6)](#beispiel-6).
 
 **Sonderfall:** Wird für `currency` der Wert '*' (Allstar-Operator) übergeben, werden **alle** in der Datenbank geführten Währungen mit Kursen zurückgegeben. Diese Operation ist sehr kostenintensiv, dauert sehr lange und produziert sehr große Datenmengen. Sie sollte nur zu Testzwecken verwendet werden.
 
@@ -208,7 +208,7 @@ Der Parameter `meta` erwartet als Wert eine Zahl {0..2}. Sie gibt das Detailleve
 
 Level 0: keine Metadaten werden mitgegeben.<br>
 Level 1: nur der Zeitstempel des Kurses wird mitgegeben.<br>
-Level 2: alle verfügbaren Metadaten zu einer Währung werden mitgegeben (Zeitstempel, vollständiger Name, Typ, Datenquelle, Link zur Datenquelle).
+Level 2: alle verfügbaren Metadaten zu einer Währung werden mitgegeben (Zeitstempel, beantwortete Anfragen, vollständiger Name, Typ, Datenquelle, Link zur Datenquelle).
 
 **Implizit:** Der Parameter `meta` kann implizit verwendet werden, das heißt: wenn der Parameter ohne Wert gesetzt ist, wird der Wert als '1' interpretiert (Kurznotation).
 
@@ -241,7 +241,19 @@ Der Oneshot-Modus bietet die Möglichkeit, einen Kurs für einen einzigen Währu
 "error"
 ```
 
-**Sonderfall**: Wenn aus Versehen der Allstar-Operator '*' mit `oneshot` kombiniert wurde (`currency=*&oneshot`), dann ist dieser Zustand nicht definiert und die API gibt ebenfalls obigen Fehler zurück.
+**Sonderfall**: Wenn der Allstar-Operator '*' mit `oneshot` kombiniert wird (`currency=*&oneshot`), so ist dieser Zustand theoretisch nicht definiert, weil keine spezifische Währung ermittelt werden kann. Stattdessen gibt in diesem besonderen Fall die API ein JSON-Objekt aus, welches alle verfügbaren Währungen und den dazugehörigen, vollständigen Namen beherbergt:
+
+```
+{
+  "AUD": "Australischer Dollar",
+  "BGN": "Bulgarischer Lev",
+  "BRL": "Brasilianischer Real",
+  "CAD": "Kanadischer Dollar",
+  "CHF": "Schweizer Franken",
+  …
+}
+```
+
 
 
 
