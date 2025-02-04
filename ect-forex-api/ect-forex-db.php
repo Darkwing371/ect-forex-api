@@ -617,6 +617,7 @@ global $db, $db_forex;
       if ( !isset($currency) ) { $currency = $c; }
 
       $name = $lut[" ".$c]["name"];
+      $requests = $lut[" ".$c]["requests"];
       $type = $lut[" ".$c]["type"];
       $id_lcw = $lut[" ".$c]["id_livecoinwatch"];
 
@@ -656,12 +657,13 @@ global $db, $db_forex;
 
 
       $currencies[] = array( "currency" => $currency,
-                             "name " => $name,
-                             "price" => $price,
-                             "latest" => $latest,
-                             "type" => $type,
-                             "source" => $source,
-                             "link" => $link
+                             "name "    => $name,
+                             "price"    => $price,
+                             "latest"   => $latest,
+                             "requests" => $requests,
+                             "type"     => $type,
+                             "source"   => $source,
+                             "link"     => $link
                             );
 
       } // Ende: Cycle durch 'ordered_currencies'

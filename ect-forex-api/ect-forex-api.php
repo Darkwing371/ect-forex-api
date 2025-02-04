@@ -148,20 +148,44 @@ if ( empty($_GET) && empty($_POST) ) { frontend_response(); } else {
     // Es sei denn, es ist 'oneshot', dann aus Performancegründen weglassen
     if ( $meta > 0 && !$oneshot) { $lut = get_lut_0("all+inactive"); }
 
-    // Auf Sonderfall prüfen: 'oneshot' mit '*' kombiniert = undefiniert = Fehler
-    if ( $oneshot && $currency === "*" ) { $currencies = array(""); }
+
+    // Auf Sonderfall prüfen: ob 'oneshot' mit '*' kombiniert wurde
+    // In diesem Fall wird eine schnelle Liste mit allen Währungstickern
+    // und ihren vollständigen Namen als JSON-Objekt zurückgegeben
+    if ( $oneshot && $currency === "*" ) {
+
+         // Wir benötigen die LUT in diesem speziellen Fall doch
+         $lut = get_lut_0("all+inactive");
+
+         // Setze aus allen Währungen aus der LUT ein JSON-Fragment zusammen
+         foreach ( $lut as $key => $v ) {
+                  $json_fragments .= "\"" .$lut[$key]["currency"]. "\":\"" .$lut[$key]["name"]. "\",";
+                  }
+
+          // Füge die JSON-Fragmente zu einem korrekten JSON-Objekt zusammen
+          // Wir müssen dies alles händisch erledigen, da wir kein PHP-Array für diese Sache
+          // bemühen können, da es möglicherweise mit den Keys Schindluder treibt
+          // Siehe: https://www.php.net/manual/de/language.types.array.php#language.types.array.key-casts
+          $response = "{".rtrim($json_fragments, ",")."}";
+
+          // Fertiges JSON ausgeben
+          header("Content-Type: application/json; charset=utf-8");
+          echo $response;
+
+          // Wir sind fertig mit dieser Anfrage, es gibt nichts weiter zu tun
+          exit();
+          }
 
 
+    // Sollte eine normale Abfrage getätigt worden sein
     // Durch alle gewünschten Währungen gehen und die API-Response vorbereiten
     foreach ($currencies as $c) {
+
 
         // Prüfen, ob die angefragte Währung überhaupt eine vorhandene Währung ist
         if ( !in_array($c, $forex_currencies) ) {
             // Falls nicht, einen Error in die Metadaten schreiben
             $result[] = array( "currency" => $c, "meta" => array("error" => "not in database") );
-            // Sonderfall: falls ein schneller Oneshot angefragt war, nur 'error' zurückgeben
-            // Hier würde nun auch im Falle von '*' der Error erzeugt
-            if ( $oneshot ) { $result = "error"; break; }
             // Zur nächsten Währung übergeben
             continue;
             }
@@ -203,12 +227,14 @@ if ( empty($_GET) && empty($_POST) ) { frontend_response(); } else {
 
             // Interessante Daten aus der LUT herausfischen
             $name =   $lut[" ".$c]["name"];
+            $requests = $lut[" ".$c]["requests"];
             $type =   $lut[" ".$c]["type"];
             $id_lcw =   $lut[" ".$c]["id_livecoinwatch"];
 
             // Das Metadaten-Array vorbereiten
             $metadata = array();
             $metadata["timestamp"] = $row["timestamp"];
+            $metadata["requests"] = $requests;
             $metadata["name"] =   $name;
             $metadata["type"] =   $type;
             $metadata["source"] = "";
@@ -315,6 +341,7 @@ function frontend_response() {
                 </thead>
                 <tbody>
               ';
+
     // Codepage des HTML-Strings in UTF-8 konvertieren
     $body = mb_convert_encoding($body, "UTF-8", "CP1252");
 
@@ -323,11 +350,11 @@ function frontend_response() {
 
         // Die Codepage dieser Daten ist schon in UTF-8 und muss nicht konvertiert werden
         // 'currency', 'name', 'price', 'latest', 'type', 'source', 'link'
-        list($currency, $name, $price, $date, $type, $source, $link) = array_values($c);
+        list($currency, $name, $price, $date, $requests, $type, $source, $link) = array_values($c);
 
         $body .= '
                   <tr>
-                    <td>'.$currency.'</td>
+                    <td><span title="'.$requests.'">'.$currency.'</span></td>
                     <td>'.$name.'</td>
                     <td></td>
                     <td>'.$price.'</td>
@@ -335,7 +362,8 @@ function frontend_response() {
                     <td><a class="'.$type.'" href="'.$link.'" target="_blank" title="'.$source.'"><span>'.$source.'</span></td>
                   </tr>
                  ';
-        //if (++$i==5) {break;}
+
+        //if (++$ii==10) {break;}
         }
 
     $part =  '</tbody>
