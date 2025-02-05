@@ -94,7 +94,7 @@ Schrittfolge: Auf der Webseite [livecoinwatch.com/tools/api](https://www.livecoi
 <br>
 
 **CronJob anlegen**<br>
-Das eigentliche Kernstück ist das Anlegen des CronJobs für die kontinuierliche Datenabfrage (Fetching-Prozess). Es lohnt sich hierzu, die Kommentare in der Datei `ect-forex-cron.php` zu lesen, insbesondere die Zeilen [31](https://github.com/Darkwing371/ect-forex-api/blob/164568da33729bede79054070f077e81f3fe71f2/ect-forex-api/ect-forex-cron.php#L31), [111](https://github.com/Darkwing371/ect-forex-api/blob/164568da33729bede79054070f077e81f3fe71f2/ect-forex-api/ect-forex-cron.php#L111) und [137](https://github.com/Darkwing371/ect-forex-api/blob/164568da33729bede79054070f077e81f3fe71f2/ect-forex-api/ect-forex-cron.php#L137).
+Das eigentliche Kernstück ist das Anlegen des CronJobs für die kontinuierliche Datenabfrage (Fetching-Prozess). Es lohnt sich hierzu, die Kommentare in der Datei `ect-forex-cron.php` zu lesen, insbesondere die Zeilen [31](https://github.com/Darkwing371/ect-forex-api/blob/65f59038ac224c4c185fe5889c6546627f9a6e72/ect-forex-api/ect-forex-cron.php#L31), [121](https://github.com/Darkwing371/ect-forex-api/blob/65f59038ac224c4c185fe5889c6546627f9a6e72/ect-forex-api/ect-forex-cron.php#L121) und [147](https://github.com/Darkwing371/ect-forex-api/blob/65f59038ac224c4c185fe5889c6546627f9a6e72/ect-forex-api/ect-forex-cron.php#L147).
 
 Ziel ist es, den CronJob in der ersten Minute einer vollen Stunde das Skript `ect-forex-cron.php` auszuführen zu lassen. Dazu trägt man in der crontab (Befehl `crontab -e`) folgende Zeile ein:
 
@@ -448,7 +448,7 @@ MariaDB >= 10.2 oder äquivalent MySQL >= 5.7
 
 
 **Getestet auf**<br>
-PHP 7.4<br>
+PHP 7.4 und 8.4<br>
 MariaDB 10.11
 
 
