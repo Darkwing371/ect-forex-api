@@ -48,9 +48,12 @@ $currentTime_hour = $currentTime->format("H");
 
 
 
+// Variablen explizit initialisieren
+$manually = $maintenance = $maintenance_monthly = $maintenance_quarterly = NULL;
+
 // Logge Cron-Skript-Ausführung als Info in die Log-Datenbank
 // Ist anfänglich zur Systemüberwachung nützlich, kann später auskommentiert werden
-if ( get_runenv() != 'cron' ) { $manually = " {manually}"; }
+if ( get_runenv() != "cron" ) { $manually = " {manually}"; }
 to_log("run @ hour ".$currentTime_hour.$manually, "info", "cron");
 
 // Schreibe auch kleine Info-Ausgaben auf die Webseite
@@ -91,11 +94,18 @@ if ( $maintenance_quarterly ) {
     $lost = scrape_lost_3M();
     $count = count($lost);
     $list = implode(", ", $lost);
-    // Gib Meldung darüber aus
-    error_log("EC&T Forex API: {".$count."} Werte seit 3 Monaten vermisst: {".$list."}");
-    to_log("lost for 3 months: {".$list."}", "system", "event");
-    // Optional: Setze diese Werte in der LUT automatisch auf 'inactive'
-    // lut_set_inactive( $lost );
+    // Wenn etwas als 'lost' erkannt wurde
+    if ( $count > 0 ) {
+         // Gib Meldung darüber aus
+         error_log("EC&T Forex API: {".$count."} Werte seit 3 Monaten vermisst: {".$list."}");
+         to_log("lost for 3 months: {".$list."}", "system", "event");
+         // Optional: Setze diese Werte in der LUT automatisch auf 'inactive'
+         // lut_set_inactive( $lost );
+         }
+    else {
+         // Wenn alles ok, nur kurze Meldung in die Log-DB
+         to_log("lost for 3 months: none", "system", "event");
+         }
     unset($lost, $list, $count);
     }
 

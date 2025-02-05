@@ -34,11 +34,11 @@ if ( empty($_GET) && empty($_POST) ) { frontend_response(); } else {
 
     // Nach erwarteten Variablen Ausschau halten
     // Unerlaubte Zeichen wegfiltern (auch wenn Werte dadurch verändert werden würden)
-    $currency = trim(apiAllowed($REQ["currency"]), ",");
-    $date = apiAllowed($REQ["date"]);
-    $time = apiAllowed($REQ["time"]);
-    $meta = apiAllowed($REQ["meta"]);
-    $oneshot = apiAllowed($REQ["oneshot"]);
+    $currency = array_key_exists("currency", $REQ) ? trim(apiAllowed($REQ["currency"]), ",") : "";
+    $date =     array_key_exists("date", $REQ) ? apiAllowed($REQ["date"]) : "";
+    $time =     array_key_exists("time", $REQ) ? apiAllowed($REQ["time"]) : "";
+    $meta =     array_key_exists("meta", $REQ) ? apiAllowed($REQ["meta"]) : "";
+    $oneshot =  array_key_exists("oneshot", $REQ) ? apiAllowed($REQ["oneshot"]) : "";
 
     // Pre-check: wenn 'currency' leer ist, dann sofort alles stoppen
     if ( $currency == "" ) { api_error("no currency requested"); }
@@ -53,7 +53,7 @@ if ( empty($_GET) && empty($_POST) ) { frontend_response(); } else {
 
     // Variable auswerten: 'meta'
     // Wenn 'meta' ohne Wert gesetzt ist, dann implizit als '1' behandeln (Konvention)
-    if ( isset($REQ["meta"]) && $meta == "" ) { $meta = 1; }
+    if ( array_key_exists("meta", $REQ) && $meta == "" ) { $meta = 1; }
     // Wenn 'meta' explizit auf '1'/'true'/'timestamp' gesetzt ist, dann Level 1
     elseif ( $meta === "1" || $meta === "true" || $meta === "timestamp" ) { $meta = 1; }
     // Wenn 'meta' explizit auf '2'/'details' gesetzt ist, dann detaillierte Angaben, Level 2
@@ -64,7 +64,7 @@ if ( empty($_GET) && empty($_POST) ) { frontend_response(); } else {
 
     // Variable auswerten: 'oneshot'
     // Wenn 'oneshot' gesetzt, dann implizit als 'true' behandeln (Konvention)
-    if ( isset($REQ["oneshot"]) && $oneshot == "" ) { $oneshot = true; }
+    if ( array_key_exists("oneshot", $REQ) && $oneshot == "" ) { $oneshot = true; }
     // Wenn 'oneshot' explizit auf 'true' gesetzt ist, dann logischerweise 'true'
     elseif ( $oneshot === "1" || $oneshot === "true" ) { $oneshot = true; }
     // In allen anderen Fällen als 'false' behandeln (default)
@@ -158,6 +158,7 @@ if ( empty($_GET) && empty($_POST) ) { frontend_response(); } else {
          $lut = get_lut_0("all+inactive");
 
          // Setze aus allen Währungen aus der LUT ein JSON-Fragment zusammen
+         $json_fragments = NULL;
          foreach ( $lut as $key => $v ) {
                   $json_fragments .= "\"" .$lut[$key]["currency"]. "\":\"" .$lut[$key]["name"]. "\",";
                   }
@@ -220,16 +221,18 @@ if ( empty($_GET) && empty($_POST) ) { frontend_response(); } else {
         $values = array( "currency" => $c, "price" => $row["price"]);
 
         // Wenn Metadaten Level 1 (Timestamp) angefragt wurden
-        if ( $meta == 1 ) { $values["meta"] = array( "timestamp" => $row["timestamp"] ); }
+        // Wenn 'oneshot', dann weglassen
+        if ( $meta == 1 && !$oneshot ) { $values["meta"] = array( "timestamp" => $row["timestamp"] ); }
 
         // Wenn Metadaten Level 2 (Details) angefragt wurden
-        if ( $meta == 2 ) {
+        // Wenn 'oneshot', dann weglassen
+        if ( $meta == 2 && !$oneshot ) {
 
             // Interessante Daten aus der LUT herausfischen
-            $name =   $lut[" ".$c]["name"];
-            $requests = $lut[" ".$c]["requests"];
-            $type =   $lut[" ".$c]["type"];
-            $id_lcw =   $lut[" ".$c]["id_livecoinwatch"];
+            $name =     array_key_exists(" ".$c, $lut) ? $lut[" ".$c]["name"] : NULL;
+            $requests = array_key_exists(" ".$c, $lut) ? $lut[" ".$c]["requests"] : NULL;
+            $type =     array_key_exists(" ".$c, $lut) ? $lut[" ".$c]["type"] : NULL;
+            $id_lcw =   array_key_exists(" ".$c, $lut) ? $lut[" ".$c]["id_livecoinwatch"] : NULL;
 
             // Das Metadaten-Array vorbereiten
             $metadata = array();
@@ -248,9 +251,10 @@ if ( empty($_GET) && empty($_POST) ) { frontend_response(); } else {
               }
 
             // Hardcoded: Abhängig vom Typ eine URL zur externen Datenquelle erzeugen
+            $link = NULL;
             if ( $type == "fiat" ) {
                $link = "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html";
-               if ( isset($lut[" ".$c]) ) {
+               if ( array_key_exists(" ".$c, $lut) ) {
                  $link = "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/eurofxref-graph-".mb_strtolower($c).".en.html";
                  }
                }

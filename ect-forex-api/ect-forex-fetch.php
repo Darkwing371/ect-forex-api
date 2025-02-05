@@ -175,6 +175,7 @@ global $apikey_livecoinwatch;
 
   // Ergebnis-Variable für die einzelnen Abfragen initialisieren
   $result = array();
+  $halt = NULL;
 
   // Pro Chunk die API abfragen
   for ( $i=0; $i < $size; $i+=$chunk ) {

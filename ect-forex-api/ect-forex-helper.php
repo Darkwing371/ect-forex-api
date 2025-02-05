@@ -275,6 +275,18 @@ function vv( $variable ){
 
 
 
+// Hilfsfunktion, um eine aufgetretene PHP-Warnung näher zu untersuchen
+// und eine aussagekräftige Variable zurückzugeben, die bei der Untersuichung hilft
+function catch_last_error( $message = " ", $token = NULL ) {
+
+  if ( error_get_last() !== NULL && str_contains(error_get_last()["message"], $message) ) {
+       error_log("CATCH!    ".$token);
+       }
+}
+
+
+
+
 // Ermittelt die Differenz zwischen zwei Zeitobjekten, in Sekunden
 // Nützlich zur Darstellung für die Skriptlaufzeit
 function diffTime_s( $startTime, $stopTime ) {

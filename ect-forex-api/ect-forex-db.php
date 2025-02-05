@@ -215,7 +215,7 @@ global $db, $db_name, $db_lut;
   // Durch die Zeilen loopen
   // Wir nehmen die von uns vorbereiteten CSV-Daten für bare Münze und wollen nicht,
   // dass die vordefinierten Trennzeichen von 'fgetcsv()' unseren Ablauf stören
-  while (($data = fgetcsv($file, NULL, ";", "------------make-sure-this-is-not-in-use------------", "------------also-this-should-not-be-in-use------------")) !== FALSE)  {
+  while ( ( $data = fgetcsv($file, NULL, ";", chr(21), chr(21)) ) !== FALSE)  {
 
       // Kommentarzeilen überspringen
       // Steuerzeichen für Kommentare: '//' am Anfang der Zeile
@@ -394,7 +394,10 @@ global $db, $db_forex;
   unset($p, $pos);
 
   // Den Kurs in Ganzzahl und Nachkommastelle aufsplitten
-  list($int, $frac) = explode(".", $price);
+  // Dabei darauf achten, dass per Default das Array auf jeden Fall
+  // zweistellig wird, um eine PHP-Warnung zu umgehen
+  // Kudos: https://www.php.net/manual/en/function.list.php#128059
+  list($int, $frac) = explode(".", $price) + [NULL, NULL];
 
   // Ganzzahl auf Plausibilität prüfen
   // Muss eine Zahl sein, dürfte aber im Zweifelsfall auch leer sein
@@ -613,13 +616,11 @@ global $db, $db_forex;
     $currencies = array();
     foreach ( $ordered_currencies as $c ) {
 
-      $currency = $lut[" ".$c]["currency"];
-      if ( !isset($currency) ) { $currency = $c; }
-
-      $name = $lut[" ".$c]["name"];
-      $requests = $lut[" ".$c]["requests"];
-      $type = $lut[" ".$c]["type"];
-      $id_lcw = $lut[" ".$c]["id_livecoinwatch"];
+      $currency = array_key_exists(" ".$c, $lut) ? $lut[" ".$c]["currency"] : $c;
+      $name =     array_key_exists(" ".$c, $lut) ? $lut[" ".$c]["name"] : NULL;
+      $requests = array_key_exists(" ".$c, $lut) ? $lut[" ".$c]["requests"] : NULL;
+      $type =     array_key_exists(" ".$c, $lut) ? $lut[" ".$c]["type"] : NULL;
+      $id_lcw =   array_key_exists(" ".$c, $lut) ? $lut[" ".$c]["id_livecoinwatch"] : NULL;
 
       // Letzten Kurs der Währung abholen
       $sql = "SELECT * FROM $db_forex WHERE currency = '".$currency."' ORDER BY timestamp DESC LIMIT 1";
@@ -648,7 +649,7 @@ global $db, $db_forex;
 
       if ( $type == "fiat" ) {
          $link = "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html";
-         if ( isset($lut[" ".$currency]) ) {
+         if ( array_key_exists(" ".$currency, $lut) ) {
            $link = "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/eurofxref-graph-".mb_strtolower($currency).".en.html";
           }
          }
@@ -753,6 +754,7 @@ global $db, $db_lut;
   unset($c, $pos, $securitynet);
 
   // Durch alle Währungen durchgehen
+  $i = 0;
   foreach ( $currencies as $currency ) {
 
       // Statement vorbereiten für das 'inactive' setzen einer Währung
