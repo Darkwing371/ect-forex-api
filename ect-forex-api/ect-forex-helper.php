@@ -10,7 +10,7 @@
  *
  *
  *
- *  Codepage: Western (Windows 1252)
+ *
  */
 
 
@@ -76,7 +76,7 @@ function allow_cron_only() {
 
     // Meldung in die Log-DB
     to_log("call from outside: {".$ip.":".$port.", ".$script.", ".$agent.", ".$lang."}", "warning", "security");
-    error_log("EC&T Forex API: Ein Skript wurde von aussen angefragt: {".$ip.":".$port.", ".$script.", ".$agent.", ".$lang."}");
+    error_log("EC&T Forex API: Ein Skript wurde von außen angefragt: {".$ip.":".$port.", ".$script.", ".$agent.", ".$lang."}");
 
     // Dann sofort die weitere Ausführung sang- und klanglos abbrechen
     die();

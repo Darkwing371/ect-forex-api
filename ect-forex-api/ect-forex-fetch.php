@@ -10,7 +10,7 @@
  *  einander kompatibel sind und gemeinsam verarbeitet werden können.
  *  Für die API von 'LiveCoinWatch' muss ein API-Key angegeben werden (Zeile 19).
  *
- *  Codepage: Western (Windows 1252)
+ *
  */
 
 
@@ -129,7 +129,7 @@ global $apikey_livecoinwatch;
   // Wenn API-Key fehlt, Fehlermeldung und sofort die weitere Verarbeitung abbrechen
   if ( $apikey_livecoinwatch == "" || $apikey_livecoinwatch == NULL ) {
       to_log("no api key: livecoinwatch", "error", "general");
-      error_log("EC&T Forex API: fetchAPI_livecoinwatch(): Es wurde kein API-Key fuer den Service von LiveCoinWatch angegeben. Bitte in der Datei 'ect-forex-fetch.php', Zeile 19, eintragen.");
+      error_log("EC&T Forex API: fetchAPI_livecoinwatch(): Es wurde kein API-Key für den Service von LiveCoinWatch angegeben. Bitte in der Datei 'ect-forex-fetch.php', Zeile 19, eintragen.");
       return array();
       }
 

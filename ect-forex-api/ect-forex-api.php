@@ -10,7 +10,7 @@
  *  Währungen an, mit Link zum Datenprovider für nähere Recherche.
  *
  *
- *  Codepage: Western (Windows 1252)
+ *
  */
 
 
@@ -346,9 +346,6 @@ function frontend_response() {
                 <tbody>
               ';
 
-    // Codepage des HTML-Strings in UTF-8 konvertieren
-    $body = mb_convert_encoding($body, "UTF-8", "CP1252");
-
     // Durch die Währungen cyclen und HTML-Ausgabe erstellen
     foreach ( $currencies as $c ) {
 
@@ -356,8 +353,7 @@ function frontend_response() {
         // 'currency', 'name', 'price', 'latest', 'type', 'source', 'link'
         list($currency, $name, $price, $date, $requests, $type, $source, $link) = array_values($c);
 
-        $body .= '
-                  <tr>
+        $body .= '<tr>
                     <td><span title="'.$requests.'">'.$currency.'</span></td>
                     <td>'.$name.'</td>
                     <td></td>
@@ -370,12 +366,10 @@ function frontend_response() {
         //if (++$ii==10) {break;}
         }
 
-    $part =  '</tbody>
+    $body .= '</tbody>
               </table>
               <br>
              ';
-    $body .= mb_convert_encoding($part, "UTF-8", "CP1252");
-
 
     // Das komplette HTML inklusive dem eben erstellten 'body' an den Browser ausgeben
     html( $body );

@@ -10,7 +10,7 @@
  *  externen API immer zur gleichen europäischen Tageszeit abgeholt werden.
  *  Triggert auch monatliche und quartalsweise Wartungsroutinen.
  *
- *  Codepage: Western (Windows 1252)
+ *
  */
 
 
@@ -173,8 +173,8 @@ if ( in_array( intval($currentTime_hour), $fetchingTime) ) {
     // Wird das Cron-Skript häufiger als einmal pro Stunde ausgeführt, sollte
     // man die Meldungen von to_log() und/oder error_log() lieber auskommentieren
     to_log("fetching time @ hour " . $currentTime_hour . ": data already present", "info", "event");
-    error_log("EC&T Forex API: does_fetch_exist(): Daten fuer {".$currentTime_date." ".$currentTime_hour.":00} sind schon vorhanden.");
-    echo mb_convert_encoding("Daten für ".$currentTime_hour.":00 sind schon vorhanden<br>", "UTF-8", "CP1252");
+    error_log("EC&T Forex API: does_fetch_exist(): Daten für {".$currentTime_date." ".$currentTime_hour.":00} sind schon vorhanden.");
+    echo "Daten für ".$currentTime_hour.":00 sind schon vorhanden<br>";
 
   // Falls keine Daten vorhanden sind: starte ein Fetching-Event
   } else {

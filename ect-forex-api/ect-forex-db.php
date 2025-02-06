@@ -10,7 +10,7 @@
  *  bei der ersten Ausführung die Datenbank-Tabellen automatisch anlegt.
  *  Es muss hier das entsprechende Datenbank-Login angegeben werden (Zeile 19).
  *
- *  Codepage: Western (Windows 1252)
+ *
  */
 
 
@@ -36,7 +36,7 @@ if ( $db_host == "" || $db_host == NULL ||
      $db_user == "" || $db_user == NULL ||
      $db_pwd  == "" || $db_pwd  == NULL    ) {
      // Falls eine Angabe fehlt, dann Meldung und abbrechen
-     error_log("ECT&T Forex API: Zugangsdaten fuer die Datenbankverbindung fehlen. Bitte in 'ect-forex-db.php', Zeile 19, eintragen.");
+     error_log("ECT&T Forex API: Zugangsdaten für die Datenbankverbindung fehlen. Bitte in 'ect-forex-db.php', Zeile 19, eintragen.");
      die();
      }
 
@@ -409,7 +409,7 @@ global $db, $db_forex;
   // Darf nicht länger als 21 Stellen sein (Konstante: 'DIGITS')
   if ( mb_strlen($int) > DIGITS ) {
     to_log("type overflow: price of {".$currency."} is loo large. data dismissed: {".asciiPure($int)."}", "error", "event");
-    error_log("EC&T Forex API: to_forex(): Typen-Ueberlauf: Preis von '".$currency."' ist hoeher als jemals erwartbar war. Daten verworfen: {".$int."}.");
+    error_log("EC&T Forex API: to_forex(): Typen-Überlauf: Preis von '".$currency."' ist höher als jemals erwartbar war. Daten verworfen: {".$int."}.");
     return false;
     }
 
@@ -745,7 +745,7 @@ global $db, $db_lut;
         // Das hier sollte eigentlich nie getriggert werden
         // Falls doch, dann ist schon sehr lange vorher sehr viel schief gegangen
         // Deswegen geben wir dieses mal eine etwas eindringlichere Fehlermeldung aus
-        error_log("EC&T Forex API: lut_set_inactive(): Achtung! Kritische Waehrung {".$c."} haette auf 'inactive' gesetzt werden sollen. Bitte Datenbank, Code und Funktionalitaet des Systems ueberpruefen!");
+        error_log("EC&T Forex API: lut_set_inactive(): Achtung! Kritische Währung {".$c."} hätte auf 'inactive' gesetzt werden sollen. Bitte Datenbank, Code und Funktionalität des Systems überprüfen!");
         to_log("critical currency {".$c."} potentially lost, please check db and code", "error", "general");
         // Die Währung aus dem Array herausnehmen, um sie nicht 'inactive' zu setzen
         unset( $currencies[$pos] );
@@ -777,7 +777,7 @@ global $db, $db_lut;
   if ( $i > 0 ) {
     // Log-Meldung ausgeben
     $list = implode(", ", $c);
-    error_log("EC&T Forex API: {".$i."} Waehrungen in der LUT auf 'inactive' gesetzt: {".$list."}.");
+    error_log("EC&T Forex API: {".$i."} Währungen in der LUT auf 'inactive' gesetzt: {".$list."}.");
     to_log("set to inactive: {".$list."}", "system", "event");
     }
 
