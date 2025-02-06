@@ -111,7 +111,7 @@ Eine besondere Bedeutung nimmt die Datei `ect-forex-currencies.init` ein. Diese 
 
 Die Datei `ect-forex-currencies.init` ist im Wesentlichen eine CSV-Datei und beinhaltet Angaben darüber, welche Währungen zukünftig bei einem Fetching-Event abgeholt und in die eigene Datenbank geschrieben werden sollen. Es befinden sich initial etwa 3.000 Werte darin. Darunter Fiat-Währungen, Krypto-Währungen, Stablecoins und Token. Praktisch sinnvoll sind etwa die ersten 50–100 Werte. Der Vollständigkeit halber befinden sich jedoch alle börsengehandelten Coins und Token (mit mehr oder weniger Handelsaktivität) in der Liste. Diese werden per Default komplett eingepflegt. Durch vorheriges Editieren der Datei (Löschen von Zeilen) kann man also seine eigene initiale Auswahl an gewünschten Währungen treffen.
 
-Belehrung: Die Datei `ect-forex-currency.init` **muss zwingend** in der Codepage `UTF-8` sein!
+Belehrung: Die Datei `ect-forex-currency.init` **muss zwingend** in der Codepage `UTF-8` gespeichert sein. Sie beherbergt Namen von Kryptowährungen / Token, die diesen Zeichensatz unbedingt benötigen.
 
 <br>
 
@@ -453,9 +453,7 @@ MariaDB 10.11
 
 
 **Codepage**<br>
-Die Quelltext-Dateien sind grundsätzlich in der Legacy-Codepage `Windows-1252`, auch bekannt als `CP1252`, seltener `Western European`, abgespeichert.
-
-Ausnahmen: Die Datei `ect-forex-currency.init` **muss zwingend** in `UTF-8` sein. Ebenfalls sind `LICENSE` und `README.md` in `UTF-8`.
+Alle Quelltext-Dateien sind in `UTF-8` abgespeichert. Besonders die Datei `ect-forex-currency.init` **muss zwingend** in `UTF-8` sein.
 
 <br>
 
