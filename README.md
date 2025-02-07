@@ -78,11 +78,14 @@ Acht geben sollte man aber darauf, dass beispielsweise eine bestehende CMS-Insta
 <br>
 
 **Editieren**<br>
-Es sind zwei Dateien zu editieren: `ect-forex-db.php` und `ect-forex-fetch.php`.
+Es sind zwei Dateien zu editieren und umzubenennen: `ect-forex-db.php.tofill` und `ect-forex-fetch.php.tofill`. Beim Umbenennen einfach die Endung .tofill wegnehmen.
+Wer Änderungen per pull request beitragen will, sollte die .tofill-Dateien in ihre .php-Pendents kopieren und so erhalten, damit hier nur für die Allgemeinheit Bestimmtes gepflegt wird. 
 
-In `ect-forex-db.php`, [Zeile 19](https://github.com/Darkwing371/ect-forex-api/blob/164568da33729bede79054070f077e81f3fe71f2/ect-forex-api/ect-forex-db.php#L19), sind die Daten für die Datenbankverbindung einzutragen: Datenbankname, Nutzername und Passwort.
+In `ect-forex-db.php`, [Zeile 19](https://github.com/Darkwing371/ect-forex-api/blob/164568da33729bede79054070f077e81f3fe71f2/ect-forex-api/ect-forex-db.php#L19), sind die Daten für die Datenbankverbindung einzutragen: Datenbankname, Nutzername und Passwort und ggf. host.
 
 In `ect-forex-fetch.php`, [Zeile 19](https://github.com/Darkwing371/ect-forex-api/blob/164568da33729bede79054070f077e81f3fe71f2/ect-forex-api/ect-forex-fetch.php#L19), ist der persönliche API-Key von LiveCoinWatch einzutragen.
+
+
 
 <br>
 
