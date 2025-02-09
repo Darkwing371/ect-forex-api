@@ -8,7 +8,7 @@
  *  verschiedenen externen APIs. Die empfangenen Daten werden in eine
  *  normalisierte Form gebracht, sodass die verschiedenen Quellen zu
  *  einander kompatibel sind und gemeinsam verarbeitet werden können.
- *  Für die API von 'LiveCoinWatch' muss ein API-Key angegeben werden (Zeile 19).
+ *
  *
  *
  */
@@ -16,10 +16,8 @@
 
 
 
-// TODO: EDIT HERE
-// API-Key für externen Service hier eintragen
-// https://www.livecoinwatch.com/
-$apikey_livecoinwatch = "";
+// Modul für Zugangs- und Konfigurationsdaten importieren
+require_once "ect-forex-config.php";
 
 
 

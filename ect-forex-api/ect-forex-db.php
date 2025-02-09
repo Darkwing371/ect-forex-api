@@ -8,7 +8,7 @@
  *  Es ist 'required' für jedes andere PHP-Skript der EC&T Forex API.
  *  Ebenfalls sorgt es für die 'Installation' der EC&T Forex API, indem es
  *  bei der ersten Ausführung die Datenbank-Tabellen automatisch anlegt.
- *  Es muss hier das entsprechende Datenbank-Login angegeben werden (Zeile 19).
+ *
  *
  *
  */
@@ -16,13 +16,10 @@
 
 
 
-// TODO: EDIT HERE
-// Verbindungsdaten des Servers und der Datenbank hier eintragen
-$db_host  = "127.0.0.1";       // Server-IP (üblicherweise nur lokal)
-$db_name  = "";                // Name der Datenbank (Schema)
-$db_user  = "";                // Username, welcher Zugriff auf die DB hat
-$db_pwd   = "";                // Passwort für diesen Username
+// Modul für Zugangs- und Konfigurationsdaten importieren
+require_once "ect-forex-config.php";
 
+// Namensstruktur der Datenbanktabellen herstellen
 $db_forex = "forex";           // Name der gewünschten Forex-Datenbanktabelle
 $db_log   = $db_forex."_log";  // Name der zugehörigen Log-Tabelle
 $db_lut   = $db_forex."_lut";  // Name der zugehörigen Look-up-Tabelle
