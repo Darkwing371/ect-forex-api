@@ -44,20 +44,23 @@ graph TD
     extAPIs --> |liefern|fetch.php
     end
 
+    config.php <--> db.php
+    config.php <--> fetch.php
     cinit([currencies.init]) <-.-> |initialisiert|db.php
     db.php --> helper.php
     db.php --> |eintragen|database[(SQL-DB)]
-    database <--> |abfragen|db.php
+    database --> |abfragen|db.php
     api.php --> db.php
     api.php --> helper.php
     cron.php --> helper.php
     cron.php --> db.php
 
-    subgraph sgreq ["  "]
+    subgraph sgreq [" "]
     style sgreq fill:#fcfcff,stroke:#ddd,stroke-width:1px
     request{"**Anfrage**"} ---> |GET / POST|api.php
     api.php ----> |antwortet<br>mit|json((("**JSON**")))
     end
+
 ```
 
 Im Übrigen ist der gesamte Quelltext ausführlich (auf Deutsch) kommentiert. Bei tieferem Interesse, oder sollte diese Dokumentation nicht ausreichen, lohnt es sich also, direkt in den Dateien über Abläufe nachzulesen.
@@ -69,6 +72,7 @@ Im Übrigen ist der gesamte Quelltext ausführlich (auf Deutsch) kommentiert. Be
 Ein paar Vorarbeiten sind zu erledigen, dass die EC&T Forex API ihren Dienst aufnehmen kann:
 
 <br>
+<a id="installation-kopieren" href="installation-kopieren"></a>
 
 **Kopieren**<br>
 Das Verzeichnis `ect-forex-api` (oder nur die Dateien darin), kann man einfach in ein beliebiges Unterverzeichnis auf dem Webserver kopieren, welches der Webserver dann ausliefert. Wenn gewünscht, kann die Datei `ect-forex-api.php` auch in `index.php` umbenannt werden, um eine schönere URL für die API zu erhalten.
@@ -76,15 +80,23 @@ Das Verzeichnis `ect-forex-api` (oder nur die Dateien darin), kann man einfach i
 Acht geben sollte man aber darauf, dass beispielsweise eine bestehende CMS-Installation auf dem Server nicht per `mod_rewrite`, oder Ähnlichem, die URLs umbiegt, sodass keine "unbekannte" Datei "abseits" der dem CMS bekannten Verzeichnisstruktur ausgeliefert wird. In einem solchen Fall muss man dafür Sorge tragen, dass per `.htaccess` der Webserver dieses Verzeichnis parallel und unabhängig vom CMS ausliefern kann.
 
 <br>
+<a id="installation-editieren" href="installation-editieren"></a>
 
 **Editieren**<br>
-Es sind zwei Dateien zu editieren: `ect-forex-db.php` und `ect-forex-fetch.php`.
+Es ist eine einzige Datei zu editieren: `ect-forex-config.php`, ab [Zeile 19](https://github.com/Darkwing371/ect-forex-api/blob/a26135241a7581f91eae63c385c319a2a53bf710/ect-forex-api/ect-forex-config.php#L19).
 
-In `ect-forex-db.php`, [Zeile 19](https://github.com/Darkwing371/ect-forex-api/blob/164568da33729bede79054070f077e81f3fe71f2/ect-forex-api/ect-forex-db.php#L19), sind die Daten für die Datenbankverbindung einzutragen: Datenbankname, Nutzername und Passwort.
+Darin sind einzutragen: **(a)** die Daten für die Datenbankverbindung: Host, Datenbankname, Nutzername und Passwort, sowie **(b)** der persönliche API-Key von LiveCoinWatch (siehe nächster Punkt).
 
-In `ect-forex-fetch.php`, [Zeile 19](https://github.com/Darkwing371/ect-forex-api/blob/164568da33729bede79054070f077e81f3fe71f2/ect-forex-api/ect-forex-fetch.php#L19), ist der persönliche API-Key von LiveCoinWatch einzutragen.
+Nach dem Eintragen dieser persönlichen Zugangsdaten wird empfohlen, diese Datei in Git auf [`--assume-unchanged`](https://git-scm.com/docs/git-update-index#Documentation/git-update-index.txt---no-assume-unchanged) zu setzen. Sollte man das Repo geforkt und seine eigenen Commits auf bspw. GitHub hosten, können so keine persönlichen Zugangsdaten an die Öffentlichkeit gelangen. Änderungen in der Datei bleiben lokal im persönlichen Repo und die Datei bleibt offiziell im "leeren" Ausgangszustand.
+
+Schrittfolge: entweder in einer GUI wie Git Extensions im Commit-Dialog mit Rechtsklick auf die Datei und dort `Assume unchanged` auswählen – oder in der Kommandozeile mit dem Befehl:
+
+``
+git update-index --assume-unchanged ect-forex-config.php
+``
 
 <br>
+<a id="installation-apikey" href="installation-apikey"></a>
 
 **API-Key LiveCoinWatch**<br>
 Für den Zugriff auf Daten von LiveCoinWatch wird ein API-Key benötigt, welcher nach einer simplen Anmeldung mit einer E-Mail-Adresse kostenlos vergeben wird.
@@ -92,9 +104,10 @@ Für den Zugriff auf Daten von LiveCoinWatch wird ein API-Key benötigt, welcher
 Schrittfolge: Auf der Webseite [livecoinwatch.com/tools/api](https://www.livecoinwatch.com/tools/api) registriert man sich über den Button "Register". Man verwendet eine E-Mail-Adresse auf welche man Zugriff hat. Man erhält eine Bestätigungs-E-Mail, mit welcher man die Anmeldung noch einmal bestätigt. Man loggt sich auf der Webseite ein, über den Button "Login". Im Nutzerbild klickt man auf den Link "Edit Profile". Ganz unten findet man den API-Key, welchen man kopiert und in die Datei `ect-forex-fetch.php` einträgt.
 
 <br>
+<a id="installation-cronjob" href="installation-cronjob"></a>
 
 **CronJob anlegen**<br>
-Das eigentliche Kernstück ist das Anlegen des CronJobs für die kontinuierliche Datenabfrage (Fetching-Prozess). Es lohnt sich hierzu, die Kommentare in der Datei `ect-forex-cron.php` zu lesen, insbesondere die Zeilen [31](https://github.com/Darkwing371/ect-forex-api/blob/65f59038ac224c4c185fe5889c6546627f9a6e72/ect-forex-api/ect-forex-cron.php#L31), [121](https://github.com/Darkwing371/ect-forex-api/blob/65f59038ac224c4c185fe5889c6546627f9a6e72/ect-forex-api/ect-forex-cron.php#L121) und [147](https://github.com/Darkwing371/ect-forex-api/blob/65f59038ac224c4c185fe5889c6546627f9a6e72/ect-forex-api/ect-forex-cron.php#L147).
+Das eigentliche Kernstück ist das Anlegen des CronJobs für die kontinuierliche Datenabfrage (Fetching-Prozess). Es lohnt sich hierzu, die Kommentare in der Datei `ect-forex-cron.php` zu lesen, insbesondere die Zeilen [31](https://github.com/Darkwing371/ect-forex-api/blob/a26135241a7581f91eae63c385c319a2a53bf710/ect-forex-api/ect-forex-cron.php#L31), [121](https://github.com/Darkwing371/ect-forex-api/blob/a26135241a7581f91eae63c385c319a2a53bf710/ect-forex-api/ect-forex-cron.php#L121) und [147](https://github.com/Darkwing371/ect-forex-api/blob/a26135241a7581f91eae63c385c319a2a53bf710/ect-forex-api/ect-forex-cron.php#L147).
 
 Ziel ist es, den CronJob in der ersten Minute einer vollen Stunde das Skript `ect-forex-cron.php` auszuführen zu lassen. Dazu trägt man in der crontab (Befehl `crontab -e`) folgende Zeile ein:
 
@@ -105,6 +118,7 @@ Ziel ist es, den CronJob in der ersten Minute einer vollen Stunde das Skript `ec
 Eine Besonderheit beim Shared Hosting: Sollte man sich im Shared Hosting befinden, hat man üblicherweise keinen direkten Zugriff auf die crontab. Hier bietet der Hoster aber gewöhnlich eine Web-Oberfläche zur Verwaltung an, in welcher man CronJobs, bzw. eine "Cron-Simulation" anlegen kann. Mithilfe einer solchen Funktion stellt man die regelmäßige Ausführung des Skriptes `ect-forex-cron.php` ein: stündlich, zu jeder ersten Minute.
 
 <br>
+<a id="installation-currenciesinit" href="installation-currenciesinit"></a>
 
 **currencies.init**<br>
 Eine besondere Bedeutung nimmt die Datei `ect-forex-currencies.init` ein. Diese Datei wird bei der **ersten** Ausführung des Fetching-Prozesses **einmalig** eingelesen und initialisiert die Datenbank durch Erstellung der Look-up-Tabelle `forex_lut` (LUT). Sobald das System initialisiert wurde, wird diese Datei vom Skript nicht wieder verwendet.
@@ -405,6 +419,7 @@ Dieses Feature ist eher als "dokumentiertes Easter-Egg" gedacht und nicht wirkli
 ## Tipps
 
 <br>
+<a id="tipps-redundant" href="tipps-redundant"></a>
 
 **Redundante Ausführung**<br>
 Die externe Datenabfrage (Fetching) ist natürlich abhängig vom Funktionieren der angefragten APIs. Obwohl diese "immer" funktionieren sollten, kann es in sehr seltenen Fällen vorkommen, dass zu einem Zeitpunkt die HTTP-Requests fehlschlagen, da evtl. der entfernte Server überlastet ist, oder Ähnliches. Ab einem gewissen Punkt wird daraufhin auch der gesamte Fetch fehlschlagen und keine Daten werden in die Datenbank geschrieben. Dies ist praktisch nicht allzu schlimm, da die API sowieso immer den zeitlich nächst näheren Wert für einen Kurs zurückliefert. Sollten diese Fehler allerdings regelmäßig und gehäuft beobachtet werden, so empfiehlt sich, eine redundante Ausführung des Fetching-Skripts `ect-forex-cron.php` einzustellen.
@@ -422,6 +437,7 @@ Ein mehrmaliges Ausführen innerhalb ein und derselben Stunde ist datensparsam: 
 Anders ausgedrückt: man könnte `ect-forex-cron.php` also auch zehnmal pro Stunde ausführen, es werden immer nur einmal pro Stunde Daten geschrieben.
 
 <br>
+<a id="tipps-logsystem" href="tipps-logsystem"></a>
 
 **Log-System**<br>
 EC&T ist mit einem ausführlichen Log-System ausgestattet. So kann man laufend und einfach in System- oder Betriebsereignisse Einblick erhalten. Zu diesem Zweck existiert die Datenbanktabelle `forex_log` (Log-DB), welche man sich sehr einfach in bspw. phpMyAdmin ansehen kann.
@@ -429,11 +445,13 @@ EC&T ist mit einem ausführlichen Log-System ausgestattet. So kann man laufend u
 Zusätzlich werden alle besonders wichtigen Meldungen auch im normalen PHP-Error-Log ausgegeben.
 
 <br>
+<a id="tipps-datenmenge" href="tipps-datenmenge"></a>
 
 **Große Datenmengen**<br>
 Beim etwaigen Betrachten der rohen Forex-Daten in der Datenbanktabelle `forex` (Forex-DB), bspw. per phpMyAdmin, werden höchstwahrscheinlich schon nach kurzer Betriebszeit nicht mehr alle Zeilen der Forex-DB angezeigt werden können. Ab einer gewissen Größe schätzt MariaDB/MySQL (InnoDB) die Datenbank nur noch, abhängig vom Wert [$cfg['MaxExactCount']](https://docs.phpmyadmin.net/de/latest/config.html#cfg_MaxExactCount). Hier sollte man sich nicht verunsichern lassen. Möchte man zu Testzwecken die neusten Werte ansehen, dann sollte man, statt zur letzten Seite der Tabelle zu springen, einfach die Tabelle per 'timestamp' absteigend sortiert betrachten. So erhält man die neusten, "hintersten" Werte als erstes angezeigt.
 
 <br>
+<a id="tipps-neuewaehrung" href="tipps-neuewaehrung"></a>
 
 **Neue Währung einpflegen**<br>
 Soll im späteren Verlauf des Betriebes eine neue (Krypto-)Währung in das System eingepflegt werden, dann sollte diese vorher gut bei der Datenquelle recherchiert worden sein und muss, z. B. per phpMyAdmin, händisch in die Look-up-Tabelle `forex_lut` (LUT), analog zu den schon bestehenden Währungen, eingepflegt werden. Besonders Acht gegeben werden muss in diesem Fall auf mögliche Doppelungen im Tickersymbol: die LUT muss vorher auf das beabsichtigte neue Tickersymbol untersucht werden (SQL: "SELECT * FROM \`forex_lut\` WHERE currency = 'NEU'"). Wird dabei etwas gefunden, würde es zu einer Doppelung kommen. In diesem Fall muss der neue Währungsticker einen laufenden numerischen Index ('.N') angefügt bekommen. Beispiel: 'NEU' schon vorhanden → 'NEU.2' stattdessen als tatsächliches Tickersymbol.
